@@ -1,0 +1,38 @@
+/**
+ * Because Redux uses alot of action types that we might loose track of, lets define all the action types that were going to use in the app
+ */
+const types = {
+    /** TOKEN */
+    FETCH_TOKEN:            "FETCH_TOKEN",
+    FETCH_TOKEN_PENDING:    "FETCH_TOKEN_PENDING",
+    FETCH_TOKEN_FULFILLED:  "FETCH_TOKEN_FULFILLED",
+    FETCH_TOKEN_REJECTED:   "FETCH_TOKEN_REJECTED",
+    SET_TOKEN:              "SET_TOKEN",
+
+    /** USER */
+    USER_LOGGED_OUT:        "USER_LOGGED_OUT",
+    USER_LOGGED_IN:         "USER_LOGGED_IN",
+    FETCH_USER:             "FETCH_USER",
+    FETCH_USER_PENDING:     "FETCH_USER_PENDING",
+    FETCH_USER_FULFILLED:   "FETCH_USER_FULFILLED",
+    FETCH_USER_REJECTED:    "FETCH_USER_REJECTED",
+
+    /** USERS */
+    FETCH_USERS:            "FETCH_USERS",
+    FETCH_USERS_PENDING:    "FETCH_USERS_PENDING",
+    FETCH_USERS_FULFILLED:  "FETCH_USERS_FULFILLED",
+    FETCH_USERS_REJECTED:   "FETCH_USERS_REJECTED",
+
+    /** RESOURCES */
+    FETCH_RESOURCES:        "FETCH_RESOURCES",
+    FETCH_RESOURCES_PENDING:"FETCH_RESOURCES_PENDING",
+    FETCH_RESOURCES_FULFILLED: "FETCH_RESOURCES_FULFILLED",
+    FETCH_RESOURCES_REJECTED:  "FETCH_RESOURCES_REJECTED",
+
+    /** NAVIGATION */
+    NAV_CHANGED:  "NAV_CHANGED",    
+};
+
+export function actionTypes() {
+    return types;
+};

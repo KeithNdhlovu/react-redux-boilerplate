@@ -1,0 +1,105 @@
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
+import { connect }  from "react-redux"
+
+import { getMe }    from "../../actions/userActions"
+import { getToken } from "../../actions/loginAction"
+
+import { actionTypes } from '../../constants'
+
+// Bootstrap
+import { 
+    Button, 
+    Form, 
+    FormGroup, 
+    Label, 
+    Input, 
+    FormText 
+} from 'reactstrap';
+
+class Login extends Component {
+  
+  state = { password: '', email: '', submittedPassword: '', submittedEmail: '' }
+  
+  componentWillMount() {
+    console.log(this.props);
+  }
+  
+
+  handleChangeEmailChange = (e) => this.setState({ email: e.target.value })
+
+  handleChangePasswordChange = (e) => this.setState({ password: e.target.value })
+
+  
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { password, email } = this.state
+    
+    // get the Token
+    
+    // Fire Begin Getting Token Event
+    this.props.dispatch({type: actionTypes().FETCH_TOKEN_PENDING, payload: null});
+    
+    let that = this;
+
+    this.props.dispatch(getToken(email, password)).then( () => {
+        
+        // We are logged in, lets render the home view
+        that.props.location.push('/');
+    });
+
+  }
+
+  render() {
+    const { password, email, submittedPassword, submittedEmail } = this.state
+
+    return (
+        <section className="login vertical-align">
+            <div className="card" style={{"width": "28rem", "margin": "0 auto"}}>
+                <div className="card-body">
+                    <Form onSubmit={this.handleSubmit}>
+
+                        {/*<!--Header-->*/}
+                        <div className="form-header default-color">
+                            <h3>Login</h3>
+                        </div>
+
+                        {/*<!--Body-->*/}
+                        <div className="md-form">
+                            <input type="text" id="defaultForm-email" placeholder="Email" name="email" value={email} onChange={this.handleChangeEmailChange} className="form-control" />
+                            {/*<label htmlFor="defaultForm-email" className="">Your email</label>*/}
+                        </div>
+
+                        <div className="md-form">
+                            <input type="password" id="defaultForm-pass" placeholder="Password" name="password" value={password} onChange={this.handleChangePasswordChange} className="form-control" />
+                            {/*<label htmlFor="defaultForm-pass" className="">Your password</label>*/}
+                        </div>
+                        
+                        {this.props.fetchingToken ? (
+                            <div className="progress primary-color-dark"><div className="indeterminate"></div></div>
+                          ): (
+                            <div className="text-center">
+                              <button className="btn btn-default waves-effect waves-light">Login</button>
+                            </div>
+                          )
+                        }
+                      </Form>
+                </div>
+
+            </div>
+        </section>
+    );
+  }
+}
+
+export default withRouter(connect((store) => {
+
+  return {
+    user: store.user.user,
+    userFetched: store.user.fetched,
+    token: store.login.token,
+    tokenFetched: store.login.fetched,
+    fetchingToken: store.login.fetching,
+    location: store.location
+  };
+})(Login));
