@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Redirect, BrowserRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import { push } from 'react-router-redux'
+import { push, replace } from 'react-router-redux'
 
 import { connect }  from "react-redux"
 
@@ -29,31 +28,25 @@ class Login extends Component {
   handleChangeEmailChange = (e) => this.setState({ email: e.target.value })
 
   handleChangePasswordChange = (e) => this.setState({ password: e.target.value })
-
-  componentDidMount() {
-    console.log("onMount", this.props.history)
-  }
   
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { password, email } = this.state
     
-    // get the Token
-    
-    // Fire Begin Getting Token Event
+    // Get the Token
+    // Fire Begin Getting Token action
     this.props.dispatch({type: actionTypes().FETCH_TOKEN_PENDING, payload: null});
     
     let that = this;
-    
+
     this.props.dispatch(getToken(email, password)).then( () => {
         
         if (that.props.tokenFetched) {
           // We are logged in, lets render the home view
-          that.props.history.replaceState(null, "/login")
+          that.props.dispatch(push("/"));
         }
     });
-    // this.props.dispatch(getToken(email, password));
 
   }
 
@@ -112,6 +105,7 @@ export default withRouter(connect((store) => {
     token:        store.login.token,
     tokenFetched: store.login.fetched,
     fetchingToken:store.login.fetching,
-    error:        store.login.error
+    error:        store.login.error,
+    routing:       store.routing
   };
 })(Login));

@@ -3,6 +3,8 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
+  Redirect,
+  Switch
 } from 'react-router-dom'
 
 import Login from '../views/Login';
@@ -15,10 +17,15 @@ const MasterCleanLayout = () => (
     <div className="react-root">
         <div className="react-wrapper-container">
 
-            <Route
-                path='*'
-                exact={true}
-                component={Login} />
+            <Switch>
+              <Route
+                  path='/login'
+                  exact={true}
+                  component={Login} />
+                
+                {/* when they try and goto any URL besides login, we show them login */}
+                <Redirect from="*" to="/login"/>
+            </Switch>
       </div>
     </div>
   </Router>

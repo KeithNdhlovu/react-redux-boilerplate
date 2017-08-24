@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
-import { withRouter } from 'react-router-dom'
-import { push } from 'react-router-redux'
+import { withRouter, NavLink } from 'react-router-dom'
+import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 
 import { actionTypes } from '../../constants'
 
@@ -20,19 +20,16 @@ let NavigationComponent = (props) => (
             {/*<!-- Links -->*/}
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                    <a className="nav-link" to="/" onClick={props.navigateTo.bind(this, '/')}>Home <span className="sr-only">(current)</span></a>
+                    <NavLink className="nav-link" to="/" onClick={props.navigateTo.bind(this, '/')}>Home</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" to="/login" onClick={props.navigateTo.bind(this, '/login')}>Login</a>
+                    <NavLink className="nav-link" to="/bubblegum" onClick={props.navigateTo.bind(this, '/bubblegum')}>Bubblegum</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" to="/bubblegum" onClick={props.navigateTo.bind(this, '/bubblegum')}>bubblegum</a>
+                    <NavLink className="nav-link" to="/shoelaces" onClick={props.navigateTo.bind(this, '/shoelaces')}>shoelaces</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" to="/shoelaces" onClick={props.navigateTo.bind(this, '/shoelaces')}>shoelaces</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" to="/logout" onClick={props.handleLogout.bind(this, '/logout')}>logout</a>
+                    <NavLink className="nav-link"  to="/login" onClick={props.handleLogout.bind(this, '/login')}>Logout</NavLink>
                 </li>                
                 {/*<!-- Dropdown -->*/}
                 <li className="nav-item dropdown">
@@ -58,21 +55,16 @@ const state = (store) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   navigateTo: (location) => {    
-    dispatch({
-        type: actionTypes().NAV_CHANGED, 
-        payload: ownProps.history.push(location)
-    });
+
+    dispatch(replace(location));
   },
   handleLogout: (location) => {
     
     // Delete the token
     localStorage.removeItem("jwt-token");
-
-    // Refresh
-    dispatch({
-        type: actionTypes().NAV_CHANGED, 
-        payload: ownProps.history.replaceState(null, location)
-    });
+    
+    // Redirect
+    dispatch(push(location));
   }
 });
 
