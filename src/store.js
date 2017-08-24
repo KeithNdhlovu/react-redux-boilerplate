@@ -4,11 +4,7 @@ import logger   from "redux-logger"
 import thunk    from "redux-thunk"
 import promise  from "redux-promise-middleware"
 
-import createHistory from 'history/createBrowserHistory';
-
 import reducer  from "./reducers"
-
-const history = createHistory();
 
 const middleware = applyMiddleware(promise(), thunk, logger())
 

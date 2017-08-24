@@ -51,9 +51,12 @@ let NavigationComponent = (props) => (
     </nav>
 )
 
-const state = (state, ownProps = {}) => {
+const state = (store) => {
+  
+  console.log(store);
+
   return {
-    location: state.location
+    location: store.location
   }
 }
 
@@ -72,7 +75,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     // Refresh
     dispatch({
         type: actionTypes().NAV_CHANGED, 
-        payload: ownProps.history.replace(location)
+        payload: window.location.replace("/login")
     });
   }
 });

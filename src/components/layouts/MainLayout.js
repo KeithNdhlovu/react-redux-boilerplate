@@ -6,24 +6,12 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-// Pages
-import Home from '../views/Home';
-import Login from '../views/Login';
-import Shoelaces from '../views/Shoelaces';
-import Bubblegum from '../views/Bubblegum';
-import Navigation from '../views/Navigation';
-
 import MasterAuthLayout from './MasterAuthLayout';
 import MasterCleanLayout from './MasterCleanLayout';
 
 import logo from '../../styles/logo.svg';
 import '../../styles/index.css';
 
-
-import createBrowserHistory from 'history/createBrowserHistory'
-import createHashHistory from 'history/createHashHistory'
-
-const history = createBrowserHistory()
 
 // Check if is logged in
 const isLoggedIn = () => {
@@ -34,5 +22,3 @@ const isLoggedIn = () => {
 export default (store) => {
   return (isLoggedIn() ? <MasterAuthLayout /> : <MasterCleanLayout />)
 }
-
-// export default MainLayout

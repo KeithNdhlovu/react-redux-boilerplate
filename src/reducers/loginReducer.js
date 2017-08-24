@@ -5,7 +5,6 @@ const initialState = {
     fetching: false,
     fetched: false,
     error: null,
-    hasError: false,
 }
 
 /**
@@ -26,8 +25,7 @@ export default function reducer(state = initialState, action) {
         
         return {
           ...state, 
-          fetching: false, 
-          hasError: true,
+          fetching: false,
           error:    action.payload.message
         }
       }

@@ -3,6 +3,7 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
+  Switch
 } from 'react-router-dom'
 
 import Home from '../views/Home';
@@ -13,9 +14,6 @@ import ForOhFour from '../views/ForOhFour';
 import Navigation from '../views/Navigation';
 
 import createBrowserHistory from 'history/createBrowserHistory'
-import createHashHistory from 'history/createHashHistory'
-
-const history = createBrowserHistory()
 
 const routes = [
   { 
@@ -34,11 +32,12 @@ const routes = [
 ]
 
 const MasterAuthLayout = () => (
-  <Router history={history}>
+  <Router history={createBrowserHistory}>
     <div className="react-root">
-        
-        <Navigation history={history} context={this.context} />
-        <div className="react-wrapper-container">
+      
+      <Navigation history={this.history} context={this.context} />
+      <div className="react-wrapper-container">
+        <Switch>
             {routes.map((route, index) => (
             // Render more <Route>s with the same paths as
             // above, but different components this time.
@@ -49,7 +48,13 @@ const MasterAuthLayout = () => (
               exact={route.exact}
               component={route.main}/>
           
-          ))}      
+          ))}
+
+          <Route 
+              path="*"
+              component={ForOhFour}/>
+
+        </Switch>
       </div>
     </div>
   </Router>

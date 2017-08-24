@@ -9,12 +9,9 @@ import Login from '../views/Login';
 import ForOhFour from '../views/ForOhFour';
 
 import createBrowserHistory from 'history/createBrowserHistory'
-import createHashHistory from 'history/createHashHistory'
-
-const history = createBrowserHistory()
 
 const MasterCleanLayout = () => (
-  <Router history={history}>
+  <Router history={createBrowserHistory}>
     <div className="react-root">
         <div className="react-wrapper-container">
 
