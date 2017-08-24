@@ -44,8 +44,10 @@ class Login extends Component {
 
     this.props.dispatch(getToken(email, password)).then( () => {
         
-        // We are logged in, lets render the home view
-        that.props.location.push('/');
+        if (that.props.tokenFetched) {
+          // We are logged in, lets render the home view
+          that.props.history.replace('/');
+        }
     });
 
   }
@@ -75,6 +77,11 @@ class Login extends Component {
                             {/*<label htmlFor="defaultForm-pass" className="">Your password</label>*/}
                         </div>
                         
+                        {/* show errors if they exist*/}
+
+                        { this.props.error ? ( <p className="text-center red-text"> Username or Password incorrect</p> ) : null }
+                        
+                        {/* Show button or loader */}
                         {this.props.fetchingToken ? (
                             <div className="progress primary-color-dark"><div className="indeterminate"></div></div>
                           ): (
@@ -95,11 +102,12 @@ class Login extends Component {
 export default withRouter(connect((store) => {
 
   return {
-    user: store.user.user,
-    userFetched: store.user.fetched,
-    token: store.login.token,
+    user:         store.user.user,
+    userFetched:  store.user.fetched,
+    token:        store.login.token,
     tokenFetched: store.login.fetched,
-    fetchingToken: store.login.fetching,
-    location: store.location
+    fetchingToken:store.login.fetching,
+    error:        store.login.error,
+    location:     store.location
   };
 })(Login));

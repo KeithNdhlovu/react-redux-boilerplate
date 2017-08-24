@@ -72,7 +72,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     // Refresh
     dispatch({
         type: actionTypes().NAV_CHANGED, 
-        payload: ownProps.location.push(location)
+        payload: ownProps.history.replace(location)
     });
   }
 });

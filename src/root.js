@@ -12,7 +12,7 @@ import MainLayout from './components/layouts/MainLayout';
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <MainLayout />
+    <MainLayout store={store}/>
   </Provider>
 )
 
