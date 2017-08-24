@@ -8,10 +8,10 @@ import {
 import Login from '../views/Login';
 import ForOhFour from '../views/ForOhFour';
 
-import createBrowserHistory from 'history/createBrowserHistory'
+import history from "../../history"
 
 const MasterCleanLayout = () => (
-  <Router history={createBrowserHistory}>
+  <Router history={history}>
     <div className="react-root">
         <div className="react-wrapper-container">
 

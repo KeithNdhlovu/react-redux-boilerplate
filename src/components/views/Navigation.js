@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { withRouter } from 'react-router-dom'
+import { push } from 'react-router-redux'
 
 import { actionTypes } from '../../constants'
 
@@ -52,16 +53,11 @@ let NavigationComponent = (props) => (
 )
 
 const state = (store) => {
-  
-  console.log(store);
-
-  return {
-    location: store.location
-  }
+  return { }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  navigateTo: (location) => {
+  navigateTo: (location) => {    
     dispatch({
         type: actionTypes().NAV_CHANGED, 
         payload: ownProps.history.push(location)
@@ -75,7 +71,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     // Refresh
     dispatch({
         type: actionTypes().NAV_CHANGED, 
-        payload: window.location.replace("/login")
+        payload: ownProps.history.replaceState(null, location)
     });
   }
 });

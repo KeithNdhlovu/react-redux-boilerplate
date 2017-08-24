@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Redirect, BrowserRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { push } from 'react-router-redux'
 
 import { connect }  from "react-redux"
 
@@ -8,6 +9,8 @@ import { getMe }    from "../../actions/userActions"
 import { getToken } from "../../actions/loginAction"
 
 import { actionTypes } from '../../constants'
+
+import history from "../../history"
 
 // Bootstrap
 import { 
@@ -47,7 +50,7 @@ class Login extends Component {
         
         if (that.props.tokenFetched) {
           // We are logged in, lets render the home view
-          this.props.history.push("/");
+          that.props.history.replaceState(null, "/login")
         }
     });
     // this.props.dispatch(getToken(email, password));
@@ -101,7 +104,7 @@ class Login extends Component {
   }
 }
 
-export default withRouter(connect((store, history) => {
+export default withRouter(connect((store) => {
 
   return {
     user:         store.user.user,

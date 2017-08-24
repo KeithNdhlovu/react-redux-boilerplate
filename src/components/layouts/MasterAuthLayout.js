@@ -13,7 +13,7 @@ import Bubblegum from '../views/Bubblegum';
 import ForOhFour from '../views/ForOhFour';
 import Navigation from '../views/Navigation';
 
-import createBrowserHistory from 'history/createBrowserHistory'
+import history from "../../history"
 
 const routes = [
   { 
@@ -32,10 +32,10 @@ const routes = [
 ]
 
 const MasterAuthLayout = () => (
-  <Router history={createBrowserHistory}>
+  <Router history={history}>
     <div className="react-root">
       
-      <Navigation history={this.history} context={this.context} />
+      <Navigation history={history} context={this.context} />
       <div className="react-wrapper-container">
         <Switch>
             {routes.map((route, index) => (
