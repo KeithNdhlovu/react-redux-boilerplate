@@ -1,0 +1,185 @@
+// Your custom style
+
+// Constant colors
+$p-color-grey: #494949;
+$p-color-white: #FFFFFF;
+$p-btn-bg-faded-white: #DCDCDC;
+$p-color-blue: #26AEEE;
+
+// Fonts path
+$source-sans-font-path: "../font/source-sans/" !default;
+
+@mixin border-radius($radius, $important : null) {
+  -webkit-border-radius: $radius $important;
+     -moz-border-radius: $radius $important;
+      -ms-border-radius: $radius $important;
+          border-radius: $radius $important;
+}
+
+@mixin box-sizing($type, $important : null) {
+    box-sizing: $type $important;
+    -webkit-box-sizing:$type $important;
+    -moz-box-sizing: $type $important;
+}
+
+
+// Fonts
+@font-face {
+    font-family: "Roboto-Thin";
+    src: local(Roboto Thin),
+    url('#{$roboto-font-path}Roboto-Thin.eot');
+    src: url("#{$roboto-font-path}Roboto-Thin.eot?#iefix") format('embedded-opentype'),
+    url("#{$roboto-font-path}Roboto-Thin.woff2") format("woff2"),
+    url("#{$roboto-font-path}Roboto-Thin.woff") format("woff"),
+    url("#{$roboto-font-path}Roboto-Thin.ttf") format("truetype");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "Roboto-Light";
+    src: local(Roboto Light),
+    url('#{$roboto-font-path}Roboto-Light.eot');
+    src: url("#{$roboto-font-path}Roboto-Light.eot?#iefix") format('embedded-opentype'),
+    url("#{$roboto-font-path}Roboto-Light.woff2") format("woff2"),
+    url("#{$roboto-font-path}Roboto-Light.woff") format("woff"),
+    url("#{$roboto-font-path}Roboto-Light.ttf") format("truetype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Roboto-Regular";
+    src: local(Roboto Regular),
+    url('#{$roboto-font-path}Roboto-Regular.eot');
+    src: url("#{$roboto-font-path}Roboto-Regular.eot?#iefix") format('embedded-opentype'),
+    url("#{$roboto-font-path}Roboto-Regular.woff2") format("woff2"),
+    url("#{$roboto-font-path}Roboto-Regular.woff") format("woff"),
+    url("#{$roboto-font-path}Roboto-Regular.ttf") format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Roboto-Medium";
+    src: url('#{$roboto-font-path}Roboto-Medium.eot');
+    src: url("#{$roboto-font-path}Roboto-Medium.eot?#iefix") format('embedded-opentype'),
+    url("#{$roboto-font-path}Roboto-Medium.woff2") format("woff2"),
+    url("#{$roboto-font-path}Roboto-Medium.woff") format("woff"),
+    url("#{$roboto-font-path}Roboto-Medium.ttf") format("truetype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Roboto-Bold";
+    src: url('#{$roboto-font-path}Roboto-Bold.eot');
+    src: url("#{$roboto-font-path}Roboto-Bold.eot?#iefix") format('embedded-opentype'),
+    url("#{$roboto-font-path}Roboto-Bold.woff2") format("woff2"),
+    url("#{$roboto-font-path}Roboto-Bold.woff") format("woff"),
+    url("#{$roboto-font-path}Roboto-Bold.ttf") format("truetype");
+    font-weight: 700;
+}
+
+
+$source-sans-pro-bold: "SourceSanspro-Bold";
+$source-sans-pro-regular: "SourceSanspro-Regular";
+
+@font-face {
+    font-family: $source-sans-pro-bold;
+    src: url('#{$source-sans-font-path}sourcesanspro-bold-webfont.eot');
+    src: url("#{$source-sans-font-path}sourcesanspro-bold-webfont.eot?#iefix") format('embedded-opentype'),
+    url("#{$source-sans-font-path}sourcesanspro-bold-webfont.woff2") format("woff2"),
+    url("#{$source-sans-font-path}sourcesanspro-bold-webfont.woff") format("woff"),
+    url("#{$source-sans-font-path}sourcesanspro-bold-webfont.ttf") format("truetype");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: $source-sans-pro-regular;
+    src: url('#{$source-sans-font-path}sourcesanspro-regular-webfont.eot');
+    src: url("#{$source-sans-font-path}sourcesanspro-regular-webfont.eot?#iefix") format('embedded-opentype'),
+    url("#{$source-sans-font-path}sourcesanspro-regular-webfont.woff2") format("woff2"),
+    url("#{$source-sans-font-path}sourcesanspro-regular-webfont.woff") format("woff"),
+    url("#{$source-sans-font-path}sourcesanspro-regular-webfont.ttf") format("truetype");
+}
+
+body, html, #root {
+  height: 100%;
+  width: 100%;
+}
+
+.p-grey-bg {
+    background: $p-color-grey;
+}
+
+.react-wrapper-container {
+    width: 100%;
+    height: 100%;
+    padding: 0 15px 0 15px;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
+
+section {
+    &.login {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.react-root {
+  width: 100%;
+  height: 100%;
+}
+
+/*
+    Default form elements
+*/
+
+// Rounded button
+$p-radius: 10px;
+
+.p-btn {
+    @extend .btn;
+    @include border-radius($p-radius);
+    /* Rectangle 10: */
+    border: 1px solid $p-color-white;
+    font-family: 'Roboto-Bold';
+    font-size: 18px;
+    background: $p-btn-bg-faded-white;
+    color: $p-color-grey !important;
+    letter-spacing: 0;
+    text-transform: capitalize;
+}
+
+// Inputs 
+
+.custom-input {
+    @extend .form-control;
+    @include border-radius($p-radius, !important);
+    border: 1px solid $p-btn-bg-faded-white !important;
+    background: transparent;
+    color: $p-btn-bg-faded-white;
+    outline: none;
+    padding: 0.6rem;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 3rem !important;
+    @include box-sizing(border-box, !important);
+
+    text-transform: none;
+
+    // Focused input style
+    &:focus:not([readonly]) {
+        border: 1px solid $p-btn-bg-faded-white !important;
+        box-shadow: none !important;
+    }
+}
+
+.header-caption {
+    
+    font-family: $source-sans-pro-regular;
+    strong {
+        font-family: $source-sans-pro-bold;
+    }
+}

@@ -11,8 +11,7 @@ import { actionTypes } from '../../constants'
 
 import history from "../../history"
 
-import logo from '../../styles/pp-logo.svg';
-import '../../styles/index.scss';
+import logo from '../../styles/images/logo.png';
 
 // Bootstrap
 import { 
@@ -58,40 +57,47 @@ class Login extends Component {
 
     return (
         <section className="login vertical-align">
-            <div className="card" style={{"width": "28rem", "margin": "0 auto"}}>
-                <div className="card-body">
-                    <Form onSubmit={this.handleSubmit.bind(this)}>
+            <div className="" style={{"width": "28rem", "margin": "0 auto"}}>
+                <div className="row">
+                    <Form onSubmit={this.handleSubmit.bind(this)} className="col-md-12 p-grey-bg">
+                      <br/>
+                      <div className="row card-content">
+                          {/*<!--Header-->*/}
+                          <div className="text-center col-md-12">
+                              <img src={logo} height={120} width={120}/>
+                              <br/>
+                              <br/>
+                              <h2 className="header-caption white-text"><strong>Principal</strong> Talk</h2>
+                              <br/>
+                          </div>
 
-                        {/*<!--Header-->*/}
-                        <div className="text-center">
-                            <img src={logo} height={200} width={200}/>
-                        </div>
+                          {/*<!--Body-->*/}
+                          <div className="md-form col-md-12 text-center">
+                              <input type="text" id="defaultForm-email" placeholder="Email" name="email" value={email} onChange={this.handleChangeEmailChange} className="custom-input col-md-10" />
+                              {/*<label htmlFor="defaultForm-email" className="">Your email</label>*/}
+                          </div>
 
-                        {/*<!--Body-->*/}
-                        <div className="md-form">
-                            <input type="text" id="defaultForm-email" placeholder="Email" name="email" value={email} onChange={this.handleChangeEmailChange} className="form-control" />
-                            {/*<label htmlFor="defaultForm-email" className="">Your email</label>*/}
-                        </div>
+                          <div className="md-form col-md-12 text-center">
+                              <input type="password" id="defaultForm-pass" placeholder="Password" name="password" value={password} onChange={this.handleChangePasswordChange} className="custom-input col-md-10" />
+                              {/*<label htmlFor="defaultForm-pass" className="">Your password</label>*/}
+                          </div>
+                          
+                          {/* show errors if they exist*/}
 
-                        <div className="md-form">
-                            <input type="password" id="defaultForm-pass" placeholder="Password" name="password" value={password} onChange={this.handleChangePasswordChange} className="form-control" />
-                            {/*<label htmlFor="defaultForm-pass" className="">Your password</label>*/}
-                        </div>
-                        
-                        {/* show errors if they exist*/}
-
-                        { this.props.error ? ( <p className="text-center red-text"> Username or Password incorrect</p> ) : null }
-                        
-                        {/* Show button or loader */}
-                        {this.props.fetchingToken ? (
-                            <div className="progress primary-color-dark"><div className="indeterminate"></div></div>
-                          ): (
-                            <div className="text-center">
-                              <button className="btn btn-default waves-effect waves-light">Login</button>
-                            </div>
-                          )
-                        }
-                      </Form>
+                          { this.props.error ? ( <p className="col-md-12 text-center red-text"> Username or Password incorrect</p> ) : null }
+                          
+                          {/* Show button or loader */}
+                          {this.props.fetchingToken ? (
+                              <div className="progress primary-color-dark"><div className="indeterminate"></div></div>
+                            ): (
+                              <div className="col-md-12 text-center">
+                                <button className="p-btn col-md-6 btn white waves-effect waves-light">Sign in</button>
+                              </div>
+                            )
+                          }
+                      </div>
+                      <br/>
+                    </Form>
                 </div>
 
             </div>

@@ -5,8 +5,8 @@ import { Provider } from "react-redux"
 
 import store from "./store"
 
-import 'mdbootstrap/css/bootstrap.css'
-import 'mdbootstrap/css/mdb.css'
+import './styles/mdbootstrap/sass/bootstrap.min.scss'
+import './styles/mdbootstrap/sass/mdb.scss'
 
 
 import Root from './root';
