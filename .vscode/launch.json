@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [{
     "name": "Chrome",
-    "url": "http://localhost:3000",
+    "url": "http://localhost:5000",
     "webRoot": "${workspaceRoot}/src",
     "userDataDir": "${workspaceRoot}/.vscode/chrome",
     "sourceMapPathOverrides": {
