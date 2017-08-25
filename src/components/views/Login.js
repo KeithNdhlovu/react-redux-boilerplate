@@ -11,6 +11,9 @@ import { actionTypes } from '../../constants'
 
 import history from "../../history"
 
+import logo from '../../styles/pp-logo.svg';
+import '../../styles/index.scss';
+
 // Bootstrap
 import { 
     Button, 
@@ -60,8 +63,8 @@ class Login extends Component {
                     <Form onSubmit={this.handleSubmit.bind(this)}>
 
                         {/*<!--Header-->*/}
-                        <div className="form-header default-color">
-                            <h3>Login</h3>
+                        <div className="text-center">
+                            <img src={logo} height={200} width={200}/>
                         </div>
 
                         {/*<!--Body-->*/}

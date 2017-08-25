@@ -9,9 +9,6 @@ import {
 import MasterAuthLayout from './MasterAuthLayout';
 import MasterCleanLayout from './MasterCleanLayout';
 
-import logo from '../../styles/logo.svg';
-import '../../styles/index.css';
-
 
 // Check if is logged in
 const isLoggedIn = () => {
