@@ -100,10 +100,17 @@ $source-sans-pro-regular: "SourceSanspro-Regular";
     url("#{$source-sans-font-path}sourcesanspro-regular-webfont.ttf") format("truetype");
 }
 
+body, html {
+    overflow-y: scroll;
+    font-family: 'Roboto-Light';
+    background: $p-color-grey;
+}
+
 body, html, #root {
   height: 100%;
   width: 100%;
 }
+
 
 .p-grey-bg {
     background: $p-color-grey;
@@ -132,6 +139,18 @@ section {
   height: 100%;
 }
 
+.no-margin {
+    margin: 0 !important;
+}
+
+a {
+    &.underline-hover {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
 /*
     Default form elements
 */
@@ -150,6 +169,14 @@ $p-radius: 10px;
     color: $p-color-grey !important;
     letter-spacing: 0;
     text-transform: capitalize;
+    margin: 0;
+    
+
+    &.flat {
+        background: $p-color-grey;
+        color: $p-color-white !important;
+        border: none;
+    }
 }
 
 // Inputs 
@@ -182,4 +209,256 @@ $p-radius: 10px;
     strong {
         font-family: $source-sans-pro-bold;
     }
+}
+
+
+// Side menu onlu showing icons, min width
+$side-nav-mobile-width: 80px !default;
+$side-nav-desktop-width: 240px !default;
+
+/*** TAKEN FROM MATERIALIZECSS BASE VARIABLES ***/
+// Media Query Ranges
+$small-screen-up: 601px !default;
+$medium-screen-up: 993px !default;
+$large-screen-up: 1201px !default;
+$small-screen: 600px !default;
+$medium-screen: 992px !default;
+$large-screen: 1200px !default;
+
+$medium-and-up: "only screen and (min-width : #{$small-screen-up})" !default;
+$large-and-up: "only screen and (min-width : #{$medium-screen-up})" !default;
+$small-and-down: "only screen and (max-width : #{$small-screen})" !default;
+$medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
+$medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
+
+// Custom colors
+$color-primary         : #1489A2;
+$color-primary-dark    : #095B6C;
+
+$color-light-grey : #EAEAEA;
+$color-text-grey  : #6A6A6A;
+$color-grey       : #EAEAEA;
+$color-dark-grey  : #979797;
+$color-white      : #FFFFFF;
+$color-yellow     : yellow;
+$color-dark-red   : #812016;
+$color-red        : #D0021B;
+$color-darker-grey: #4A4A4A;
+$color-purple     : #AE75CC;
+
+$red: #F44336;
+$yellow: #ffeb3b;
+$green: #4CAF50;
+$blue: #1489A2;
+$purple: #AB47BC;
+
+$select-text-color: #424242;
+
+// Custom media queries
+@mixin mq_small_down() {
+  @media #{$small-and-down} {
+    @content;
+  }
+}
+
+@mixin mq_medium_down() {
+  @media #{$medium-and-down} {
+    @content;
+  }
+}
+
+@mixin mq_medium_up() {
+  @media #{$medium-and-up} {
+    @content;
+  }
+}
+
+@mixin mq_large_up() {
+  @media #{$large-and-up} {
+    @content;
+  }
+}
+
+
+@mixin mq_on_hide_sidenav() {
+  @media only screen and (max-width: 992px) {
+    @content;    
+  }
+}
+
+// Side Nav
+.side-nav {
+
+
+    height: calc(100%) !important;
+    height: -moz-calc(100%) !important; //Temporary Firefox Fix
+    padding: 0px !important;
+
+    &.fixed {
+        transition: all .2s linear;
+        // @include mq_on_hide_sidenav() {
+        left: 0 !important;
+        width: $side-nav-mobile-width;
+        // };
+
+        @include mq_small_down() {
+        left: -105%;// !important;
+        width: $side-nav-desktop-width;
+        }
+    }
+
+	&.leftside-navigation {
+    
+    overflow: scroll;
+    top: 0px;
+
+    &.show-full-on-click {
+      width: $side-nav-desktop-width;
+      left: 0px;
+
+      li {
+        a {
+          span {
+            visibility: visible;
+          }
+        }
+      }      
+    }
+
+    &.show-full {
+      width: $side-nav-desktop-width;
+
+      li {
+        a {
+          span {
+            visibility: visible;
+          }
+        }
+      }
+    }
+
+		li {
+			&.user-details {
+				background: none;
+			}
+
+      a {
+
+        span {
+          // Hide all labels on medium screen sizes
+          // @include mq_on_hide_sidenav() {
+            visibility: hidden;
+          // }
+        }
+      }
+		}
+	}
+
+  $sidenav-links-height: 80px;
+
+  &.leftside-navigation {
+    &.custom {
+      background-color: $color-grey;
+      top: 0px;
+      
+      @include mq_on_hide_sidenav() {
+        top: 0px !important;
+      }
+
+      li {
+        height: $sidenav-links-height;
+        line-height: $sidenav-links-height;
+        // border-bottom: 1px solid $color-dark-grey;
+
+        &.to-collapse {
+          height: auto;
+        }
+        a {
+          height: $sidenav-links-height;
+          line-height: $sidenav-links-height;
+        }
+
+        .small-logo-container {
+            margin: 0 auto;
+            height: 30px;
+        }
+
+        &.logo-container {
+          padding: 0px;
+          .white-circle {
+              @include border-radius(50%);
+              background: $p-color-white;
+              height: 60px;
+              width: 60px;
+              background-size: 70%;
+              background-position: center;
+              background-repeat: no-repeat;
+              margin: 0 auto;
+          }
+
+          img {
+            // padding: 20px;
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+      
+    }
+  }
+}
+
+
+// Override sidebar scrollbar
+#slide-out {
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+#slide-out::-webkit-scrollbar {
+	width: 0px;
+}
+
+#slide-out::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+
+#main {
+  transition: all .2s linear;
+  // padding-left: $side-nav-desktop-width;
+  // @include mq_on_hide_sidenav() {
+    padding-left: $side-nav-mobile-width;
+  // }
+
+  @include mq_small_down() {
+    padding-left: 0;
+  }
+
+  &.show-full {
+    padding-left: $side-nav-desktop-width;
+  }
+}
+
+footer {
+  transition: all .2s linear;
+  // padding-left: $side-nav-desktop-width;
+  
+  // @include mq_on_hide_sidenav() {
+    padding-left: $side-nav-mobile-width;
+  // }
+
+  &.show-full {
+    padding-left: $side-nav-desktop-width;
+  }
+
+  @include mq_small_down() {
+    padding-left: 0;
+  }
+}
+
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
 }

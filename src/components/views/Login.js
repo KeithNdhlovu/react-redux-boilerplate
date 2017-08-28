@@ -13,6 +13,8 @@ import history from "../../history"
 
 import logo from '../../styles/images/logo.png';
 
+import CircleLoader from '../general-components/CircleLoader.js';
+
 // Bootstrap
 import { 
     Button, 
@@ -59,42 +61,61 @@ class Login extends Component {
         <section className="login vertical-align">
             <div className="" style={{"width": "28rem", "margin": "0 auto"}}>
                 <div className="row">
-                    <Form onSubmit={this.handleSubmit.bind(this)} className="col-md-12 p-grey-bg">
+                    <Form disabled={this.props.fetchingToken} onSubmit={this.handleSubmit.bind(this)} className="col-12 p-grey-bg">
                       <br/>
                       <div className="row card-content">
-                          {/*<!--Header-->*/}
-                          <div className="text-center col-md-12">
-                              <img src={logo} height={120} width={120}/>
-                              <br/>
-                              <br/>
-                              <h2 className="header-caption white-text"><strong>Principal</strong> Talk</h2>
-                              <br/>
-                          </div>
+                            {/*<!--Header-->*/}
+                            <div className="text-center col-12">
+                                <img src={logo} height={120} width={120}/>
+                                <br/>
+                                <br/>
+                                <h2 className="header-caption white-text"><strong>Principal</strong> Talk</h2>
+                                <br/>
+                            </div>
 
-                          {/*<!--Body-->*/}
-                          <div className="md-form col-md-12 text-center">
-                              <input type="text" id="defaultForm-email" placeholder="Email" name="email" value={email} onChange={this.handleChangeEmailChange} className="custom-input col-md-10" />
-                              {/*<label htmlFor="defaultForm-email" className="">Your email</label>*/}
-                          </div>
+                            {/* show errors if they exist*/}
 
-                          <div className="md-form col-md-12 text-center">
-                              <input type="password" id="defaultForm-pass" placeholder="Password" name="password" value={password} onChange={this.handleChangePasswordChange} className="custom-input col-md-10" />
-                              {/*<label htmlFor="defaultForm-pass" className="">Your password</label>*/}
-                          </div>
+                            { this.props.error ? ( 
+                                <div className="col-12">
+                                    <div className="alert alert-danger text-center" role="alert">
+                                        <strong>Username or Password incorrect. </strong>
+                                    </div>
+                                    <br/>
+                                </div>
+                             ) : null }
                           
-                          {/* show errors if they exist*/}
+                            {/*<!--Body-->*/}
+                            <div className="md-form col-12 text-center">
+                                <input type="text" placeholder="Email" name="email" value={email} onChange={this.handleChangeEmailChange} className="custom-input col-12" />
+                                {/*<label htmlFor="defaultForm-email" className="">Your email</label>*/}
+                            </div>
 
-                          { this.props.error ? ( <p className="col-md-12 text-center red-text"> Username or Password incorrect</p> ) : null }
-                          
-                          {/* Show button or loader */}
-                          {this.props.fetchingToken ? (
-                              <div className="progress primary-color-dark"><div className="indeterminate"></div></div>
-                            ): (
-                              <div className="col-md-12 text-center">
-                                <button className="p-btn col-md-6 btn white waves-effect waves-light">Sign in</button>
-                              </div>
-                            )
-                          }
+                            <div className="md-form col-12 text-center">
+                                <input type="password" placeholder="Password" name="password" value={password} onChange={this.handleChangePasswordChange} className="custom-input col-12" />
+                                {/*<label htmlFor="defaultForm-pass" className="">Your password</label>*/}
+                                <div className="row">
+                                    <a href="#/help" className="col-6 text-white text-left underline-hover">Help</a>
+                                    <a href="#/forgot" className="col-6 text-white text-right underline-hover">Forgot Password</a>
+                                </div>                              
+                            </div>
+
+                            <div className="col-12 text-center">
+                                <div className="row">
+                                    <div className="col-12 text-center">
+                                        {/* Show button or loader */}
+                                        { this.props.fetchingToken ? (
+                                            <button className="p-btn col-6 btn white waves-effect waves-light"><CircleLoader /></button>
+                                            ) : (
+                                                <button className="p-btn col-6 btn white waves-effect waves-light">Sign In</button>
+                                            )}
+                                        <br /><br />
+                                    </div>
+                                    <div className="col-12 text-center">
+                                        <a href="#/signup" className="text-white underline-hover"><strong>Sign Up</strong></a>
+                                    </div>                              
+                                </div>
+                            </div>
+
                       </div>
                       <br/>
                     </Form>

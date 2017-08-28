@@ -14,8 +14,8 @@ import history from "../../history"
 
 const MasterCleanLayout = () => (
   <Router history={history}>
-    <div className="react-root">
-        <div className="react-wrapper-container p-grey-bg">
+    <div className="react-root login">
+        <div className="react-wrapper-container">
 
             <Switch>
               <Route
