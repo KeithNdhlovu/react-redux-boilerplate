@@ -62,7 +62,8 @@
 @import "mdb/free/tables";
 
 /* Custom Sass */
-@import "mdb/custom";
 @import "mdb/loader";
 @import "mdb/helpers";
 @import "mdb/sideNav";
+@import "mdb/navbar";
+@import "mdb/custom";

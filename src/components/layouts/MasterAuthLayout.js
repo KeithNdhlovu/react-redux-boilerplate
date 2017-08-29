@@ -12,7 +12,11 @@ import Shoelaces from '../views/Shoelaces';
 import Bubblegum from '../views/Bubblegum';
 import ForOhFour from '../views/ForOhFour';
 import Navigation from '../views/Navigation';
+
 import MainSideNavigation from '../general-components/MainSideNavigation';
+import SideNavigation from '../general-components/SideNavigation';
+
+import DefaultLogo from '../../styles/images/logo.png';
 
 import history from "../../history"
 
@@ -56,6 +60,35 @@ const organisations = [
   }
 ];
 
+const links = [
+  {
+    id: 1,
+    caption: "Feed One",
+    url: "/feed/one"
+  }, {
+    id: 2,
+    caption: "Feed One",
+    url: "/feed/one"
+  }, {
+    id: 3,
+    caption: "Feed One",
+    url: "/feed/one"
+  }, {
+    id: 4,
+    caption: "Feed One",
+    url: "/feed/one"
+  }, {
+    id: 5,
+    caption: "Feed One",
+    url: "/feed/one"
+  }
+];
+
+const header = {
+  caption: "The Ultimate Header",
+  logo: DefaultLogo
+}
+
 const MasterAuthLayout = () => (
   <Router history={history}>
 
@@ -64,9 +97,10 @@ const MasterAuthLayout = () => (
         {/*<!-- START WRAPPER -->*/}
         <div className="">
           {/*<!-- include side navigation -->*/}
-          <MainSideNavigation organisations={organisations}/>
-          {/*<!-- include header -->*/}
-
+          <MainSideNavigation organisations={ organisations }/>
+          
+          {/*<!-- include inner side navigation -->*/}
+          <SideNavigation links={ links } header={ header }/>
           <section id="content">
             
             {/* Content goes here */}
