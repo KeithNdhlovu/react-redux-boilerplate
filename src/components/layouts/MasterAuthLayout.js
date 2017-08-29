@@ -6,6 +6,12 @@ import {
   Switch
 } from 'react-router-dom'
 
+import { connect } from "react-redux"
+import { withRouter, NavLink } from 'react-router-dom'
+import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
+
+import { actionTypes } from '../../constants'
+
 import Home from '../views/Home';
 import Login from '../views/Login';
 import Shoelaces from '../views/Shoelaces';
@@ -38,58 +44,75 @@ const routes = [
 
 const organisations = [
   {
-    id: 1,
-    organisation_name: "School 1",
-    image: "http://www.cde.ca.gov/ta/sr/cs/images/goldribbonlogo.png"
-  }, {
-    id: 2,
-    organisation_name: "School 2",
-    image: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAaxAAAAJDI4MDFiZDczLWQxNmYtNDY5OS1hMTZhLTc3NDIxZjE2YjE1YQ.png"
-  }, {
-    id: 3,
-    organisation_name: "School 3",
-    image: "https://upload.wikimedia.org/wikipedia/en/8/8a/Seabrook_Christian_School_logo.png"
-  }, {
-    id: 4,
-    organisation_name: "School 4",
-    image: "https://schoolofbancal.files.wordpress.com/2011/05/school-logo.jpg"
-  }, {
-    id: 5,
-    organisation_name: "School 5",
-    image: "https://s3.amazonaws.com/htw/dt-contest-entries/91266/united-states-education-logo-design.png"
-  }
-];
+  "id": 0,
+  "organisation_name": "Principal Talk",
+  "image": DefaultLogo,
+  "primary_color": "#3d3d3d",
+  "is_white": true,
+  "url": "/organisations/0"
+}, {
+  "id": 1,
+  "organisation_name": "Bubblemix",
+  "image": "http://www.cde.ca.gov/ta/sr/cs/images/goldribbonlogo.png",
+  "primary_color": "#c565c8",
+  "is_white": true,
+  "url": "/organisations/1"
+}, {
+  "id": 2,
+  "organisation_name": "Yakidoo",
+  "image": "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAaxAAAAJDI4MDFiZDczLWQxNmYtNDY5OS1hMTZhLTc3NDIxZjE2YjE1YQ.png",
+  "primary_color": "#e1741d",
+  "is_white": true,
+  "url": "/organisations/2"
+}, {
+  "id": 3,
+  "organisation_name": "Ailane",
+  "image": "https://upload.wikimedia.org/wikipedia/en/8/8a/Seabrook_Christian_School_logo.png",
+  "primary_color": "#3e5b82",
+  "is_white": true,
+  "url": "/organisations/3"
+}, {
+  "id": 4,
+  "organisation_name": "Voonyx",
+  "image": "https://schoolofbancal.files.wordpress.com/2011/05/school-logo.jpg",
+  "primary_color": "#534bbf",
+  "is_white": false,
+  "url": "/organisations/4"
+}, {
+  "id": 5,
+  "organisation_name": "Browsedrive",
+  "image": "https://s3.amazonaws.com/htw/dt-contest-entries/91266/united-states-education-logo-design.png",
+  "primary_color": "#360f08",
+  "is_white": true,
+  "url": "/organisations/5"
+}]
 
 const links = [
   {
     id: 1,
-    caption: "Feed One",
-    url: "/feed/one"
+    caption: "News Feed",
+    url: "/feed"
   }, {
     id: 2,
-    caption: "Feed One",
-    url: "/feed/one"
+    caption: "Calendar",
+    url: "/calendar"
   }, {
     id: 3,
-    caption: "Feed One",
-    url: "/feed/one"
+    caption: "Resources",
+    url: "/resource"
   }, {
     id: 4,
-    caption: "Feed One",
-    url: "/feed/one"
+    caption: "Contact Details",
+    url: "/contacts"
   }, {
     id: 5,
-    caption: "Feed One",
-    url: "/feed/one"
+    caption: "Channels",
+    url: "/channels"
   }
 ];
 
-const header = {
-  caption: "The Ultimate Header",
-  logo: DefaultLogo
-}
 
-const MasterAuthLayout = () => (
+const MasterAuthLayout = (props) => (
   <Router history={history}>
 
       {/*<!-- START MAIN -->*/}
@@ -100,7 +123,7 @@ const MasterAuthLayout = () => (
           <MainSideNavigation organisations={ organisations }/>
           
           {/*<!-- include inner side navigation -->*/}
-          <SideNavigation links={ links } header={ header }/>
+          <SideNavigation links={ links } header={ props.organisation }/>
           <section id="content">
             
             {/* Content goes here */}
@@ -132,4 +155,10 @@ const MasterAuthLayout = () => (
   </Router>
 )
 
-export default MasterAuthLayout
+export default withRouter(connect((store) => {
+
+  return {
+    organisation: store.organisation,
+    user:  store.user,
+  };
+})(MasterAuthLayout));

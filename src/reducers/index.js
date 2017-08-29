@@ -7,9 +7,11 @@ import { routerReducer } from 'react-router-redux'
 
 import user from './userReducer';
 import login from './loginReducer';
+import organisation from './organisationReducer';
 
 export default combineReducers({
     user,
     login,
+    organisation,
     routing: routerReducer
 });

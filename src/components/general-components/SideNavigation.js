@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from "react-redux"
+import { withRouter, NavLink } from 'react-router-dom'
+import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
+
+import { actionTypes } from '../../constants'
+
 class HeaderComponent extends Component {
     render() {
         
-        const { header } = this.props;
+        var { header } = this.props;
         
         return (
             <header className="page-topbar show-on-small hide-on-med-and-up">
@@ -13,10 +19,10 @@ class HeaderComponent extends Component {
                         <div className="valign-wrapper col-12 no-padding">
                             <ul className="valign-wrapper col-12 no-padding">
                                 <li className="link logo-image valign">
-                                    <div className="header-logo-container" style={{backgroundImage: `url(${header.logo})`}}></div>
+                                    <div className="header-logo-container" style={{backgroundImage: `url(${header.image})`}}></div>
                                 </li>
                                 <li className="link valign-wrapper">
-                                    <h4 className="no-margin" href="#" >{ header.caption }</h4>
+                                    <h4 className="no-margin" href="#" >{ header.organisation_name }</h4>
                                 </li>
                             </ul>
                         </div>
@@ -55,4 +61,21 @@ SideNavComponent.propTypes = {
     header: React.PropTypes.object.isRequired
 };
 
-export default SideNavComponent;
+const state = (store) => {
+  return {
+      selected: store.organisation,
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  navigateTo: (item) => {    
+
+    // We tell browser to remember
+    dispatch(replace(item.ur));
+
+    // we tell system to listen
+    dispatch({type: actionTypes().ORGANISATION_NAVIGATION_CHANGED, payload: item});
+  }
+});
+
+export default withRouter(connect(state, mapDispatchToProps)(SideNavComponent));
