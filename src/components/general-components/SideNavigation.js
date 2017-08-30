@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   navigateTo: (item) => {    
 
     // We tell browser to remember
-    dispatch(replace(item.ur));
+    // dispatch(replace(item.ur));
 
     // we tell system to listen
     dispatch({type: actionTypes().ORGANISATION_NAVIGATION_CHANGED, payload: item});

@@ -21,7 +21,7 @@ class MainSideNavComponent extends Component {
                     <li className="logo-container valign-wrapper">
                         <div className="white-circle">
                             <NavLink 
-                                to="/organisations" 
+                                to="/" 
                                 onClick={this.props.navigateTo.bind(this, this.props.organisations[0])} 
                                 className="text-link no-padding no-margin">All</NavLink>
                         </div>

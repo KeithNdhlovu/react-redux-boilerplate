@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Customise Our Axios Instance to overload some methods
 let Axios = axios.create({
-    baseURL: 'http://localhost/api/',
+    baseURL: process.env.REACT_APP_API_BASE_URL,
     headers: {
         'X-Requested-With': 'rest.js',
         'Content-Type': 'application/json'
