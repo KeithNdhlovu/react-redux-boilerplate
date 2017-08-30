@@ -37,6 +37,7 @@ $color-purple     : #AE75CC;
 $p-color-grey: #494949;
 $p-color-dark-grey: #3d3d3d;
 $p-color-white: #FFFFFF;
+$p-color-faded-white: rgba(255, 255, 255, 0.5);
 $p-btn-bg-faded-white: #DCDCDC;
 $p-color-blue: #26AEEE;
 
@@ -332,7 +333,6 @@ $p-radius: 10px;
       top: $navbar-height !important;
       left: $side-nav-mobile-width !important;
       width: $side-nav-desktop-width;
-      background: $p-color-dark-grey !important;
       z-index: 0;
 
       li {
@@ -367,6 +367,11 @@ $p-radius: 10px;
   &.leftside-navigation {
     &.custom {
       background-color: $color-grey;
+
+      &.show-full {
+        background: $p-color-dark-grey;
+      }
+      
       top: 0px;
 
       li {
@@ -413,6 +418,7 @@ $p-radius: 10px;
               background: $p-color-white;
               height: 60px;
               width: 60px;
+              opacity: 0.4;
               background-size: 70%;
               background-position: center;
               background-repeat: no-repeat;

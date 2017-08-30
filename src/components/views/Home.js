@@ -1,6 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import FeedList from '../general-components/FeedList';
+import { connect } from "react-redux"
+import { withRouter, NavLink } from 'react-router-dom'
+import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
+
+import FeedList from '../general-components/FeedList'
+import { actionTypes } from '../../constants'
 
 const feeditems = [
     {
@@ -444,4 +449,22 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const state = (store) => {
+  return {
+      selected: store.organisation,
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  navigateTo: (organisation) => {    
+
+    // We tell browser to remember
+    dispatch(replace(organisation.ur));
+
+    console.log(organisation)
+    // we tell system to listen
+    dispatch({type: actionTypes().ORGANISATION_NAVIGATION_CHANGED, payload: organisation});
+  }
+});
+
+export default withRouter(connect(state, mapDispatchToProps)(Home));

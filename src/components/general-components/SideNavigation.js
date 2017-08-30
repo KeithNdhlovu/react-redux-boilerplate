@@ -11,11 +11,11 @@ class HeaderComponent extends Component {
     render() {
         
         var { header } = this.props;
-        
+
         return (
             <header className="page-topbar show-on-small hide-on-med-and-up">
                 <div className="navbar-fixed">
-                    <nav className="nav">
+                    <nav className="nav" style={{ background: header.primary_color }}>
                         <div className="valign-wrapper col-12 no-padding">
                             <ul className="valign-wrapper col-12 no-padding">
                                 <li className="link logo-image valign">
@@ -41,7 +41,8 @@ class SideNavComponent extends Component {
         return (
 
             <div id="inner-left-sidebar-nav">
-                <ul className="side-menu show-full collapsible collapsible-accordion side-nav fixed leftside-navigation custom">
+                <ul style={{ background: header.primary_dark }}
+                    className="side-menu show-full collapsible collapsible-accordion side-nav fixed leftside-navigation custom">
                     {links.map((link, index) => (
                         <li className="link valign-wrapper" 
                             key={link.id}>

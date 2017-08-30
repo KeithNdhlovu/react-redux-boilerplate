@@ -27,16 +27,16 @@ import {
 
 class Login extends Component {
   
-  state = { password: '', email: '', submittedPassword: '', submittedEmail: '' }
+  state = { password: '', username: '', submittedPassword: '', submittedUsername: '' }
   
-  handleChangeEmailChange = (e) => this.setState({ email: e.target.value })
+  handleChangeUsernameChange = (e) => this.setState({ username: e.target.value })
 
   handleChangePasswordChange = (e) => this.setState({ password: e.target.value })
   
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { password, email } = this.state
+    const { password, username } = this.state
     
     // Get the Token
     // Fire Begin Getting Token action
@@ -44,7 +44,7 @@ class Login extends Component {
     
     let that = this;
 
-    this.props.dispatch(getToken(email, password)).then( () => {
+    this.props.dispatch(getToken(username, password)).then( () => {
         
         if (that.props.tokenFetched) {
           // We are logged in, lets render the home view
@@ -55,7 +55,7 @@ class Login extends Component {
   }
 
   render() {
-    const { password, email, submittedPassword, submittedEmail } = this.state
+    const { password, email, submittedPassword, submittedUsername } = this.state
 
     return (
         <section className="login vertical-align">
@@ -86,7 +86,7 @@ class Login extends Component {
                           
                             {/*<!--Body-->*/}
                             <div className="md-form col-12 text-center">
-                                <input type="text" placeholder="Email" name="email" value={email} onChange={this.handleChangeEmailChange} className="custom-input col-12" />
+                                <input type="text" placeholder="Number" name="number" value={email} onChange={this.handleChangeUsernameChange} className="custom-input col-12" />
                                 {/*<label htmlFor="defaultForm-email" className="">Your email</label>*/}
                             </div>
 

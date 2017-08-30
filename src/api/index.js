@@ -2,11 +2,14 @@ import axios from 'axios';
 
 // Customise Our Axios Instance to overload some methods
 let Axios = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL,
-    headers: {
-        'X-Requested-With': 'rest.js',
-        'Content-Type': 'application/json'
-    }
+    baseURL: process.env.REACT_APP_PROD_API_BASE_URL,
+	headers: {
+		'X-Requested-With': 'XMLHttpRequest',
+		'Content-Type': 'application/json',
+		"Access-Control-Allow-Credentials": true,
+	},
+    responseType: 'json',
+    withCredentials: true,
 });
 
 // Add a request interceptor
@@ -18,8 +21,6 @@ Axios.interceptors.request.use(function (config) {
     if ( token !== null && token !== 'undefined') {
         config.headers.Authorization = token;
     }
-
-    console.log("onRequest", config);
 
     return config;
 }, function (error) {
@@ -40,13 +41,21 @@ Axios.interceptors.response.use(function (response) {
 		localStorage.setItem('jwt-token', 'Bearer ' + response.data.token);
 	}
 	
-	console.log("onResponse", response);
-	
 	return response;
 }, function (error) {
 	// Do something with response error
 	return Promise.reject(error);
 });
+
+function makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 5; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
 
 /**
  * Get token using credentials
@@ -55,13 +64,16 @@ Axios.interceptors.response.use(function (response) {
  * @param password
  * @return Promise
  */
-export function fetchToken(email, password) {
+export function fetchToken(username, password) {
     
     let path = 'login';
 
 	let payload = {
-		email: email,
-		password: password
+		username: username,
+		password: password,
+		device_id: makeid(),
+		app_version: 1,
+		device_type: "Desktop"
 	};
 
     return Axios.post(path, payload);
@@ -72,7 +84,7 @@ export function fetchToken(email, password) {
  * 
  * @return Promise
  */
-export function fetchtMe(email, password) {
+export function fetchtMe(username, password) {
     
     let path = 'users/me';
 

@@ -22,20 +22,22 @@ class MainSideNavComponent extends Component {
                         <div className="white-circle">
                             <NavLink 
                                 to="/" 
-                                onClick={this.props.navigateTo.bind(this, this.props.organisations[0])} 
+                                onClick={this.props.navigateTo.bind(this, this.props.selected)} 
                                 className="text-link no-padding no-margin">All</NavLink>
                         </div>
                     </li>
 
                     {this.props.organisations.map((organisation, index) => (
                         <li className="logo-container valign-wrapper" 
-                            style={{ backgroundColor: (organisation.id === this.props.selected.id) ? "#ddd" : null }}
                             key={ organisation.id }>
                             <NavLink 
-                                to={ organisation.url } 
+                                to="/" 
                                 className="white-circle" 
                                 onClick={ this.props.navigateTo.bind(this, organisation) }
-                                style={{ backgroundImage: `url(${organisation.image})` }}>
+                                style={{ 
+                                    backgroundImage: `url(${organisation.image})`,
+                                    opacity: (organisation.id === this.props.selected.id) ? 1 : null
+                                }}>
                             </NavLink>
                         </li>
                     ))}
