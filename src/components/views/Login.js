@@ -59,11 +59,13 @@ class Login extends Component {
 componentWillMount () {
     
     const { dispatch } = this.props
+
     dispatch(actions.config({
-      token: 'login',
+      token: 'login', //The Route to get the tokken from
+      profile_url: 'me', //The URL to get the user profile
       client_id: 'Desktop',
       client_secret: 'The-secret',
-      url: 'http://mapi.principalsoftware.co.za/v1/'
+      url: process.env.REACT_APP_PROD_API_BASE_URL
     }))
   }
 
@@ -76,8 +78,7 @@ componentWillMount () {
 		password: this.refs.password.value,
 		device_id: "WEB APP",
 		app_version: 1,
-		device_type: "Desktop",
-        scope: "all"
+		device_type: "Desktop"
 	};
 
     await dispatch(actions.signin(payload, console.log))
@@ -87,26 +88,11 @@ componentWillMount () {
     
     const { oauth } = this.props
     
-    const Signin = signin({
-      success (user) {
-        console.log(user)
-      }
-    })(props => <button {...props} />)
-
-    const Signout = signout({
-      success () {
-        console.log(arguments)
-      },
-      failed () {
-        console.log('error')
-      }
-    })(props => <button {...props} />)
-
     return (
         <section className="login vertical-align">
             <div className="" style={{"width": "28rem", "margin": "0 auto"}}>
                 <div className="row">
-                    <Form disabled={this.props.fetchingToken} onSubmit={this.handleSignin.bind(this)} className="col-12 p-grey-bg">
+                    <Form onSubmit={this.handleSignin.bind(this)} className="col-12 p-grey-bg">
                       <br/>
                       <div className="row card-content">
                             {/*<!--Header-->*/}
@@ -120,10 +106,10 @@ componentWillMount () {
 
                             {/* show errors if they exist*/}
 
-                            { this.props.error ? ( 
+                            { oauth.error ? ( 
                                 <div className="col-12">
                                     <div className="alert alert-danger text-center" role="alert">
-                                        <strong>Username or Password incorrect. </strong>
+                                        <strong>Invalid username or password. </strong>
                                     </div>
                                     <br/>
                                 </div>
@@ -148,11 +134,12 @@ componentWillMount () {
                                 <div className="row">
                                     <div className="col-12 text-center">
                                         {/* Show button or loader */}
-                                        { this.props.fetchingToken ? (
+                                        { oauth.authenticating ? (
                                             <button className="p-btn col-6 btn white waves-effect waves-light"><CircleLoader /></button>
                                             ) : (
                                                 <button className="p-btn col-6 btn white waves-effect waves-light">Sign In</button>
-                                            )}
+                                            )
+                                        }
                                         <br /><br />
                                     </div>
                                     <div className="col-12 text-center">

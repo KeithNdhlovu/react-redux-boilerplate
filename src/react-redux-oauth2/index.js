@@ -6,16 +6,26 @@ import querystring from 'query-string'
 import { omit, get, wrap } from 'lodash'
 
 export const actions = {
+
+  /**
+   * Initialize options
+   */
   config: createAction('REACT_REDUX_OAUTH2/CONFIG'),
   error: createAction('REACT_REDUX_OAUTH2/ERROR'),
   start: createAction('REACT_REDUX_OAUTH2/START'),
   reset: createAction('REACT_REDUX_OAUTH2/RESET'),
   cancel: createAction('REACT_REDUX_OAUTH2/CANCEL'),
   save: createAction('REACT_REDUX_OAUTH2/SAVE'),
+  
+  /**
+   * Using the configurations, set on initialisation, we perform login action when requested upon
+   */
   signin (creds, cb = f => f) {
     return (dispatch, getState) => {
       const { config } = getState().oauth
+      
       dispatch(actions.start())
+      
       axios.post(`${config.url}${config.token}`, Object.assign({
         client_id: config.client_id,
         client_secret: config.client_secret,
@@ -27,6 +37,10 @@ export const actions = {
       })
     }
   },
+
+  /**
+   * Sign out by deleting the tokens
+   */
   signout (cb = f => f) {
     return (dispatch, getState) => {
       const { user, config } = getState().oauth
@@ -41,14 +55,19 @@ export const actions = {
       })
     }
   },
+  
+  /**
+   * After we get the acces token from sign in, we quickly get the user profile
+   */
   sync (token, cb = f => f) {
     return (dispatch, getState) => {
       const { config } = getState().oauth
-      return axios.get(`${config.url}${config.token}`, {
+      return axios.get(`${config.url}${config.profile_url}`, {
         headers: { 'Authorization': `Bearer ${token.access_token}` }
       }).then(res => {
         const user = { token, profile: res.data }
         dispatch(actions.save(user))
+        
         cb(null, user)
       }).catch(cb)
     }
