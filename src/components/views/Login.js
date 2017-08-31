@@ -6,6 +6,8 @@ import { connect }  from "react-redux"
 
 import { getMe }    from "../../actions/userActions"
 import { getToken } from "../../actions/loginAction"
+import { actions, signin, signout } from '../../react-redux-oauth2'
+
 
 import { actionTypes } from '../../constants'
 
@@ -34,34 +36,77 @@ class Login extends Component {
   handleChangePasswordChange = (e) => this.setState({ password: e.target.value })
   
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { password, username } = this.state
+//   handleSubmit = (e) => {
+//     e.preventDefault();
+//     const { password, username } = this.state
     
-    // Get the Token
-    // Fire Begin Getting Token action
-    this.props.dispatch({type: actionTypes().FETCH_TOKEN_PENDING, payload: null});
+//     // Get the Token
+//     // Fire Begin Getting Token action
+//     this.props.dispatch({type: actionTypes().FETCH_TOKEN_PENDING, payload: null});
     
-    let that = this;
+//     let that = this;
 
-    this.props.dispatch(getToken(username, password)).then( () => {
+//     this.props.dispatch(getToken(username, password)).then( () => {
         
-        if (that.props.tokenFetched) {
-          // We are logged in, lets render the home view
-          that.props.dispatch(push("/"));
-        }
-    });
+//         if (that.props.tokenFetched) {
+//           // We are logged in, lets render the home view
+//           that.props.dispatch(push("/"));
+//         }
+//     });
 
+//   }
+
+componentWillMount () {
+    
+    const { dispatch } = this.props
+    dispatch(actions.config({
+      token: 'login',
+      client_id: 'Desktop',
+      client_secret: 'The-secret',
+      url: 'http://mapi.principalsoftware.co.za/v1/'
+    }))
+  }
+
+  async handleSignin (e) {
+    const { dispatch } = this.props
+    e.preventDefault()
+
+	let payload = {
+		username: this.refs.number.value,
+		password: this.refs.password.value,
+		device_id: "WEB APP",
+		app_version: 1,
+		device_type: "Desktop",
+        scope: "all"
+	};
+
+    await dispatch(actions.signin(payload, console.log))
   }
 
   render() {
-    const { password, email, submittedPassword, submittedUsername } = this.state
+    
+    const { oauth } = this.props
+    
+    const Signin = signin({
+      success (user) {
+        console.log(user)
+      }
+    })(props => <button {...props} />)
+
+    const Signout = signout({
+      success () {
+        console.log(arguments)
+      },
+      failed () {
+        console.log('error')
+      }
+    })(props => <button {...props} />)
 
     return (
         <section className="login vertical-align">
             <div className="" style={{"width": "28rem", "margin": "0 auto"}}>
                 <div className="row">
-                    <Form disabled={this.props.fetchingToken} onSubmit={this.handleSubmit.bind(this)} className="col-12 p-grey-bg">
+                    <Form disabled={this.props.fetchingToken} onSubmit={this.handleSignin.bind(this)} className="col-12 p-grey-bg">
                       <br/>
                       <div className="row card-content">
                             {/*<!--Header-->*/}
@@ -86,12 +131,12 @@ class Login extends Component {
                           
                             {/*<!--Body-->*/}
                             <div className="md-form col-12 text-center">
-                                <input type="text" placeholder="Number" name="number" value={email} onChange={this.handleChangeUsernameChange} className="custom-input col-12" />
+                                <input type="text" placeholder="Number" ref="number" name="number" className="custom-input col-12" />
                                 {/*<label htmlFor="defaultForm-email" className="">Your email</label>*/}
                             </div>
 
                             <div className="md-form col-12 text-center">
-                                <input type="password" placeholder="Password" name="password" value={password} onChange={this.handleChangePasswordChange} className="custom-input col-12" />
+                                <input type="password" placeholder="Password" ref="password" name="password" className="custom-input col-12" />
                                 {/*<label htmlFor="defaultForm-pass" className="">Your password</label>*/}
                                 <div className="row">
                                     <a href="#/help" className="col-6 text-white text-left underline-hover">Help</a>
@@ -127,15 +172,16 @@ class Login extends Component {
   }
 }
 
-export default withRouter(connect((store) => {
+export default withRouter(connect((state) => {
 
   return {
-    user:         store.user.user,
-    userFetched:  store.user.fetched,
-    token:        store.login.token,
-    tokenFetched: store.login.fetched,
-    fetchingToken:store.login.fetching,
-    error:        store.login.error,
-    routing:       store.routing
+    user:         state.user.user,
+    userFetched:  state.user.fetched,
+    token:        state.login.token,
+    tokenFetched: state.login.fetched,
+    fetchingToken:state.login.fetching,
+    error:        state.login.error,
+    routing:       state.routing,
+    oauth:         state.oauth
   };
 })(Login));
