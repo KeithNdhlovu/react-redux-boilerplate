@@ -26,41 +26,6 @@ import {
 
 class Login extends Component {
 
-
-//   handleSubmit = (e) => {
-//     e.preventDefault();
-//     const { password, username } = this.state
-    
-//     // Get the Token
-//     // Fire Begin Getting Token action
-//     this.props.dispatch({type: actionTypes().FETCH_TOKEN_PENDING, payload: null});
-    
-//     let that = this;
-
-//     this.props.dispatch(getToken(username, password)).then( () => {
-        
-//         if (that.props.tokenFetched) {
-//           // We are logged in, lets render the home view
-//           that.props.dispatch(push("/"));
-//         }
-//     });
-
-//   }
-
-//     componentWillMount () {
-    
-//         const { dispatch } = this.props
-
-//         dispatch(actions.config({
-//             token: 'login', //The Route to get the tokken from
-//             profile_url: 'me', //The Route to get the user profile
-//             logout_url: 'logout', //The Route to logout
-//             client_id: 'Desktop',
-//             client_secret: 'The-secret',
-//             url: process.env.REACT_APP_PROD_API_BASE_URL
-//         }))
-//   }
-
   async handleSignin (e) {
     const { dispatch } = this.props
     e.preventDefault()
@@ -73,8 +38,6 @@ class Login extends Component {
 	};
 
     await dispatch(actions.signin(payload))
-
-    console.log("Here, next up ... dashboard");
 
     dispatch(push("/"));
   }

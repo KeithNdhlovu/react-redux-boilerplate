@@ -29,7 +29,7 @@ export const actions = {
     signin (credentials) {
         return (dispatch, getState) => doLogin(credentials.username, credentials.password).then( (response) => {
             
-            actions.saveTokens(response);
+            actions.saveTokens(response.data);
             dispatch(actions.sync(response.data));
         }).catch( (error) => {
             dispatch(actions.error(error));
@@ -63,7 +63,7 @@ export const actions = {
 
         if (accessToken && refreshToken && user) {
             actions.saveTokens({access_token: accessToken, refresh_token: refreshToken});
-            actons.saveUser(user);
+            actions.saveUser(user);
         }
     },
 
@@ -104,7 +104,7 @@ export const actions = {
         
         // Automatically add access token
         var interceptor = axios.interceptors.request.use((config) => {
-            config.headers.Authorization = new Uri(config.url).addQueryParam('access_token', access_token);
+            config.headers.Authorization = `Bearer ${access_token}`;
             return config;
         });
 

@@ -12,7 +12,7 @@ import MasterCleanLayout from './MasterCleanLayout';
 
 // Check if is logged in
 const isLoggedIn = () => {
-  return (localStorage.getItem("jwt-token") !== null) ? true : false
+  return (localStorage.getItem("access_token") !== null) ? true : false
 }
 
 
