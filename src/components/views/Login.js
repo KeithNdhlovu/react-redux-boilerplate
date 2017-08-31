@@ -4,10 +4,7 @@ import { push, replace } from 'react-router-redux'
 
 import { connect }  from "react-redux"
 
-import { getMe }    from "../../actions/userActions"
-import { getToken } from "../../actions/loginAction"
-import { actions, signin, signout } from '../../react-redux-oauth2'
-
+import { actions } from '../../actions/authActions'
 
 import { actionTypes } from '../../constants'
 
@@ -28,13 +25,7 @@ import {
 } from 'reactstrap';
 
 class Login extends Component {
-  
-  state = { password: '', username: '', submittedPassword: '', submittedUsername: '' }
-  
-  handleChangeUsernameChange = (e) => this.setState({ username: e.target.value })
 
-  handleChangePasswordChange = (e) => this.setState({ password: e.target.value })
-  
 
 //   handleSubmit = (e) => {
 //     e.preventDefault();
@@ -56,37 +47,41 @@ class Login extends Component {
 
 //   }
 
-componentWillMount () {
+//     componentWillMount () {
     
-    const { dispatch } = this.props
+//         const { dispatch } = this.props
 
-    dispatch(actions.config({
-      token: 'login', //The Route to get the tokken from
-      profile_url: 'me', //The URL to get the user profile
-      client_id: 'Desktop',
-      client_secret: 'The-secret',
-      url: process.env.REACT_APP_PROD_API_BASE_URL
-    }))
-  }
+//         dispatch(actions.config({
+//             token: 'login', //The Route to get the tokken from
+//             profile_url: 'me', //The Route to get the user profile
+//             logout_url: 'logout', //The Route to logout
+//             client_id: 'Desktop',
+//             client_secret: 'The-secret',
+//             url: process.env.REACT_APP_PROD_API_BASE_URL
+//         }))
+//   }
 
   async handleSignin (e) {
     const { dispatch } = this.props
     e.preventDefault()
 
+    dispatch(actions.start())
+
 	let payload = {
 		username: this.refs.number.value,
-		password: this.refs.password.value,
-		device_id: "WEB APP",
-		app_version: 1,
-		device_type: "Desktop"
+		password: this.refs.password.value
 	};
 
-    await dispatch(actions.signin(payload, console.log))
+    await dispatch(actions.signin(payload))
+
+    console.log("Here, next up ... dashboard");
+
+    dispatch(push("/"));
   }
 
   render() {
     
-    const { oauth } = this.props
+    const { auth } = this.props
     
     return (
         <section className="login vertical-align">
@@ -106,7 +101,7 @@ componentWillMount () {
 
                             {/* show errors if they exist*/}
 
-                            { oauth.error ? ( 
+                            { auth.error ? ( 
                                 <div className="col-12">
                                     <div className="alert alert-danger text-center" role="alert">
                                         <strong>Invalid username or password. </strong>
@@ -134,7 +129,7 @@ componentWillMount () {
                                 <div className="row">
                                     <div className="col-12 text-center">
                                         {/* Show button or loader */}
-                                        { oauth.authenticating ? (
+                                        { auth.authenticating ? (
                                             <button className="p-btn col-6 btn white waves-effect waves-light"><CircleLoader /></button>
                                             ) : (
                                                 <button className="p-btn col-6 btn white waves-effect waves-light">Sign In</button>
@@ -160,15 +155,7 @@ componentWillMount () {
 }
 
 export default withRouter(connect((state) => {
-
   return {
-    user:         state.user.user,
-    userFetched:  state.user.fetched,
-    token:        state.login.token,
-    tokenFetched: state.login.fetched,
-    fetchingToken:state.login.fetching,
-    error:        state.login.error,
-    routing:       state.routing,
-    oauth:         state.oauth
+    auth: state.auth
   };
 })(Login));

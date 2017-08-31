@@ -4,16 +4,13 @@
 
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import { reducer } from '../react-redux-oauth2'
+// import { reducer } from '../react-redux-oauth2'
 
-import user from './userReducer'
-import login from './loginReducer'
+import auth from './authReducer'
 import organisation from './organisationReducer'
 
 export default combineReducers({
-    user,
-    login,
+    auth,
     organisation,
     routing: routerReducer,
-    oauth: reducer
 });

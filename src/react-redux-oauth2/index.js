@@ -15,6 +15,7 @@ export const actions = {
   start: createAction('REACT_REDUX_OAUTH2/START'),
   reset: createAction('REACT_REDUX_OAUTH2/RESET'),
   cancel: createAction('REACT_REDUX_OAUTH2/CANCEL'),
+  refresh: createAction('REACT_REDUX_OAUTH2/REFRESH'),
   save: createAction('REACT_REDUX_OAUTH2/SAVE'),
   
   /**
@@ -44,7 +45,7 @@ export const actions = {
   signout (cb = f => f) {
     return (dispatch, getState) => {
       const { user, config } = getState().oauth
-      axios.delete(`${config.url}${config.token}`, {
+      axios.delete(`${config.url}${config.logout_url}`, {
         headers: { 'Authorization': `Bearer ${user.token.access_token}` }
       }).then(res => {
         dispatch(actions.reset())

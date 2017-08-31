@@ -12,5 +12,4 @@ import './styles/mdbootstrap/sass/mdb.scss'
 import Root from './root';
 
 // ========================================
-render(
-<Root store={store} />, document.getElementById('root'));
+render(<Root store={store} />, document.getElementById('root'));
