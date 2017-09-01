@@ -1,4 +1,3 @@
-import React from 'react'
 import { createAction, handleActions } from 'redux-actions'
 import querystring from 'query-string'
 import axios from 'axios';
@@ -8,6 +7,8 @@ import InterceptorUtil from '../utils/InterceptorUtil';
 
 import { actionTypes } from '../constants'
 import { doLogin, getMe, getRefreshToken } from '../api';
+
+import history from '../history'
 
 export const actions = {
 
@@ -56,7 +57,7 @@ export const actions = {
     /**
      * Try to connect user from local storage
      */
-    onLocalLogin() {
+    onLocalLogin () {
         let accessToken = localStorage.getItem('access_token');
         let refreshToken = localStorage.getItem('refresh_token');
         let user = JSON.parse(localStorage.getItem('user'));
@@ -68,27 +69,14 @@ export const actions = {
     },
 
     /**
-     * Try to refresh user access token
-     */
-    onRefreshToken(params) {
-        return (dispatch, getState) => getRefreshToken().then( (response) => {
-            // Replay request
-            axios(params.initialRequest).then(response => {
-                params.resolve(response);
-            }).catch(response => {
-                params.reject(response);
-            });
-        }).catch( (error) => {
-            actions.clearLogins();
-        });
-    },
-
-    /**
      * Logout user and clear their localStorage
      */
-    clearLogins () {
+    clearLogins (error = null) {
+
         localStorage.clear();
         axios.interceptors.request.eject(InterceptorUtil.getInterceptor());
+
+        history.replace("/login", null);
     },
 
     /**
@@ -101,14 +89,6 @@ export const actions = {
 
         localStorage.setItem('access_token', access_token);
         localStorage.setItem('refresh_token', refresh_token);
-        
-        // Automatically add access token
-        var interceptor = axios.interceptors.request.use((config) => {
-            config.headers.Authorization = `Bearer ${access_token}`;
-            return config;
-        });
-
-        InterceptorUtil.setInterceptor(interceptor)
     },
 
     /**

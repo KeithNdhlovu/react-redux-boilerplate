@@ -10,7 +10,7 @@ import { actionTypes } from '../../constants'
 class MainSideNavComponent extends Component {
     render() {
         
-        console.log(this.props.selected);
+        console.log(this.props.organisation);
 
         return (
             // <!-- START LEFT SIDEBAR NAV-->
@@ -22,7 +22,7 @@ class MainSideNavComponent extends Component {
                         <div className="white-circle">
                             <NavLink 
                                 to="/" 
-                                onClick={this.props.navigateTo.bind(this, this.props.selected)} 
+                                onClick={this.props.navigateTo.bind(this, this.props.organisation)} 
                                 className="text-link no-padding no-margin">All</NavLink>
                         </div>
                     </li>
@@ -36,7 +36,8 @@ class MainSideNavComponent extends Component {
                                 onClick={ this.props.navigateTo.bind(this, organisation) }
                                 style={{ 
                                     backgroundImage: `url(${organisation.image})`,
-                                    opacity: (organisation.id === this.props.selected.id) ? 1 : null
+                                    backgroundColor: organisation.color,
+                                    opacity: (organisation.id === this.props.organisation.id) ? 1 : null
                                 }}>
                             </NavLink>
                         </li>
@@ -53,7 +54,8 @@ MainSideNavComponent.propTypes = {
 
 const state = (store) => {
   return {
-      selected: store.organisation,
+      organisation: store.org.organisation,
+      organisations: store.org.organisations,
   }
 }
 

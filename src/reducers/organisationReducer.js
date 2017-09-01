@@ -13,15 +13,25 @@ const blendColors = (c0, c1, p) => {
     return "#"+(0x1000000+(Math.round((R2-R1)*p)+R1)*0x10000+(Math.round((G2-G1)*p)+G1)*0x100+(Math.round((B2-B1)*p)+B1)).toString(16).slice(1);
 }
 
-const initialState = {
-    id: 0,
-    organisation_name: "Principal Talk",
-    image: DefaultLogo,
-    primary_color: "#3d3d3d",
-    primary_dark: blendColors("#3d3d3d","#000000", 0.5),
-    is_white: true,
+const initOrganisation = {
+    id: null,
+    name: "Principal Talk",
+    medium_name: null,
+    short_name: null,
+    show_adverts: false,
+    color: "#3d3d3d",
+    accent: blendColors("#3d3d3d","#000000", 0.5),
+    logo: DefaultLogo,
+    telephone_number: null,
+    email_address: null,
+    physical_address: null,
+    url: null,
     active: true,
-    feeds: []
+}
+
+const initialState = {
+  organisation: initOrganisation,
+  organisations: []
 }
 
 /**
@@ -31,18 +41,17 @@ const initialState = {
 export default function reducer(state = initialState, action) {
 
     switch (action.type) {
+      case actionTypes().ORGANISATION_ACTION_START: {
+          return {...state, fetching: true}
+      };
+      case actionTypes().ORGANISATION_ACTION_ERROR: {
+          return {...state, fetching: false, error: action.payload}
+      };
+      case actionTypes().ORGANISATION_ACTION_SAVE: {
+          return {...state,fetching: false, organisations: action.payload.results}
+      };
       case (actionTypes().ORGANISATION_NAVIGATION_CHANGED): {
-        
-        return {
-          ...state,
-          id: action.payload.id, 
-          organisation_name: action.payload.organisation_name,
-          image: action.payload.image,
-          primary_color: action.payload.primary_color,
-          primary_dark: blendColors(action.payload.primary_color,"#000000", 0.2),
-          is_white: action.payload.is_white,
-          active: true,
-        }
+          return { ...state, active: true, organisation: action.payload }
       }
     }
 

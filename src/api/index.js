@@ -2,23 +2,55 @@ import axios from 'axios';
 import InterceptorUtil from '../utils/InterceptorUtil';
 import { actions } from '../actions/authActions'
 import { createAction, handleActions } from 'redux-actions'
-
-
+import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
+import Uri from './endpoints'
 
 let Config = {
-	apiUrl: process.env.REACT_APP_PROD_API_BASE_URL,
+	apiUrl: process.env.REACT_APP_LOCAL_API_BASE_URL,
 	clientId: process.env.REACT_APP_CLIENT_ID,
 	clientSecret: process.env.REACT_APP_CLIENT_SECRET,
 }
 
-axios.interceptors.response.use(response => {
+// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+    var token;
+    token = localStorage.getItem('access_token');
+
+    if ( token !== null && token !== 'undefined') {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+}, function (error) {
+
+    // Do something with request error
+    return new Promise((resolve, reject) => {
+		if (error.response.status === 401 && error.response.data.error_description === 'The access token provided has expired.') {
+			getRefreshToken({initialRequest: error.response.config, resolve: resolve, reject: reject});
+		} else if (error.response.status === 401 && error.response.statusText === 'Unauthorized') {
+			getRefreshToken({initialRequest: error.response.config, resolve: resolve, reject: reject});
+		} else {
+			reject(error);
+		}
+	});
+});
+
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+	
+	if (response.headers && response.headers.Authorization) {
+		localStorage.setItem('access_token', response.headers.Authorization)
+	}
+
 	return response;
-}, error => {
-	return new Promise((resolve, reject) => {
-		if (error.status === 401 && error.data.error_description === 'The access token provided has expired.') {
-			actions.refreshToken({initialRequest: error.config, resolve: resolve, reject: reject});
-		} else if (error.status === 401 && error.statusText === 'Unauthorized') {
-			actions.logout();
+}, function (error) {
+
+	// Do something with response error
+    return new Promise((resolve, reject) => {
+		if (error.response.status === 401 && error.response.data.error_description === 'The access token provided has expired.') {
+			getRefreshToken({initialRequest: error.response.config, resolve: resolve, reject: reject});
+		} else if (error.response.status === 401 && error.response.statusText === 'Unauthorized') {
+			getRefreshToken({initialRequest: error.response.config, resolve: resolve, reject: reject});
 		} else {
 			reject(error);
 		}
@@ -26,25 +58,23 @@ axios.interceptors.response.use(response => {
 });
 
 /**
- * Get token using credentials
- * 
- * @param email
- * @param password
- * @return Promise
- */
+* @param username (String) The cell phone number of the user which acts as the username.
+* @param password (String) The user's password.
+* @return Promise
+*/
 export function doLogin (username, password) {
 	
-	let path = '/login';
+	let { DO_LOGIN } = Uri;
 
 	let payload = {
-		username: username,
+		email: username,
 		password: password,
 		app_version: 1,
 		device_id: "THEWEBNOID",
 		device_type: "Desktop"
 	};
 
-	return axios.post(getEndpoint(path), Object.assign({
+	return axios.post(getEndpoint(DO_LOGIN), Object.assign({
 		client_id: Config.clientId,
 		client_secret: Config.clientSecret,
 		grant_type: 'password'
@@ -54,36 +84,78 @@ export function doLogin (username, password) {
 /**
  * Get the refresh token
  */
-export function getRefreshToken () {
+export function getRefreshToken (params) {
 	
 	let refreshToken = localStorage.getItem('refresh_token');
-	let path = '/login/refresh';
+	let { DO_LOGIN_REFRESH } = Uri;
+
 	let payload = {
 		refresh_token: refreshToken
 	};
 
 	if (refreshToken) {
 		axios.interceptors.request.eject(InterceptorUtil.getInterceptor());
-		axios.post(getEndpoint(path), payload)
+		return axios.post(getEndpoint(DO_LOGIN_REFRESH), payload).then( (response) => {
+            
+			actions.saveTokens(response.data);
+
+			// Replay request
+            axios(params.initialRequest).then(response => {
+                params.resolve(response);
+            }).catch(response => {
+                params.reject(response);
+            });			
+		})
 	}
 }
 
 /**
  * Get the logged in users' details
- * @param accessToken
+ * 
  * @return Promise
  */
 export function getMe (accessToken) {
 	
-	let path = '/me';
+	let { GET_ME } = Uri;
 
-	let payload = {
-		headers: { 'Authorization': `Bearer ${accessToken}` }
-	}
-
-	return axios.get(getEndpoint(path), payload)
+	return axios.get(getEndpoint(GET_ME))
 }
 
+/**
+ * Get the logged in users' resources
+ * 
+ * @return Promise
+ */
+export function getResources () {
+	
+	let { GET_RESOURCES } = Uri;
+
+	return axios.get(getEndpoint(GET_RESOURCES))
+}
+
+/**
+ * Get the logged in users' resources
+ * 
+ * @return Promise
+ */
+export function getFeedItems () {
+	
+	let { GET_FEED } = Uri;
+
+	return axios.get(getEndpoint(GET_FEED))
+}
+
+/**
+ * Get the logged in users' organinsations
+ * 
+ * @return Promise
+ */
+export function getOrganisations () {
+	
+	let { GET_ORGANISATIONS } = Uri;
+
+	return axios.get(getEndpoint(GET_ORGANISATIONS))
+}
 
 /**
  * Return API endpoint with given path

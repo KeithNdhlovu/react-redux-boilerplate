@@ -4,13 +4,14 @@
 
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-// import { reducer } from '../react-redux-oauth2'
 
 import auth from './authReducer'
-import organisation from './organisationReducer'
+import feed from './feedReducer'
+import org from './organisationReducer'
 
 export default combineReducers({
     auth,
-    organisation,
+    feed,
+    org,
     routing: routerReducer,
 });

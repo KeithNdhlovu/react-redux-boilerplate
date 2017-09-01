@@ -35,6 +35,9 @@ export default function reducer(state = initialState, action) {
         case 'REACT_REDUX_OAUTH2/SAVE': {
             return {...state,authenticating: false, user: action.payload}
         }
+        case 'REACT_REDUX_OAUTH2/REFRESH': {
+            return {...state, refreshing: true, retry: action.payload}
+        }
     }
 
     return state

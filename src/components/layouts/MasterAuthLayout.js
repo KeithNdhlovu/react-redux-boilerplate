@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import {
   BrowserRouter as Router,
@@ -11,18 +11,19 @@ import { withRouter, NavLink } from 'react-router-dom'
 import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 
 import { actionTypes } from '../../constants'
+import { actions } from '../../actions/organisationActions'
 
-import Home from '../views/Home';
-import Login from '../views/Login';
-import Shoelaces from '../views/Shoelaces';
-import Bubblegum from '../views/Bubblegum';
-import ForOhFour from '../views/ForOhFour';
-import Navigation from '../views/Navigation';
+import Home from '../views/Home'
+import Login from '../views/Login'
+import Shoelaces from '../views/Shoelaces'
+import Bubblegum from '../views/Bubblegum'
+import ForOhFour from '../views/ForOhFour'
+import Navigation from '../views/Navigation'
 
-import MainSideNavigation from '../general-components/MainSideNavigation';
-import SideNavigation from '../general-components/SideNavigation';
+import MainSideNavigation from '../general-components/MainSideNavigation'
+import SideNavigation from '../general-components/SideNavigation'
 
-import DefaultLogo from '../../styles/images/logo.png';
+import DefaultLogo from '../../styles/images/logo.png'
 
 import history from "../../history"
 
@@ -112,53 +113,71 @@ const links = [
 ];
 
 
-const MasterAuthLayout = (props) => (
-  <Router history={history}>
+class MasterAuthLayout extends Component {
+  
+  async getOrganisations () {
+      const { dispatch } = this.props
+      dispatch(actions.start())
+      await dispatch(actions.fetchOrganisations())
+  }
 
-      {/*<!-- START MAIN -->*/}
-      <div className="react-root" id="main">
-        {/*<!-- START WRAPPER -->*/}
-        <div className="">
-          {/*<!-- include side navigation -->*/}
-          <MainSideNavigation organisations={ organisations }/>
-          
-          {/*<!-- include inner side navigation -->*/}
-          <SideNavigation links={ links } header={ props.organisation }/>
-          <section id="content">
-            
-            {/* Content goes here */}
-            <div className="react-wrapper-container">
-              <Switch>
-                  {routes.map((route, index) => (
-                  // Render more <Route>s with the same paths as
-                  // above, but different components this time.
+  componentDidMount() {
+      this.getOrganisations()
+  }
+  
+  render () {
 
-                  <Route 
-                    key={index}
-                    path={route.path}
-                    exact={route.exact}
-                    component={route.main}/>
-                ))}
+    const { organisations, organisation } = this.props
 
-                <Route 
-                    path="*"
-                    component={ForOhFour}/>
+    return (
+        <Router history={history}>
+          {/*<!-- START MAIN -->*/}
+          <div className="react-root" id="main">
+            {/*<!-- START WRAPPER -->*/}
+            <div className="">
+              {/*<!-- include side navigation -->*/}
+              <MainSideNavigation organisations={ organisations }/>
+              
+              {/*<!-- include inner side navigation -->*/}
+              <SideNavigation links={ links } header={ organisation }/>
+              <section id="content">
+                
+                {/* Content goes here */}
+                <div className="react-wrapper-container">
+                  <Switch>
+                      {routes.map((route, index) => (
+                      // Render more <Route>s with the same paths as
+                      // above, but different components this time.
 
-              </Switch>
+                      <Route 
+                        key={index}
+                        path={route.path}
+                        exact={route.exact}
+                        component={route.main}/>
+                    ))}
+
+                    <Route 
+                        path="*"
+                        component={ForOhFour}/>
+
+                  </Switch>
+                </div>
+              </section>
+              
             </div>
-          </section>
-          
-        </div>
-        {/*<!-- END WRAPPER -->*/}
-      </div>
-      {/*<!-- END MAIN -->*/}
-  </Router>
-)
+            {/*<!-- END WRAPPER -->*/}
+          </div>
+          {/*<!-- END MAIN -->*/}
+        </Router>
+    )
+  }
+}
 
 export default withRouter(connect((store) => {
 
   return {
-    organisation: store.organisation,
-    user:  store.user,
+    organisation:  store.org.organisation,
+    organisations: store.org.organisations,
+    user:          store.user,
   };
 })(MasterAuthLayout));
