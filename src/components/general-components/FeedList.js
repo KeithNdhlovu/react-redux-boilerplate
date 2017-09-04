@@ -35,7 +35,7 @@ class FeedListComponent extends Component {
                                     </div>
                                     <div className="col-11">
                                         {/* The header */}
-                                        <h5 className="mb-1 header" style={{ color: organisation.accent }}>{ item.title }</h5>
+                                        <h5 className="mb-1 header" style={ item.is_read ? null : { color: organisation.accent } }>{ item.title }</h5>
 
                                         {/* The date */}
                                         <p className="date mb-1">{ item.created_at }</p>
@@ -45,13 +45,13 @@ class FeedListComponent extends Component {
 
                                         {/* The tags in their numbers */}
                                         <div className="tags text-right">
-                                            {/*{item.tags.map((tag, tagIndex) => (
+                                            {item.tags.map((tag, tagIndex) => (
                                                 <span className="badge badge-pill"
                                                     key={ tagIndex } 
                                                     style={{ backgroundColor: tag.color }}>
-                                                    { tag.description }
+                                                    { tag.name }
                                                 </span>
-                                            ))}*/}
+                                            ))}
                                         </div>
                                     </div>
                                 </div>

@@ -153,7 +153,8 @@ export function getFeedItems () {
 		"icon_id": "randomDigit",
 		"is_read": "boolean",
 		"tags": {
-			"name": "cityPrefix"
+			"name": "cityPrefix",
+			"color": "hexColor"
 		}
 	}
 

@@ -38,7 +38,7 @@ class MainSideNavComponent extends Component {
                                 className="white-circle" 
                                 onClick={ navigateTo.bind(this, organisation) }
                                 style={{ 
-                                    backgroundImage: `url(${DefaultLogo})`,
+                                    backgroundImage: `url(${organisation.logo})`,
                                     opacity: (organisation.id === currentOrganisation.id) ? 1 : null
                                 }}>
                             </NavLink>
