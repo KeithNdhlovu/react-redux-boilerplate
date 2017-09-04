@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from "react-redux"
-import { withRouter, NavLink } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 
 import DefaultLogo from '../../styles/images/logo.png';
@@ -40,7 +40,9 @@ class HeaderComponent extends Component {
 class SideNavComponent extends Component {
     render() {
 
-        const { links, header } = this.props;
+        const { links, header, navigateTo, router } = this.props;
+
+        console.log(router.location)
 
         return (
 
@@ -48,9 +50,13 @@ class SideNavComponent extends Component {
                 <ul style={{ background: header.accent }}
                     className="side-menu show-full collapsible collapsible-accordion side-nav fixed leftside-navigation custom">
                     {links.map((link, index) => (
-                        <li className="link valign-wrapper" 
+                        <li className={ "link valign-wrapper " + ((router.location.pathname == link.url) ? "active" : "")}
                             key={ index }>
-                            <a href={ link.url } className="nav-link waves-effect waves-cyan">{ link.caption }</a>
+                            <Link 
+                               to={ link.url }
+                               onClick={ navigateTo.bind(this, link) }
+                               replace
+                               className={"nav-link waves-effect waves-cyan "+ ((router.location.pathname == link.url) ? "active" : "")}>{ link.caption }</Link>
                         </li>
                     ))}
                 </ul>
@@ -66,20 +72,22 @@ SideNavComponent.propTypes = {
     header: React.PropTypes.object.isRequired
 };
 
-const state = (store) => {
+const state = (store, router) => {
   return {
       selected: store.org.organisation,
+      router: router
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  navigateTo: (item) => {    
+  navigateTo: (link) => {    
 
     // We tell browser to remember
-    // dispatch(replace(item.ur));
-
+    dispatch(replace(link.ur));
+    // Change the main content to correspond to navigation
+    
     // we tell system to listen
-    dispatch({type: actionTypes().ORGANISATION_NAVIGATION_CHANGED, payload: item});
+    // dispatch({type: actionTypes().ORGANISATION_NAVIGATION_CHANGED, payload: item});
   }
 });
 

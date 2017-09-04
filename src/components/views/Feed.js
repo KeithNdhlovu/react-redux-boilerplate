@@ -11,12 +11,21 @@ import { actions } from '../../actions/feedActions'
 
 import CircleLoader from '../general-components/CircleLoader.js'
 
-class Home extends Component {
+class Feed extends Component {
     
     async getFeeds () {
-        const { dispatch } = this.props
+        const { dispatch, organisation } = this.props
         dispatch(actions.start())
-        await dispatch(actions.fetchFeedItems())
+
+        
+        // When no organisaton id is parsed, we fetch all
+        if (organisation && organisation.id == null) {
+            await dispatch(actions.fetchFeedItems())
+            return;
+        }
+        
+        // Otherwise we use the selected organisation to ge thte data
+        await dispatch(actions.fetchFeedItems(organisation.id))
     }
 
     componentDidMount() {
@@ -46,4 +55,4 @@ export default withRouter(connect((state) => {
       organisation: state.org.organisation,
       feed:     state.feed
   };
-})(Home));
+})(Feed));

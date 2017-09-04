@@ -408,6 +408,10 @@ $p-radius: 10px;
             &:hover {
               color: $p-color-dark-grey;
             }
+
+            &.active {
+              color: $p-color-dark-grey;
+            }
           }
         }
         

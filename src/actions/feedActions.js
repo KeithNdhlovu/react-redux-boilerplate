@@ -16,8 +16,8 @@ export const actions = {
      * Get Feed handler
      * 
      */
-    fetchFeedItems () {
-        return (dispatch, getState) => getFeedItems().then( (response) => {
+    fetchFeedItems (organisationID) {
+        return (dispatch, getState) => getFeedItems(organisationID).then( (response) => {
             dispatch(actions.save(response.data));
         }).catch( (error) => {
             dispatch(actions.error(error));

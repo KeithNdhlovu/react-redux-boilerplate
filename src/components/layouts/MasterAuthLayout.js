@@ -13,10 +13,14 @@ import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 import { actionTypes } from '../../constants'
 import { actions } from '../../actions/organisationActions'
 
-import Home from '../views/Home'
 import Login from '../views/Login'
-import Shoelaces from '../views/Shoelaces'
-import Bubblegum from '../views/Bubblegum'
+import Feed  from '../views/Feed'
+
+import Resource  from '../views/Resource'
+import Calendar  from '../views/Calendar'
+import Contact   from '../views/Contact'
+import Channel   from '../views/Channel'
+
 import ForOhFour from '../views/ForOhFour'
 import Navigation from '../views/Navigation'
 
@@ -31,68 +35,31 @@ const routes = [
   { 
     path: '/',
     exact: true,
-    main: Home,
+    main: Feed,
   },    
   { 
-    path: '/bubblegum',
-    main: Bubblegum,
+    path: '/calendar',
+    main: Calendar,
   },
   { 
-    path: '/shoelaces',
-    main: Shoelaces,
-  }
+    path: '/resources',
+    main: Resource,
+  },
+  { 
+    path: '/contacts',
+    main: Contact,
+  },
+  { 
+    path: '/channels',
+    main: Channel,
+  },    
 ]
-
-const organisations = [
-  {
-  "id": 0,
-  "organisation_name": "Principal Talk",
-  "image": DefaultLogo,
-  "primary_color": "#3d3d3d",
-  "is_white": true,
-  "url": "/organisations/0"
-}, {
-  "id": 1,
-  "organisation_name": "Bubblemix",
-  "image": "http://www.cde.ca.gov/ta/sr/cs/images/goldribbonlogo.png",
-  "primary_color": "#c565c8",
-  "is_white": true,
-  "url": "/organisations/1"
-}, {
-  "id": 2,
-  "organisation_name": "Yakidoo",
-  "image": "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAaxAAAAJDI4MDFiZDczLWQxNmYtNDY5OS1hMTZhLTc3NDIxZjE2YjE1YQ.png",
-  "primary_color": "#e1741d",
-  "is_white": true,
-  "url": "/organisations/2"
-}, {
-  "id": 3,
-  "organisation_name": "Ailane",
-  "image": "https://upload.wikimedia.org/wikipedia/en/8/8a/Seabrook_Christian_School_logo.png",
-  "primary_color": "#3e5b82",
-  "is_white": true,
-  "url": "/organisations/3"
-}, {
-  "id": 4,
-  "organisation_name": "Voonyx",
-  "image": "https://schoolofbancal.files.wordpress.com/2011/05/school-logo.jpg",
-  "primary_color": "#534bbf",
-  "is_white": false,
-  "url": "/organisations/4"
-}, {
-  "id": 5,
-  "organisation_name": "Browsedrive",
-  "image": "https://s3.amazonaws.com/htw/dt-contest-entries/91266/united-states-education-logo-design.png",
-  "primary_color": "#360f08",
-  "is_white": true,
-  "url": "/organisations/5"
-}]
 
 const links = [
   {
     id: 1,
     caption: "News Feed",
-    url: "/feed"
+    url: "/",
   }, {
     id: 2,
     caption: "Calendar",
@@ -100,7 +67,7 @@ const links = [
   }, {
     id: 3,
     caption: "Resources",
-    url: "/resource"
+    url: "/resources"
   }, {
     id: 4,
     caption: "Contact Details",

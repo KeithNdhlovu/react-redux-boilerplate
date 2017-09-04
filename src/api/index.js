@@ -123,10 +123,10 @@ export function getMe (accessToken) {
 
 /**
  * Get the logged in users' resources
- * 
+ * @param organisationID
  * @return Promise
  */
-export function getResources () {
+export function getResources (organisationID = null) {
 	
 	let { GET_RESOURCES } = Uri;
 
@@ -138,7 +138,7 @@ export function getResources () {
  * 
  * @return Promise
  */
-export function getFeedItems () {
+export function getFeedItems (organisationID = null) {
 	
 	let { GET_FEED } = Uri;
 	let payload = {

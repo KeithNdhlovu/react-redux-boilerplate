@@ -13,7 +13,6 @@ class MainSideNavComponent extends Component {
     render() {
 
         const { navigateTo, currentOrganisation }  = this.props;
-        console.log("Selected", currentOrganisation);
 
         return (
             // <!-- START LEFT SIDEBAR NAV-->

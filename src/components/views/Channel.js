@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Shoelaces extends Component {
+class Channel extends Component {
     render() {
         return (
             <div>
-                <h1> Some Shoe Laces </h1>
+                <h1> Channel </h1>
             </div>
         );
     }
 }
 
-export default Shoelaces;
+export default Channel;
