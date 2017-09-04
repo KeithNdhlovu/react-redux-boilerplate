@@ -34,6 +34,12 @@ const initialState = {
   organisations: []
 }
 
+function addAccent(payload) {
+    return {
+        ...payload,
+        accent: blendColors(payload.color,"#000000", 0.5)
+    }
+}
 /**
  * @param state
  * @param action
@@ -51,7 +57,7 @@ export default function reducer(state = initialState, action) {
           return {...state,fetching: false, organisations: action.payload.results}
       };
       case (actionTypes().ORGANISATION_NAVIGATION_CHANGED): {
-          return { ...state, active: true, organisation: action.payload }
+          return { ...state, active: true, organisation: addAccent(action.payload) }
       }
     }
 

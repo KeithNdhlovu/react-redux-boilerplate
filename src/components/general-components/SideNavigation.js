@@ -5,6 +5,8 @@ import { connect } from "react-redux"
 import { withRouter, NavLink } from 'react-router-dom'
 import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 
+import DefaultLogo from '../../styles/images/logo.png';
+
 import { actionTypes } from '../../constants'
 
 class HeaderComponent extends Component {
@@ -15,14 +17,16 @@ class HeaderComponent extends Component {
         return (
             <header className="page-topbar show-on-small hide-on-med-and-up">
                 <div className="navbar-fixed">
-                    <nav className="nav" style={{ background: header.primary_color }}>
+                    <nav className="nav" style={{ background: header.color }}>
                         <div className="valign-wrapper col-12 no-padding">
                             <ul className="valign-wrapper col-12 no-padding">
                                 <li className="link logo-image valign">
-                                    <div className="header-logo-container" style={{backgroundImage: `url(${header.image})`}}></div>
+                                    <div className="header-logo-container" 
+                                         style={{ backgroundImage: `url(${DefaultLogo})` }}>
+                                    </div>
                                 </li>
                                 <li className="link valign-wrapper">
-                                    <h4 className="no-margin" href="#" >{ header.organisation_name }</h4>
+                                    <h4 className="no-margin" href="#" >{ header.name }</h4>
                                 </li>
                             </ul>
                         </div>
@@ -41,12 +45,12 @@ class SideNavComponent extends Component {
         return (
 
             <div id="inner-left-sidebar-nav">
-                <ul style={{ background: header.primary_dark }}
+                <ul style={{ background: header.accent }}
                     className="side-menu show-full collapsible collapsible-accordion side-nav fixed leftside-navigation custom">
                     {links.map((link, index) => (
                         <li className="link valign-wrapper" 
-                            key={link.id}>
-                            <a href={link.url} className="nav-link waves-effect waves-cyan">{ link.caption }</a>
+                            key={ index }>
+                            <a href={ link.url } className="nav-link waves-effect waves-cyan">{ link.caption }</a>
                         </li>
                     ))}
                 </ul>
@@ -64,7 +68,7 @@ SideNavComponent.propTypes = {
 
 const state = (store) => {
   return {
-      selected: store.organisation,
+      selected: store.org.organisation,
   }
 }
 

@@ -7,10 +7,13 @@ import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 
 import { actionTypes } from '../../constants'
 
+import DefaultLogo from '../../styles/images/logo.png';
+
 class MainSideNavComponent extends Component {
     render() {
-        
-        console.log(this.props.organisation);
+
+        const { navigateTo, currentOrganisation }  = this.props;
+        console.log("Selected", currentOrganisation);
 
         return (
             // <!-- START LEFT SIDEBAR NAV-->
@@ -22,22 +25,21 @@ class MainSideNavComponent extends Component {
                         <div className="white-circle">
                             <NavLink 
                                 to="/" 
-                                onClick={this.props.navigateTo.bind(this, this.props.organisation)} 
+                                onClick={ navigateTo.bind(this, null) } 
                                 className="text-link no-padding no-margin">All</NavLink>
                         </div>
                     </li>
 
                     {this.props.organisations.map((organisation, index) => (
                         <li className="logo-container valign-wrapper" 
-                            key={ organisation.id }>
+                            key={ index }>
                             <NavLink 
                                 to="/" 
                                 className="white-circle" 
-                                onClick={ this.props.navigateTo.bind(this, organisation) }
+                                onClick={ navigateTo.bind(this, organisation) }
                                 style={{ 
-                                    backgroundImage: `url(${organisation.image})`,
-                                    backgroundColor: organisation.color,
-                                    opacity: (organisation.id === this.props.organisation.id) ? 1 : null
+                                    backgroundImage: `url(${DefaultLogo})`,
+                                    opacity: (organisation.id === currentOrganisation.id) ? 1 : null
                                 }}>
                             </NavLink>
                         </li>
@@ -54,7 +56,7 @@ MainSideNavComponent.propTypes = {
 
 const state = (store) => {
   return {
-      organisation: store.org.organisation,
+      currentOrganisation: store.org.organisation,
       organisations: store.org.organisations,
   }
 }

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class FeedListComponent extends Component {
     render() {
 
-        const { items } = this.props;
+        const { items, organisation } = this.props;
 
         return (
             <div>
@@ -31,11 +31,11 @@ class FeedListComponent extends Component {
                                 
                                 <div className="row justify-content-between">
                                     <div className="col-1">
-                                        <i className="fa fa-bell" aria-hidden="true" style={ item.is_read ? null : {color: "blue"} }></i>
+                                        <i className="fa fa-bell" aria-hidden="true" style={ item.is_read ? null : { color: organisation.accent } }></i>
                                     </div>
                                     <div className="col-11">
                                         {/* The header */}
-                                        <h5 className="mb-1 header">{ item.title }</h5>
+                                        <h5 className="mb-1 header" style={{ color: organisation.accent }}>{ item.title }</h5>
 
                                         {/* The date */}
                                         <p className="date mb-1">{ item.created_at }</p>
@@ -66,6 +66,7 @@ class FeedListComponent extends Component {
 
 FeedListComponent.propTypes = {
     items: React.PropTypes.array.isRequired,
+    organisation: React.PropTypes.object.isRequired
 };
 
 export default FeedListComponent;

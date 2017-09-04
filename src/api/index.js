@@ -141,8 +141,23 @@ export function getResources () {
 export function getFeedItems () {
 	
 	let { GET_FEED } = Uri;
+	let payload = {
+		"body": "realText",
+		"id": "randomDigit",
+		"school_id": "randomDigit",
+		"title": "catchPhrase",
+		"created_at": "iso8601",
+		"updated_at": "iso8601",
+		"disabled_at": "iso8601",
+		"rsvp_date": "iso8601",
+		"icon_id": "randomDigit",
+		"is_read": "boolean",
+		"tags": {
+			"name": "cityPrefix"
+		}
+	}
 
-	return axios.get(getEndpoint(GET_FEED))
+	return axios.post(getEndpoint(GET_FEED), payload)
 }
 
 /**
@@ -153,8 +168,22 @@ export function getFeedItems () {
 export function getOrganisations () {
 	
 	let { GET_ORGANISATIONS } = Uri;
+	let payload = {		
+		"id": "randomDigit",
+		"name": "company",
+		"medium_name": "cityPrefix",
+		"short_name": "cityPrefix",
+		"show_adverts": "boolean",
+		"color": "hexcolor",
+		"logo": "imageUrl",
+		"telephone_number": "e164PhoneNumber",
+		"email_address": "email",
+		"physical_address": "address",
+		"url": "imageUrl",
+		"nick": "stateAbbr",
+	}
 
-	return axios.get(getEndpoint(GET_ORGANISATIONS))
+	return axios.post(getEndpoint(GET_ORGANISATIONS), payload)
 }
 
 /**
