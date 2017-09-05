@@ -30,8 +30,6 @@ const endpoints = {
     NOTICE_ENDPOINT: "/me/notices",
 
     UPDATE_LEARNER_ENDPOINT: "/me/children/%s",
-    USER_EVENTS_ENDPOINT: "/me/events",
-    GROUP_EVENTS_ENDPOINT: "/me/groups/events",
     GALLERY_IMAGE_ENDPOINT: "/me/groups/images",
     GALLERY_IMAGE_POST_ENDPOINT: "/me/groups/images/upload",
     UPDATE_CHILD_ENDPOINT: "/me/children/%s",
@@ -66,6 +64,9 @@ const endpoints = {
     GET_ORG_ABSENTEE_REASONS_ENDPOINT: "/me/schools/absenteeismreasons",
     GET_ORG_POLICIES_ENDPOINT: "/me/schools/policies",
     GET_ORG_CODEOFCONDUCT_ENDPOINT: "/me/schools/codeofconduct",
+
+    GET_USER_EVENTS_ENDPOINT: "/me/events",
+    GET_GROUP_EVENTS_ENDPOINT: "/me/groups/events",
 
     CODE_OF_CONDUCT_TITLE: 0,
     ACCOUNT_STATEMENT_TITLE: 1,

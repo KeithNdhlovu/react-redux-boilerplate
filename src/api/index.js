@@ -122,6 +122,39 @@ export function getMe (accessToken) {
 }
 
 /**
+ * Get the logged in users' calendar events
+ * @param organisationID
+ * @return Promise
+ */
+export function getUserEvents (organisationID = null) {
+	
+	let { GET_USER_EVENTS_ENDPOINT } = Uri;
+	
+	
+	let payload = {
+		"id": "randomDigit",
+		"title": "catchPhrase",
+		"date": "iso8601",
+		"location_desciption": "streetAddress",
+		"full_address": "address",
+		"school_id": "randomDigit",
+		"child_id": "randomDigit",
+		"is_read": "boolean",
+		"attachements": {
+			"title": "catchPhrase",
+			"attachment_id": "randomDigit",
+			"location": "imageUrl"
+		},
+		"tags": {
+			"name": "cityPrefix",
+			"color": "hexColor"
+		}
+	}
+
+	return axios.post(getEndpoint(GET_USER_EVENTS_ENDPOINT), payload)
+}
+
+/**
  * Get the logged in users' resources
  * @param organisationID
  * @return Promise
@@ -129,6 +162,23 @@ export function getMe (accessToken) {
 export function getResources (organisationID = null) {
 	
 	let { GET_RESOURCES } = Uri;
+	
+	let payload = {
+		"id": "randomDigit",
+		"body": "realText",		
+		"school_id": "randomDigit",
+		"title": "catchPhrase",
+		"created_at": "iso8601",
+		"updated_at": "iso8601",
+		"disabled_at": "iso8601",
+		"rsvp_date": "iso8601",
+		"icon_id": "randomDigit",
+		"is_read": "boolean",
+		"tags": {
+			"name": "cityPrefix",
+			"color": "hexColor"
+		}
+	}
 
 	return axios.get(getEndpoint(GET_RESOURCES))
 }

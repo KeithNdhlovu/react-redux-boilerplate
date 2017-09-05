@@ -21,10 +21,13 @@ class MainSideNavComponent extends Component {
                     
                     {/* All */}
                     <li className="logo-container valign-wrapper">
-                        <div className="white-circle">
+                        <div className="white-circle"
+                            style={{
+                                opacity: (currentOrganisation.id === null) ? 1 : null
+                            }}>
                             <NavLink 
                                 to="/" 
-                                onClick={ navigateTo.bind(this, null) } 
+                                onClick={ navigateTo.bind(this, null) }
                                 className="text-link no-padding no-margin">All</NavLink>
                         </div>
                     </li>
