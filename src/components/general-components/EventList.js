@@ -59,8 +59,6 @@ class Item extends Component {
                             <strong className="date big">{ this.formatDate(item.date).day }</strong><small className="date small">{ this.formatDate(item.date).month } <br/> { this.formatDate(item.date).time }</small> 
                         </div>
 
-                        <div clasNa
-
                         {/* The Description */}
                         <p className="mb-1">{ item.location_desciption }, { item.full_address }</p>
                         <br/>
