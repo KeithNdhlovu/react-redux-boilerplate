@@ -24,31 +24,22 @@ class Item extends Component {
                     
                     <div className="col-12">
                         <div className="row">
-                            <div className="col-10">
+                            <div className="col-11">
                                 {/* The header */}
-                                <h5 className="mb-1 header" style={{ color: organisation.accent }}>{ item.title }</h5>
+                                <h5 className="mb-1 header" style={ item.is_read ? null : { color: organisation.accent } }>{ item.title }</h5>
                             </div>
-                            <div className="col-2 text-right">
-                                <span className="fa-stack fa-lg">
-                                    <i className="fa fa-square fa-stack-2x" style={{ color: organisation.accent }}></i>
-                                    <i className="fa fa-map-marker fa-stack-1x white-text"></i>
-                                </span>
-                                <span className="fa-stack fa-lg">
-                                    <i className="fa fa-square fa-stack-2x" style={{ color: organisation.accent }}></i>
-                                    <i className="fa fa-calendar fa-stack-1x white-text"></i>
-                                </span>
-                            </div>      
+                            <div className={ "col-1 text-center " + (item.is_read ? "show" : "hide") }>
+                                <i className="fa fa-chevron-down" aria-hidden="true"></i>
+                            </div>
                         </div>
+                    </div>
+                    <div className="col-12">
+                        {/* The date @TODO: Format to (dd, d-M'y) */}
+                        <p className="date mb-1">{ item.date }</p>
 
-                        {/* The date */}
-                        <p className="mb-1">
-                            <strong className="date big">10</strong><small className="date small">Jun 13:00</small> 
-                            <strong className="separator">-</strong>
-                            <strong className="date big">10</strong><small className="date small">Jun 13:00</small>
-                        </p>
 
-                        {/* The Description */}
-                        <p className="mb-1">{ item.location_desciption }, { item.full_address }</p>
+                        {/* The Body */}
+                        <p className="mb-1">{ item.body }</p>
                         <br/>
 
                         {/* Attachments */}

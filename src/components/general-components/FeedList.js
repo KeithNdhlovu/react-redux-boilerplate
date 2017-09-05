@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import CustomDropdown from './CustomDropdown'
 
 class Item extends Component {
+  
     render() {
 
         const { index, item, organisation, type } = this.props
 
         return (
-            <a  href="#" 
-                key={ index } 
-                className="list-group-item list-group-item-action flex-column align-items-start">
+            <a key={ index } 
+                 className="list-group-item list-group-item-action flex-column align-items-start">
                 
                 <div className="row justify-content-between">
                     <div className="icon-container">
@@ -29,7 +30,7 @@ class Item extends Component {
                                 <h5 className="mb-1 header" style={ item.is_read ? null : { color: organisation.accent } }>{ item.title }</h5>
                             </div>
                             <div className={ "col-1 text-center " + (item.is_read ? "show" : "hide") }>
-                                <i className="fa fa-chevron-down" aria-hidden="true"></i>
+                                <CustomDropdown items={["Mark As Unread"]} />
                             </div>
                         </div>
 

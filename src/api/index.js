@@ -165,22 +165,24 @@ export function getResources (organisationID = null) {
 	
 	let payload = {
 		"id": "randomDigit",
-		"body": "realText",		
-		"school_id": "randomDigit",
 		"title": "catchPhrase",
-		"created_at": "iso8601",
-		"updated_at": "iso8601",
-		"disabled_at": "iso8601",
-		"rsvp_date": "iso8601",
-		"icon_id": "randomDigit",
+		"date": "iso8601",
+		"school_id": "randomDigit",
+		"child_id": "randomDigit",
 		"is_read": "boolean",
+		"body": "realText",
+		"attachements": {
+			"title": "catchPhrase",
+			"attachment_id": "randomDigit",
+			"location": "imageUrl"
+		},
 		"tags": {
 			"name": "cityPrefix",
 			"color": "hexColor"
 		}
 	}
 
-	return axios.get(getEndpoint(GET_RESOURCES))
+	return axios.post(getEndpoint(GET_RESOURCES), payload)
 }
 
 /**

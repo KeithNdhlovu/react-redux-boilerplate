@@ -22,7 +22,6 @@ import Contact   from '../views/Contact'
 import Channel   from '../views/Channel'
 
 import ForOhFour from '../views/ForOhFour'
-import Navigation from '../views/Navigation'
 
 import MainSideNavigation from '../general-components/MainSideNavigation'
 import SideNavigation from '../general-components/SideNavigation'

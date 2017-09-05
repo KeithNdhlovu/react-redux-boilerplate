@@ -8,9 +8,9 @@ export const actions = {
     /**
      * Initialize options
      */
-    error: createAction(actionTypes().EVENT_ACTION_ERROR),
-    start: createAction(actionTypes().EVENT_ACTION_START),
-    save: createAction(actionTypes().EVENT_ACTION_SAVE),
+    error: createAction(actionTypes().RESOURCE_ACTION_ERROR),
+    start: createAction(actionTypes().RESOURCE_ACTION_START),
+    save: createAction(actionTypes().RESOURCE_ACTION_SAVE),
 
     /**
      * Get Event handler

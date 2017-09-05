@@ -34,7 +34,7 @@ class Resource extends Component {
     
 
     render() {
-        const { organisation, resource } = this.props;
+        const { organisation, resource } = this.props
 
         // Load while we wait for feeds
         if (resource.fetching && organisation) {

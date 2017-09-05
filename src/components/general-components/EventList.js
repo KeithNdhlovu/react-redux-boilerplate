@@ -1,19 +1,34 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import AddToCalendar from './AddToCalendar'
+import Moment from 'moment'
+
+// Global locale to English
+Moment.locale('en')
 
 class Item extends Component {
+    
+    formatDate = (date) => {
+
+        let formated = Moment(date).format('DD')
+        return {
+            day: Moment(date).format('DD'),
+            month: Moment(date).format('MMM.'),
+            time: Moment(date).format('H:m'),
+        };
+    }
+
     render() {
 
         const { index, item, organisation, type } = this.props
 
-        function formatDate(date) {
-            let fDate = new Date(date)
-            return {
-                day: fDate.getDay(),
-                month: fDate.getMonth(),
-                time: fDate.getHours()
-            };
-        }
+        let event = {
+            title: item.title,
+            description: null,
+            location: item.full_address,
+            start_datetime: new Date(item.date),
+            end: new Date(item.date)
+        };        
 
         return (
             <a  href="#" 
@@ -29,23 +44,22 @@ class Item extends Component {
                                 <h5 className="mb-1 header" style={{ color: organisation.accent }}>{ item.title }</h5>
                             </div>
                             <div className="col-2 text-right">
-                                <span className="fa-stack fa-lg">
+                                <a href={ "https://www.google.com/maps/search/?api=1&query=" + encodeURI(item.full_address) } target="_blank" className="fa-stack fa-lg">
                                     <i className="fa fa-square fa-stack-2x" style={{ color: organisation.accent }}></i>
                                     <i className="fa fa-map-marker fa-stack-1x white-text"></i>
-                                </span>
-                                <span className="fa-stack fa-lg">
-                                    <i className="fa fa-square fa-stack-2x" style={{ color: organisation.accent }}></i>
-                                    <i className="fa fa-calendar fa-stack-1x white-text"></i>
-                                </span>
+                                </a>
+                                <AddToCalendar event={event} color={ organisation.accent }/>
                             </div>      
                         </div>
 
                         {/* The date */}
-                        <p className="mb-1">
-                            <strong className="date big">10</strong><small className="date small">Jun 13:00</small> 
+                        <div className="mb-1">
+                            <strong className="date big">{ this.formatDate(item.date).day }</strong><small className="date small">{ this.formatDate(item.date).month } <br/> { this.formatDate(item.date).time }</small> 
                             <strong className="separator">-</strong>
-                            <strong className="date big">10</strong><small className="date small">Jun 13:00</small>
-                        </p>
+                            <strong className="date big">{ this.formatDate(item.date).day }</strong><small className="date small">{ this.formatDate(item.date).month } <br/> { this.formatDate(item.date).time }</small> 
+                        </div>
+
+                        <div clasNa
 
                         {/* The Description */}
                         <p className="mb-1">{ item.location_desciption }, { item.full_address }</p>
