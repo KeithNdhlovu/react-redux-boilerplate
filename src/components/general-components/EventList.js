@@ -53,10 +53,24 @@ class Item extends Component {
                         </div>
 
                         {/* The date */}
-                        <div className="mb-1">
-                            <strong className="date big">{ this.formatDate(item.date).day }</strong><small className="date small">{ this.formatDate(item.date).month } <br/> { this.formatDate(item.date).time }</small> 
-                            <strong className="separator">-</strong>
-                            <strong className="date big">{ this.formatDate(item.date).day }</strong><small className="date small">{ this.formatDate(item.date).month } <br/> { this.formatDate(item.date).time }</small> 
+                        <div className="row mb-1">
+                            <div className="col-12 valign-wrapper">
+                                <div className="flex-display">
+                                    <strong className="date big">{ this.formatDate(item.date).day }</strong>
+                                    <p className="small-dates-container">
+                                        <small>{ this.formatDate(item.date).month }</small>
+                                        <small>{ this.formatDate(item.date).time }</small> 
+                                    </p>
+                                </div>
+                                <strong className="separator">-</strong>
+                                <div className="flex-display">
+                                    <strong className="date big">{ this.formatDate(item.date).day }</strong>
+                                    <p className="small-dates-container">
+                                        <small>{ this.formatDate(item.date).month }</small>
+                                        <small>{ this.formatDate(item.date).time }</small> 
+                                    </p>
+                                </div>                            
+                            </div>
                         </div>
 
                         {/* The Description */}

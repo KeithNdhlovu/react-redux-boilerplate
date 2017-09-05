@@ -595,6 +595,19 @@ footer {
     }
   }
 
+  .small-dates-container {
+    margin: auto;
+    display: grid;
+    padding-left: 5px;
+    padding-right: 5px;    
+  }
+
+  small {
+    &.date.small {
+      padding: 5px;
+    }
+  }
+
   strong {
     &.date.big, &.separator {
       font-size: 2em;
@@ -604,6 +617,10 @@ footer {
     &.separator {
       margin-left: 10px;
       margin-right: 10px;
+    }
+
+    &.date.big {
+      padding: 5px;
     }
 
   }
@@ -625,4 +642,8 @@ footer {
 .pp-dropdown-menu-right {
   right: 0;
   left: auto !important;
+}
+
+.flex-display {
+  display: inline-flex;
 }
