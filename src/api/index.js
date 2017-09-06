@@ -241,9 +241,15 @@ export function getOrganisations () {
 
 /**
  * Return API endpoint with given path
- * @param grantType
+ * @param path
+ * @param id
  * @returns {string}
  */
-function getEndpoint ( path ) {
-	return Config.apiUrl + path;
+function getEndpoint ( path , id = null ) {
+	
+	if (id) {
+		return Config.apiUrl + path.replace("%s", id)
+	}
+	
+	return Config.apiUrl + path
 }

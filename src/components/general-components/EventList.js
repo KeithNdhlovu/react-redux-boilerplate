@@ -33,7 +33,7 @@ class Item extends Component {
         return (
             <a  href="#" 
                 key={ index } 
-                className="list-group-item list-group-item-action flex-column align-items-start">
+                className={"list-group-item list-group-item-action flex-column align-items-start " + ( item.is_read ? "active" : "" ) }>
                 
                 <div className="row justify-content-between">
                     

@@ -121,10 +121,10 @@ class AddToCalendar extends Component {
                     <i className="fa fa-calendar fa-stack-1x white-text"></i>
                 </a>
                 <DropdownMenu className="pp-dropdown-menu-right">
-                    <a className="dropdown-item" href={ calendarURLs.google(this.props.event) } target="_blank">Google Calendar</a>
-                    <a className="dropdown-item" href={ calendarURLs.yahoo(this.props.event) } target="_blank">Yahoo Calendar</a>
-                    <a className="dropdown-item" href={ calendarURLs.ical(this.props.event) } target="_blank">Apple</a>
-                    <a className="dropdown-item" href={ calendarURLs.outlook(this.props.event) } target="_blank">Outlook</a>
+                    <a className="dropdown-item" href={ calendarURLs.google(event) } target="_blank">Google Calendar</a>
+                    <a className="dropdown-item" href={ calendarURLs.yahoo(event) } target="_blank">Yahoo Calendar</a>
+                    <a className="dropdown-item" href={ calendarURLs.ical(event) } target="_blank">Apple</a>
+                    <a className="dropdown-item" href={ calendarURLs.outlook(event) } target="_blank">Outlook</a>
                 </DropdownMenu>
             </Dropdown>
         );
