@@ -1,3 +1,4 @@
+import React from 'react'
 import { omit, get, map, assign, has } from 'lodash'
 
 export const tagsHelper = {
@@ -32,30 +33,34 @@ export const tagsHelper = {
         map(items, (item, index) => {
             let tag = {}
             let haSchool = has(item, "school_id")
-            let hasAttachment = get(item, "attachements")
+            let hasAttachment = has(item, "attachments")
             let tags = []
 
-            // Does this item have a school attached to it?
-            if (haSchool) {
+            
+            // Does this item have a attachments attached to it?
+            if (hasAttachment && get(item, "attachments").length > 0) {
                 tag = {}
                 tag = assign(tag, {
-                    name: "School ".concat(get(item, "school_id")),
+                    type: 1,
+                    name: '<i class="fa fa-paperclip fa-rotate-45" aria-hidden="true"></i>',
                     color: this.gimmeColor(1)
                 })
 
                 tags.push(tag)
             }
 
-            // Does this item have a attachments attached to it?
-            if (hasAttachment) {
+            
+            // Does this item have a school attached to it?
+            if (haSchool) {
                 tag = {}
                 tag = assign(tag, {
-                    name: "Attachments",
+                    type: 0,
+                    name: "School ".concat(get(item, "school_id")),
                     color: this.gimmeColor(1)
                 })
 
                 tags.push(tag)
-            }            
+            }          
 
             item.tags = tags
         })

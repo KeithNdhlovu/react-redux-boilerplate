@@ -15,14 +15,28 @@ class BaseList extends Component {
         this.state = initialState
     }
 
-    toggleOpen = (itemID) => {
+    toggleOpen = (data) => {
         
-        this.setState(this.initialState);
+        const { items, item } = data
+        
+        let that = this;
+
+        items.map((_item, index) => {
+
+            if (_item.id != item.id) {
+                Object.assign(_item, { expand: false })
+            }
+        })
+
+        Object.assign(item, { expand: true })
+
 
         this.setState({
-            expand: true,
-            selectedItem: itemID
-        });
+            expand: !this.state.expand,
+            selectedItem: item.id
+        })
+
+        console.log("Expand", this.state.expand)
     }
 
     render() {

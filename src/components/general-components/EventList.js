@@ -3,31 +3,13 @@ import PropTypes from 'prop-types'
 import AddToCalendar from './AddToCalendar'
 import Moment from 'moment'
 import BaseItem from './BaseItem'
+import BaseList from './BaseList'
 
 // Global locale to English
 Moment.locale('en')
 
 class Item extends Component {
      
-    constructor(props) {
-        super(props);
-        
-        const initialState = {
-            expand: false,
-        }
-
-        this.initialState = initialState
-        this.state = initialState
-    }
-
-    toggleOpen = (parentFn) => {
-        this.setState({
-            expand: !this.state.expand,
-        })
-
-        parentFn()
-    }
-
     formatDate = (date) => {
 
         let formated = Moment(date).format('DD')
@@ -40,7 +22,7 @@ class Item extends Component {
 
     render() {
 
-        const { index, item, organisation, type, onClick, parent } = this.props
+        const { index, item, organisation, type, onClick } = this.props
 
         let event = {
             title: item.title,
@@ -50,13 +32,11 @@ class Item extends Component {
             end: new Date(item.date)
         };
 
-        const expanded = (this.state.expand && (parent.selectedItem === item.id));
-
         return (
 
             <BaseItem active={item.is_read ? "active" : ""} key={ index }>
                 <div className="col-12"
-                    onClick={ this.toggleOpen.bind(this, onClick) }>
+                    onClick={ onClick.bind(this) }>
                     <div className="row">
                         <div className="col-10">
                             {/* The header */}
@@ -98,16 +78,12 @@ class Item extends Component {
                     <p className="mb-1">{ item.description }, { item.full_address }</p>
                     <br/>
 
-                    <div className={"attachments " + (expanded ? "show" : "hide")}>
-                        <h1> I am that hidden nigguh </h1>
-                    </div>
-
                     {/* Attachments */}
-                    <div className={"attachments " + (expanded ? "show" : "hide")}>
+                    <div className={"attachments " + (item.expand ? "show" : "hide")}>
                         {item.attachments.map((attachment, attIndex) => (
                             <span className="badge badge-pill attachment-items"
                                 key={ attIndex }>
-                                <i className="fa fa-paperclip" style={{ color: organisation.accent }}></i>
+                                <i className="fa fa-paperclip fa-marg-5 fa-rotate-45" style={{ color: organisation.accent }}></i>
                                 { attachment.title }
                             </span>
                         ))}
@@ -118,8 +94,8 @@ class Item extends Component {
                         {item.tags.map((tag, tagIndex) => (
                             <span className="badge badge-pill"
                                 key={ tagIndex } 
-                                style={{ backgroundColor: tag.color }}>
-                                { tag.name }
+                                style={{ backgroundColor: tag.color }}
+                                dangerouslySetInnerHTML={{ __html: tag.name }}>
                             </span>
                         ))}
                     </div>
@@ -131,56 +107,21 @@ class Item extends Component {
 
 class EventList extends Component {
     
-    constructor(props) {
-        super(props);
-        
-        const initialState = {
-            expand: false,
-            selectedItem: null
-        }
-
-        this.initialState = initialState
-        this.state = initialState
-    }
-
-    toggleOpen = (item) => {
-        
-        this.setState(this.initialState);
-
-        this.setState({
-            expand: !item.expand,
-            selectedItem: item.id
-        });
-    }
-
     render() {
 
         const { items, organisation } = this.props
 
-        // A flag specific to an item
-        {items.map((item, index) => (
-            Object.assign(item, {expand: false})
-        ))}
+        items.map((item, index) => {
+            Object.assign(item, { expand: false })
+        })
 
         return (
-            <div>
-                {(items.length == 0) ? (
-                    <div className="list-group pp-custom">
-                        <a  href="#"
-                            className="list-group-item list-group-item-action flex-column align-items-start">
-                            
-                            <div className="row justify-content-between">
-                                <div className="col-12">
-                                    {/* The header */}
-                                    <h5 className="mb-1 header text-center">Nothing for now</h5>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                ) : (
-                    
+
+            <BaseList hasItems={ (items.length !== 0) }>
+                {(toggleOpen, parentState) => (
                     <div className="list-group pp-custom">
                         {/* Search filters */}
+                        
                         {items.map((item, index) => (
                             
                             <Item key={ index } 
@@ -188,12 +129,12 @@ class EventList extends Component {
                                 item={ item } 
                                 organisation={ organisation } 
                                 type={ item.image ? 1 : 0 } 
-                                onClick={ this.toggleOpen.bind(this, item) }
-                                parent={ this.state }/>
+                                onClick={ toggleOpen.bind(this, {item, items}) }
+                                parent={ parentState }/>
                         ))}
-                    </div>
+                    </div>                    
                 )}
-            </div>             
+            </BaseList>           
         );
     }
 }

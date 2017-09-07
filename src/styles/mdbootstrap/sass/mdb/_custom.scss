@@ -576,7 +576,7 @@ footer {
 
   .tags {
     span {
-      // margin-right: 10px; 
+      font-size: 1.1em;
     }
   }
 
@@ -661,4 +661,16 @@ $list-item-active-color: #e9ecef;
     border: 1px solid rgba(0, 0, 0, 0.125);
     color: inherit;
   }
+}
+
+.fa-rotate-45 {
+    transform: rotate(-45deg);
+}
+
+.fa-marg-5 {
+  margin-right: 5px;
+}
+
+.fa-1x {
+  font-size: 1.2em !important;
 }
