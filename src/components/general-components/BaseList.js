@@ -5,16 +5,33 @@ import PropTypes from 'prop-types';
 class BaseList extends Component {
     constructor(props) {
         super(props);
+        
+        const initialState = {
+            expand: false,
+            selectedItem: null
+        }
 
+        this.initialState = initialState
+        this.state = initialState
     }
 
-   render() {
+    toggleOpen = (itemID) => {
+        
+        this.setState(this.initialState);
 
-        const { items, organisation } = this.props;
+        this.setState({
+            expand: true,
+            selectedItem: itemID
+        });
+    }
+
+    render() {
+
+        const { hasItems } = this.props;
 
         return (
             <div>
-                {(items.length == 0) ? (
+                {(!hasItems) ? (
                     <div className="list-group pp-custom">
                         <a  href="#"
                             className="list-group-item list-group-item-action flex-column align-items-start">
@@ -29,7 +46,7 @@ class BaseList extends Component {
                 ) : (
                     
                     <div className="list-group pp-custom">
-                        {/* Items here */}
+                        { this.props.children(this.toggleOpen, this.state) }
                     </div>
                 )}
             </div>             
@@ -38,9 +55,8 @@ class BaseList extends Component {
 }
 
 BaseList.propTypes = {
-    items: React.PropTypes.array.isRequired,
-    organisation: React.PropTypes.object.isRequired,
-    behaviour: React.PropTypes.func.isRequired,
-};
+    hasItems: React.PropTypes.bool.isRequired,
+    children: React.PropTypes.func.isRequired,
+}
 
-export default BaseList;
+export default BaseList

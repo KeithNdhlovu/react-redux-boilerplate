@@ -7,14 +7,15 @@ class BaseItem extends Component {
     
     render() {
 
+        const { props } = this
+
         return (
-            <a  href="#"
-                className="list-group-item list-group-item-action flex-column align-items-start">
+            <div className={"base-item list-group-item list-group-item-action flex-column align-items-start " + props.active}>
                 
                 <div className="row justify-content-between">
-                    {/* Different item types comes in here */}
+                    { props.children }
                 </div>
-            </a>
+            </div>
         );
     }
 }

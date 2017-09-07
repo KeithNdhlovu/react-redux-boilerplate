@@ -17,7 +17,7 @@ class HeaderComponent extends Component {
         return (
             <header className="page-topbar show-on-small hide-on-med-and-up">
                 <div className="navbar-fixed">
-                    <nav className="nav" style={{ background: header.color }}>
+                    <nav className="nav" style={{ background: "#" + header.color }}>
                         <div className="valign-wrapper col-12 no-padding">
                             <ul className="valign-wrapper col-12 no-padding">
                                 <li className="link logo-image valign">

@@ -36,7 +36,7 @@ export const tagsHelper = {
             let tags = []
 
             // Does this item have a school attached to it?
-            if (haSchool !== null) {
+            if (haSchool) {
                 tag = {}
                 tag = assign(tag, {
                     name: "School ".concat(get(item, "school_id")),
@@ -47,7 +47,7 @@ export const tagsHelper = {
             }
 
             // Does this item have a attachments attached to it?
-            if (hasAttachment !== null) {
+            if (hasAttachment) {
                 tag = {}
                 tag = assign(tag, {
                     name: "Attachments",
