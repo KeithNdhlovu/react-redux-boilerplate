@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action) {
             return {...state, authenticating: false, error: null, user: {token: null, profile: null}}
         };
         case 'REACT_REDUX_OAUTH2/SAVE': {
-            return {...state,authenticating: false, user: action.payload}
+            return {...state,authenticating: false, user: action.payload.results}
         }
         case 'REACT_REDUX_OAUTH2/REFRESH': {
             return {...state, refreshing: true, retry: action.payload}

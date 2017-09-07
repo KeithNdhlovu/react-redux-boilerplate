@@ -31,8 +31,7 @@ class Item extends Component {
         };        
 
         return (
-            <a  href="#" 
-                key={ index } 
+            <div  key={ index } 
                 className={"list-group-item list-group-item-action flex-column align-items-start " + ( item.is_read ? "active" : "" ) }>
                 
                 <div className="row justify-content-between">
@@ -74,12 +73,12 @@ class Item extends Component {
                         </div>
 
                         {/* The Description */}
-                        <p className="mb-1">{ item.location_desciption }, { item.full_address }</p>
+                        <p className="mb-1">{ item.description }, { item.full_address }</p>
                         <br/>
 
                         {/* Attachments */}
                         <div className="attachments">
-                            {item.attachements.map((attachment, attIndex) => (
+                            {item.attachments.map((attachment, attIndex) => (
                                 <span className="badge badge-pill attachment-items"
                                     key={ attIndex }>
                                     <i className="fa fa-paperclip" style={{ color: organisation.accent }}></i>
@@ -100,7 +99,7 @@ class Item extends Component {
                         </div>
                     </div>
                 </div>
-            </a>
+            </div>
         );
     }
 }
