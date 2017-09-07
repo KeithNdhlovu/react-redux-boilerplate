@@ -603,6 +603,7 @@ footer {
   }
 
   small {
+    line-height: 1.4;
     &.date.small {
       padding: 5px;
     }
@@ -655,5 +656,6 @@ $list-item-active-color: #e9ecef;
   &.active {
     background-color: $list-item-active-color;
     border: 1px solid rgba(0, 0, 0, 0.125);
+    color: inherit;
   }
 }

@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import AddToCalendar from './AddToCalendar'
 import Moment from 'moment'
+import BaseItem from './BaseItem'
 
 // Global locale to English
 Moment.locale('en')
 
-class Item extends Component {
+class Item extends BaseItem {
     
     formatDate = (date) => {
 
@@ -42,12 +43,18 @@ class Item extends Component {
                                 {/* The header */}
                                 <h5 className="mb-1 header" style={{ color: organisation.accent }}>{ item.title }</h5>
                             </div>
-                            <div className="col-2 text-right">
-                                <a href={ "https://www.google.com/maps/search/?api=1&query=" + encodeURI(item.full_address) } target="_blank" className="fa-stack fa-lg">
-                                    <i className="fa fa-square fa-stack-2x" style={{ color: organisation.accent }}></i>
-                                    <i className="fa fa-map-marker fa-stack-1x white-text"></i>
-                                </a>
-                                <AddToCalendar event={event} color={ organisation.accent }/>
+                            <div className="col-2">
+                                <div className="row">
+                                    <div className="col-6 no-padding text-right">
+                                        <a href={ "https://www.google.com/maps/search/?api=1&query=" + encodeURI(item.full_address) } target="_blank" className="fa-stack fa-lg">
+                                            <i className="fa fa-square fa-stack-2x" style={{ color: organisation.accent }}></i>
+                                            <i className="fa fa-map-marker fa-stack-1x white-text"></i>
+                                        </a>
+                                    </div>
+                                    <div className="col-6 no-padding text-left">
+                                        <AddToCalendar event={event} color={ organisation.accent }/>
+                                    </div>
+                                </div>
                             </div>      
                         </div>
 
@@ -77,8 +84,8 @@ class Item extends Component {
                         <br/>
 
                         {/* Attachments */}
-                        <div className="attachments">
-                            {item.attachments.map((attachment, attIndex) => (
+                        <div className="attachements">
+                            {item.attachements.map((attachment, attIndex) => (
                                 <span className="badge badge-pill attachment-items"
                                     key={ attIndex }>
                                     <i className="fa fa-paperclip" style={{ color: organisation.accent }}></i>
