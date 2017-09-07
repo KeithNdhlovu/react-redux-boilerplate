@@ -458,9 +458,11 @@ $p-radius: 10px;
 
 
 .header-logo-container {
-    height: $navbar-height;
-    width: $navbar-height;
-    background-size: contain;
+    @include border-radius(50%);
+    background-color: $p-color-white;
+    height: 110px;
+    width: 110px;
+    background-size: 70%;
     background-position: center;
     background-repeat: no-repeat;
     margin: 0 auto;
@@ -574,7 +576,7 @@ footer {
 
   .tags {
     span {
-      margin-right: 10px; 
+      font-size: 1.1em;
     }
   }
 
@@ -603,6 +605,7 @@ footer {
   }
 
   small {
+    line-height: 1.4;
     &.date.small {
       padding: 5px;
     }
@@ -628,6 +631,7 @@ footer {
   .badge {
     font-size: 1em;
     box-shadow: none !important;
+    margin-right: 5px;
   }
 }
 
@@ -655,5 +659,18 @@ $list-item-active-color: #e9ecef;
   &.active {
     background-color: $list-item-active-color;
     border: 1px solid rgba(0, 0, 0, 0.125);
+    color: inherit;
   }
+}
+
+.fa-rotate-45 {
+    transform: rotate(-45deg);
+}
+
+.fa-marg-5 {
+  margin-right: 5px;
+}
+
+.fa-1x {
+  font-size: 1.2em !important;
 }

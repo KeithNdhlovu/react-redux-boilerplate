@@ -1,4 +1,5 @@
-import { omit, get, map, assign } from 'lodash'
+import React from 'react'
+import { omit, get, map, assign, has } from 'lodash'
 
 export const tagsHelper = {
     
@@ -15,6 +16,11 @@ export const tagsHelper = {
             //var _color = "hsl(" + leRandomVal.toFixed(2) + ",100%,50%)"; //Uncomment this line for HSL color generator
             colors.push(_color);
         }
+
+        if (howMany == 1) {
+            return colors[0];
+        }
+
         return colors;
     },
 
@@ -25,18 +31,36 @@ export const tagsHelper = {
      */
     createTags(items) {
         map(items, (item, index) => {
-            let tag = {}, haSchool = get(item, "school_id")
+            let tag = {}
+            let haSchool = has(item, "school_id")
+            let hasAttachment = has(item, "attachments")
             let tags = []
 
-            // Does this item have a scshool attached to it?
-            if (haSchool !== null) {
+            
+            // Does this item have a attachments attached to it?
+            if (hasAttachment && get(item, "attachments").length > 0) {
+                tag = {}
                 tag = assign(tag, {
-                    name: "School ".concat(get(item, "school_id")),
-                    color: this.gimmeColor(1)[0]
+                    type: 1,
+                    name: '<i class="fa fa-paperclip fa-rotate-45" aria-hidden="true"></i>',
+                    color: this.gimmeColor(1)
                 })
 
                 tags.push(tag)
             }
+
+            
+            // Does this item have a school attached to it?
+            if (haSchool) {
+                tag = {}
+                tag = assign(tag, {
+                    type: 0,
+                    name: "School ".concat(get(item, "school_id")),
+                    color: this.gimmeColor(1)
+                })
+
+                tags.push(tag)
+            }          
 
             item.tags = tags
         })
