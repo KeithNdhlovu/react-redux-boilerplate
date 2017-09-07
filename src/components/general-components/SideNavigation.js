@@ -22,7 +22,7 @@ class HeaderComponent extends Component {
                             <ul className="valign-wrapper col-12 no-padding">
                                 <li className="link logo-image valign">
                                     <div className="header-logo-container" 
-                                         style={{ backgroundImage: `url(${DefaultLogo})` }}>
+                                         style={{ backgroundImage: `url(${header.logo})` }}>
                                     </div>
                                 </li>
                                 <li className="link valign-wrapper">

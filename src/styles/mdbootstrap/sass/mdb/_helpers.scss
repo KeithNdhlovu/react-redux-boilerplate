@@ -23,6 +23,15 @@
   }
 }
 
+
+// trim words
+.truncate {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 // Z-levels
 .z-depth-0 {
   box-shadow: none !important;

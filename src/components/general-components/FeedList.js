@@ -58,6 +58,7 @@ class Item extends Component {
 }
 
 class FeedList extends Component {
+    
     render() {
 
         const { items, organisation } = this.props;
