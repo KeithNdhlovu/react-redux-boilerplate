@@ -691,6 +691,16 @@ $rotate-class: 'fa-rotate' !default
 .base-item {
   cursor: pointer;
   margin-bottom: 10px;
+
+  .nested-child {
+    .header-2 {
+      margin-top: 10px;
+      font-family: 'Roboto-Regular';
+    }
+    .list-group-item:last-child {
+      padding-bottom: 0;    
+    }
+  }
 }
 
 .contacts-count-container {

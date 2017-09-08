@@ -46,10 +46,7 @@ class Item extends Component {
                             </div>  
                         </div>
 
-                        {/* The Description */}
-                        <p className="mb-1">{ item.full_address }</p>
                         <br/>
-
                         <div className="row">
                             <div className="col-6">
                                 <div className="verical-align">
@@ -83,6 +80,46 @@ class Item extends Component {
                             <span className="col-12" style={{ color: organisation.accent }}><i className={"animate-rotation fa fa-plus "+ (isExpanded ? "fa-rotate-45" : "")  }></i>&nbsp;&nbsp;{ item.contacts.length }&nbsp;&nbsp;Contacts</span>
                         </div>
                         <br/>
+
+                        {/* Show nested contacts */}                        
+                        <div className={"row nested-child " + ( isExpanded ? "show" : "hide" )}>
+                            {item.contacts.map((contact, contactIndex) => (
+                                <div className="col-12 list-group-item" key={ contactIndex }>
+                                    <div className="row">
+                                        <div className="col-9">
+                                            <h6 className="mb-1 header" style={{ color: organisation.accent }}>{ contact.role }</h6>
+                                            <h6 className="mb-1 header-2">{ contact.name }</h6>
+                                        </div>
+                                        <div className="col-3">
+                                            <div className="float-right flex-display">
+                                                <a href={ "mailto:" +contact.email } target="_blank" className="fa-stack fa-lg">
+                                                    <i className="fa fa-square fa-stack-2x" style={{ color: organisation.accent }}></i>
+                                                    <i className="fa fa-envelope fa-stack-1x white-text"></i>
+                                                </a>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                    <br/>
+
+
+                                    <div className="row">
+                                        <div className="col-6 verical-align">
+                                            <div className="row mb-10">
+                                                <i className="w-20 fa fa-phone fa-m" aria-hidden="true" style={{ color: organisation.accent }}></i>
+                                                <p className="w-80 no-margin">{ contact.phone }</p>
+                                            </div>
+                                        </div>
+                                        <div className="col-6 verical-align">
+                                            <div className="row">
+                                                <i className="w-20 fa fa-envelope fa-m" aria-hidden="true" style={{ color: organisation.accent }}></i>
+                                                <p className="w-80 no-margin">{ contact.email }</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 )}
             </BaseItem>
