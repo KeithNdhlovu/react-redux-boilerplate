@@ -4,20 +4,39 @@ import PropTypes from 'prop-types';
 
 
 class BaseItem extends Component {
+    constructor(props) {
+        super(props);
+        let initialState = {
+            isExpanded: false
+        }
+        this.state = initialState
+        this.initialState = initialState
+    }
     
+    togleOpen = () => {
+        this.setState({
+            isExpanded: !this.state.isExpanded
+        })
+    }
+
     render() {
 
-        const { props } = this
-
         return (
-            <div className={"base-item list-group-item list-group-item-action flex-column align-items-start " + props.active}>
+            <div 
+                onClick={ this.togleOpen.bind(this) }
+                className={"base-item list-group-item list-group-item-action flex-column align-items-start " + this.props.active}>
                 
                 <div className="row justify-content-between">
-                    { props.children }
+                    { this.props.children(this.state.isExpanded) }
                 </div>
             </div>
         );
     }
 }
+
+BaseItem.propTypes = {
+    children: React.PropTypes.func.isRequired,
+}
+
 
 export default BaseItem;
