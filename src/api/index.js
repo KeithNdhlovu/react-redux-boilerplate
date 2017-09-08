@@ -6,7 +6,7 @@ import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 import Uri from './endpoints'
 
 let Config = {
-	apiUrl: process.env.REACT_APP_LOCAL_API_BASE_URL,
+	apiUrl: process.env.REACT_APP_PROD_API_BASE_URL,
 	clientId: process.env.REACT_APP_CLIENT_ID,
 	clientSecret: process.env.REACT_APP_CLIENT_SECRET,
 }
@@ -67,7 +67,7 @@ export function doLogin (username, password) {
 	let { DO_LOGIN } = Uri;
 
 	let payload = {
-		email: username,
+		username: username,
 		password: password,
 		app_version: 1,
 		device_id: "THEWEBNOID",
@@ -130,28 +130,7 @@ export function getUserEvents (organisationID = null) {
 	
 	let { GET_USER_EVENTS_ENDPOINT } = Uri;
 	
-	
-	let payload = {
-		"id": "randomDigit",
-		"title": "catchPhrase",
-		"date": "iso8601",
-		"location_desciption": "streetAddress",
-		"full_address": "address",
-		"school_id": "randomDigit",
-		"child_id": "randomDigit",
-		"is_read": "boolean",
-		"attachements": {
-			"title": "catchPhrase",
-			"attachment_id": "randomDigit",
-			"location": "imageUrl"
-		},
-		"tags": {
-			"name": "cityPrefix",
-			"color": "hexColor"
-		}
-	}
-
-	return axios.post(getEndpoint(GET_USER_EVENTS_ENDPOINT), payload)
+	return axios.get(getEndpoint(GET_USER_EVENTS_ENDPOINT))
 }
 
 /**
@@ -162,27 +141,8 @@ export function getUserEvents (organisationID = null) {
 export function getResources (organisationID = null) {
 	
 	let { GET_RESOURCES } = Uri;
-	
-	let payload = {
-		"id": "randomDigit",
-		"title": "catchPhrase",
-		"date": "iso8601",
-		"school_id": "randomDigit",
-		"child_id": "randomDigit",
-		"is_read": "boolean",
-		"body": "realText",
-		"attachements": {
-			"title": "catchPhrase",
-			"attachment_id": "randomDigit",
-			"location": "imageUrl"
-		},
-		"tags": {
-			"name": "cityPrefix",
-			"color": "hexColor"
-		}
-	}
 
-	return axios.post(getEndpoint(GET_RESOURCES), payload)
+	return axios.get(getEndpoint(GET_RESOURCES))
 }
 
 /**
@@ -193,24 +153,8 @@ export function getResources (organisationID = null) {
 export function getFeedItems (organisationID = null) {
 	
 	let { GET_FEED } = Uri;
-	let payload = {
-		"body": "realText",
-		"id": "randomDigit",
-		"school_id": "randomDigit",
-		"title": "catchPhrase",
-		"created_at": "iso8601",
-		"updated_at": "iso8601",
-		"disabled_at": "iso8601",
-		"rsvp_date": "iso8601",
-		"icon_id": "randomDigit",
-		"is_read": "boolean",
-		"tags": {
-			"name": "cityPrefix",
-			"color": "hexColor"
-		}
-	}
 
-	return axios.post(getEndpoint(GET_FEED), payload)
+	return axios.get(getEndpoint(GET_FEED))
 }
 
 /**
@@ -221,22 +165,20 @@ export function getFeedItems (organisationID = null) {
 export function getOrganisations () {
 	
 	let { GET_ORGANISATIONS } = Uri;
-	let payload = {		
-		"id": "randomDigit",
-		"name": "company",
-		"medium_name": "cityPrefix",
-		"short_name": "cityPrefix",
-		"show_adverts": "boolean",
-		"color": "hexcolor",
-		"logo": "imageUrl",
-		"telephone_number": "e164PhoneNumber",
-		"email_address": "email",
-		"physical_address": "address",
-		"url": "imageUrl",
-		"nick": "stateAbbr",
-	}
 
-	return axios.post(getEndpoint(GET_ORGANISATIONS), payload)
+	return axios.get(getEndpoint(GET_ORGANISATIONS))
+}
+
+/**
+ * Get the logged in users' contacts through organisations
+ * 
+ * @return Promise
+ */
+export function getContacts () {
+	
+	let { GET_ORGANISATIONS } = Uri;
+
+	return axios.get(getEndpoint(GET_ORGANISATIONS))
 }
 
 /**

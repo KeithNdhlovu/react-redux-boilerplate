@@ -564,8 +564,12 @@ footer {
   .contact-item-image-container {
     height: 90px;
     width: 90px;
+    margin-right: 15px;
   }
 
+  .mb-10 {
+    margin-bottom: 10px;
+  }
 
   .fa-m {
     font-size: 1.5em;
@@ -668,8 +672,12 @@ $list-item-active-color: #e9ecef;
   }
 }
 
-.fa-rotate-45 {
-    transform: rotate(-45deg);
+// Custom icon rotations
+$rotate-class: 'fa-rotate' !default
+@for $i from 0 through 360 {
+  .#{$rotate-class}-#{$i} {
+      transform: rotate($i + deg);
+  }
 }
 
 .fa-marg-5 {
@@ -678,4 +686,43 @@ $list-item-active-color: #e9ecef;
 
 .fa-1x {
   font-size: 1.2em !important;
+}
+
+.base-item {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.contacts-count-container {
+  font-family: 'Roboto-Medium';
+}
+
+// Custom grids
+.row {
+  $class: w !default
+
+  @for $i from 1 through 100 {
+    .#{$class}-#{$i} {
+      width: $i + %;
+      padding-right: 15px;
+      padding-left: 15px;
+
+      @if $i == 20 {
+        max-width: 50px;      
+      }
+    }
+  }
+}
+
+// Custom transition animations
+@mixin transition($transition...) {
+  @if length($transition) == 0 {
+    transition: $transition-base;
+  } @else {
+    transition: $transition;
+  }
+}
+
+.animate-rotation {
+  @include transition(transform 0.5s);
 }

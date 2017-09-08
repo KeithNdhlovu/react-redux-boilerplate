@@ -28,7 +28,7 @@ class Item extends Component {
                         <div className="row">
                             <div className="col-9">
                                 <div className="vertical-align">
-                                    <img className="contact-item-image-container" src={ DefaultLogo } />
+                                    <img className="contact-item-image-container" src={ item.logo } />
                                     <h6 className="mb-1 header" style={{ color: organisation.accent }}>{ item.name }</h6>
                                 </div>
                             </div>
@@ -54,31 +54,34 @@ class Item extends Component {
                             <div className="col-6">
                                 <div className="verical-align">
                                     <div className="row">
-                                        <i className="col-2 fa fa-map-marker fa-m" aria-hidden="true" style={{ color: organisation.accent }}></i>
-                                        <p className="col-10 no-margin">{ item.physical_address }</p>
+                                        <i className="w-20 fa fa-map-marker fa-m" aria-hidden="true" style={{ color: organisation.accent }}></i>
+                                        <p className="w-80 no-margin">{ item.physical_address }</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-6">
                                 <div className="row">
-                                    <div className="col-12 vertical-align">
-                                        <div className="col-12">
-                                            <i className="col-2 fa fa-phone fa-m" aria-hidden="true" style={{ color: organisation.accent }}></i>
-                                            <p className="col-10 no-margin">{ item.telephone_number }</p>
+                                    <div className="col-12 verical-align">
+                                        <div className="row mb-10">
+                                            <i className="w-20 fa fa-phone fa-m" aria-hidden="true" style={{ color: organisation.accent }}></i>
+                                            <p className="w-80 no-margin">{ item.telephone_number }</p>
                                         </div>
                                     </div>
-                                    <div className="col-12 vertical-align">
+                                    <div className="col-12 verical-align">
                                         <div className="row">
-                                            <i className="col-2 fa fa-envelope fa-m" aria-hidden="true" style={{ color: organisation.accent }}></i>
-                                            <p className="col-10 no-margin">{ item.email_address }</p>
+                                            <i className="w-20 fa fa-envelope fa-m" aria-hidden="true" style={{ color: organisation.accent }}></i>
+                                            <p className="w-80 no-margin">{ item.email_address }</p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
 
-                        {/* The hidden information */}
-                        <p className={"mb-1 " + (isExpanded ? "show" : "hide")}>{ item.description }</p>
+                        {/* Number of contacts */}
+                        <br/>
+                        <div className="contacts-count-container row text-right">
+                            <span className="col-12" style={{ color: organisation.accent }}><i className={"animate-rotation fa fa-plus "+ (isExpanded ? "fa-rotate-45" : "")  }></i>&nbsp;&nbsp;{ item.contacts.length }&nbsp;&nbsp;Contacts</span>
+                        </div>
                         <br/>
                     </div>
                 )}

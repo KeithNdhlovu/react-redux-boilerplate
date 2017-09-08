@@ -18,7 +18,7 @@ class HeaderComponent extends Component {
             <header className="page-topbar show-on-small hide-on-med-and-up">
                 <div className="navbar-fixed">
                     {/* @TODO: style={{ background: "#"+header.color }}*/}
-                    <nav className="nav" style={{ background: header.color }}>
+                    <nav className="nav" style={{ background: "#"+header.color }}>
                         <div className="valign-wrapper col-12 no-padding">
                             <ul className="valign-wrapper col-12 no-padding">
                                 <li className="link logo-image valign">

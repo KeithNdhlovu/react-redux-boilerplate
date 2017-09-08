@@ -27,6 +27,8 @@ const initOrganisation = {
     physical_address: null,
     url: null,
     active: true,
+    menu_color: null,
+    text_color: null,
 }
 
 const initialState = {
@@ -37,7 +39,7 @@ const initialState = {
 function addAccent(payload) {
     return {
         ...payload,
-        accent: blendColors(payload.color,"#000000", 0.5)
+        accent: blendColors("#"+payload.color,"#000000", 0.5)
     }
 }
 /**
