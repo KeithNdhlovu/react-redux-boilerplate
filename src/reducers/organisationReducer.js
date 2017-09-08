@@ -37,7 +37,7 @@ const initialState = {
 function addAccent(payload) {
     return {
         ...payload,
-        accent: blendColors("#"+payload.color,"#000000", 0.5)
+        accent: blendColors(payload.color,"#000000", 0.5)
     }
 }
 /**

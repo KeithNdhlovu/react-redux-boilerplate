@@ -5,19 +5,20 @@ import { connect } from "react-redux"
 import { withRouter, Link } from 'react-router-dom'
 import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 
-import DefaultLogo from '../../styles/images/logo.png';
+import DefaultLogo from '../../styles/images/logo.png'
 
 import { actionTypes } from '../../constants'
 
 class HeaderComponent extends Component {
     render() {
         
-        var { header } = this.props;
+        var { header } = this.props
 
         return (
             <header className="page-topbar show-on-small hide-on-med-and-up">
                 <div className="navbar-fixed">
-                    <nav className="nav" style={{ background: "#" + header.color }}>
+                    {/* @TODO: style={{ background: "#"+header.color }}*/}
+                    <nav className="nav" style={{ background: header.color }}>
                         <div className="valign-wrapper col-12 no-padding">
                             <ul className="valign-wrapper col-12 no-padding">
                                 <li className="link logo-image valign">
@@ -40,9 +41,7 @@ class HeaderComponent extends Component {
 class SideNavComponent extends Component {
     render() {
 
-        const { links, header, navigateTo, router } = this.props;
-
-        console.log(router.location)
+        const { links, header, navigateTo, router } = this.props
 
         return (
 
@@ -83,7 +82,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   navigateTo: (link) => {    
 
     // We tell browser to remember
-    dispatch(replace(link.ur));
+    dispatch(replace(link.ur))
     // Change the main content to correspond to navigation
     
     // we tell system to listen
