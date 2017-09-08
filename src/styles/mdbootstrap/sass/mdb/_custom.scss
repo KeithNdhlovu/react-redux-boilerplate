@@ -369,6 +369,34 @@ $p-radius: 10px;
     &.custom {
       background-color: $color-grey;
 
+      .place-bottom {
+        position: fixed;
+        bottom: 0;
+        width: $side-nav-desktop-width;
+
+        .fa {
+          vertical-align: middle;
+        }
+
+        .link {
+          span {
+            color: $color-white;    
+          }
+
+          &:hover {
+            cursor: pointer;
+
+            span {
+              color: #444;
+            }  
+          }
+
+          &:hover + p {
+            color: $color-dark-grey;
+          }
+        }
+      }
+
       &.show-full {
         background: $p-color-dark-grey;
       }
@@ -673,10 +701,15 @@ $list-item-active-color: #e9ecef;
 }
 
 // Custom icon rotations
-$rotate-class: 'fa-rotate' !default
+$rotate-class: 'fa-rotate' !default;
+$rotate-class-n: 'fa-rotate-n' !default;
 @for $i from 0 through 360 {
   .#{$rotate-class}-#{$i} {
       transform: rotate($i + deg);
+  }
+
+  .#{$rotate-class-n}-#{$i} {
+      transform: rotate(-$i + deg);
   }
 }
 

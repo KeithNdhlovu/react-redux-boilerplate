@@ -87,7 +87,7 @@ class Item extends Component {
                             {item.attachments.map((attachment, attIndex) => (
                                 <span className="badge badge-pill attachment-items"
                                     key={ attIndex }>
-                                    <i className="fa fa-paperclip fa-marg-5 fa-rotate-45" style={{ color: organisation.accent }}></i>
+                                    <i className="fa fa-paperclip fa-marg-5 fa-rotate-n-45" style={{ color: organisation.accent }}></i>
                                     { attachment.title }
                                 </span>
                             ))}
@@ -106,7 +106,7 @@ class Item extends Component {
                     </div>
                 )}
             </BaseItem>
-        );
+        )
     }
 }
 
@@ -138,7 +138,7 @@ class EventList extends Component {
                     </div>                    
                 )}
             </BaseList>           
-        );
+        )
     }
 }
 
@@ -147,4 +147,4 @@ EventList.propTypes = {
     organisation: React.PropTypes.object.isRequired
 };
 
-export default EventList;
+export default EventList

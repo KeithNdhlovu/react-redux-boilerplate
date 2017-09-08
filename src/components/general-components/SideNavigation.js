@@ -8,6 +8,7 @@ import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 import DefaultLogo from '../../styles/images/logo.png'
 
 import { actionTypes } from '../../constants'
+import { actions } from '../../actions/authActions'
 
 class HeaderComponent extends Component {
     render() {
@@ -41,25 +42,37 @@ class HeaderComponent extends Component {
 class SideNavComponent extends Component {
     render() {
 
-        const { links, header, navigateTo, router } = this.props
+        const { links, header, navigateTo, router, logout } = this.props
 
         return (
 
             <div id="inner-left-sidebar-nav">
                 <ul style={{ background: header.accent }}
-                    className="side-menu show-full collapsible collapsible-accordion side-nav fixed leftside-navigation custom">
-                    {links.map((link, index) => (
-                        <li className={ "link valign-wrapper " + ((router.location.pathname == link.url) ? "active" : "")}
-                            key={ index }>
-                            <Link 
-                               to={ link.url }
-                               onClick={ navigateTo.bind(this, link) }
-                               replace
-                               className={"nav-link waves-effect waves-cyan "+ ((router.location.pathname == link.url) ? "active" : "")}>{ link.caption }</Link>
+                        className="side-menu show-full collapsible collapsible-accordion side-nav fixed leftside-navigation custom">
+                    <ul className="no-padding">
+                        {links.map((link, index) => (
+                            <li className={ "link valign-wrapper " + ((router.location.pathname == link.url) ? "active" : "")}
+                                key={ index }>
+                                <Link 
+                                to={ link.url }
+                                onClick={ navigateTo.bind(this, link) }
+                                replace
+                                className={"nav-link waves-effect waves-cyan "+ ((router.location.pathname == link.url) ? "active" : "")}>{ link.caption }</Link>
+                            </li>
+                        ))}                                        
+                    </ul>
+                    <ul className="no-padding place-bottom">
+                        <li className="link valign-wrapper">
+                            <span><i className="fa fa-question-circle fa-2x"></i>&nbsp;&nbsp;Help</span>
                         </li>
-                    ))}
+                        <li className="link valign-wrapper" onClick={ logout.bind(this) }>
+                            <span><i className="fa fa-cog fa-2x"></i>&nbsp;&nbsp;Settings</span>
+                        </li>
+                        <li className="link valign-wrapper">
+                            <span><i className="fa fa-sign-out fa-2x"></i>&nbsp;&nbsp;Logout</span>
+                        </li>
+                    </ul>
                 </ul>
-
                 <HeaderComponent header={ header }/>
             </div>
         );
@@ -79,6 +92,9 @@ const state = (store, router) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+  logout: () => {
+    dispatch(actions.clearLogins())
+  },
   navigateTo: (link) => {    
 
     // We tell browser to remember

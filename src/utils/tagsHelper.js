@@ -42,7 +42,7 @@ export const tagsHelper = {
                 tag = {}
                 tag = assign(tag, {
                     type: 1,
-                    name: '<i class="fa fa-paperclip fa-rotate-45" aria-hidden="true"></i>',
+                    name: '<i class="fa fa-paperclip fa-rotate-n-45" aria-hidden="true"></i>',
                     color: this.gimmeColor(1)
                 })
 
