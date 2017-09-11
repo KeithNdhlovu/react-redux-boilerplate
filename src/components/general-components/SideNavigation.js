@@ -98,7 +98,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   navigateTo: (link) => {    
 
     // We tell browser to remember
-    dispatch(replace(link.ur))
+    if (link !== null){
+        dispatch(replace(link.url))
+    }
+    
     // Change the main content to correspond to navigation
     
     // we tell system to listen

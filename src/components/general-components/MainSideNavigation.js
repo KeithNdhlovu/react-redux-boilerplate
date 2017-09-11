@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes            from 'prop-types';
 
-import { connect } from "react-redux"
-import { withRouter, NavLink } from 'react-router-dom'
-import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
+import { connect }          from "react-redux"
+import { 
+    withRouter, 
+    NavLink 
+} from 'react-router-dom'
 
-import { actionTypes } from '../../constants'
+import { 
+    push, 
+    replace, 
+    LOCATION_CHANGE 
+} from 'react-router-redux'
 
-import DefaultLogo from '../../styles/images/logo.png';
+import { 
+    actionTypes 
+} from '../../constants'
+
+import DefaultLogo from '../../styles/images/logo.png'
 
 class MainSideNavComponent extends Component {
     render() {
@@ -67,12 +77,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   navigateTo: (organisation) => {    
 
     // We tell browser to remember
-    dispatch(replace(organisation.ur));
+    if (organisation && organisation.url !== null) {
+        dispatch(replace(organisation.url))
+    }
 
-    console.log(organisation)
     // we tell system to listen
-    dispatch({type: actionTypes().ORGANISATION_NAVIGATION_CHANGED, payload: organisation});
+    dispatch({type: actionTypes().ORGANISATION_NAVIGATION_CHANGED, payload: organisation})
   }
 });
 
-export default withRouter(connect(state, mapDispatchToProps)(MainSideNavComponent));
+export default withRouter(connect(state, mapDispatchToProps)(MainSideNavComponent))

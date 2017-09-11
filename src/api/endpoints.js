@@ -21,7 +21,7 @@ const endpoints = {
     RESULTS_ENDPOINT: "/me/children/results",
     DISIPLINARIES_ENDPOINT: "/me/children/disciplinaries",
     TIMETABLES_ENDPOINT: "/me/children/timetables",
-    GETGROUPS_ENDPOINT: "/me/groups",
+    
     SENDCHATGROUPMESSAGE_ENDPOINT: "/send/group/%s",
     ENQUIRY_ENDPOINT: "/me/generalenquiry",
     ABSENTREPORT: "/children/%s/absenteereports",
@@ -60,13 +60,15 @@ const endpoints = {
     RECOVER_PASSWORD_ENDPOINT: "/login/recover",
 
     GET_ORGANISATIONS: "/me/schools",
-    GET_ORG_ACCOUNTSTATEMENT_EMDPOINT: "/me/schools/accountstatements",
+    GET_ORG_ACCOUNTSTATEMENT_ENDPOINT: "/me/schools/accountstatements",
     GET_ORG_ABSENTEE_REASONS_ENDPOINT: "/me/schools/absenteeismreasons",
     GET_ORG_POLICIES_ENDPOINT: "/me/schools/policies",
     GET_ORG_CODEOFCONDUCT_ENDPOINT: "/me/schools/codeofconduct",
 
     GET_USER_EVENTS_ENDPOINT: "/me/events",
     GET_GROUP_EVENTS_ENDPOINT: "/me/groups/events",
+
+    GET_GROUPS_ENDPOINT: "/me/groups",
 
     CODE_OF_CONDUCT_TITLE: 0,
     ACCOUNT_STATEMENT_TITLE: 1,

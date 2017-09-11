@@ -182,6 +182,18 @@ export function getContacts () {
 }
 
 /**
+ * Get the logged in users' channels/groups
+ * 
+ * @return Promise
+ */
+export function getChannels () {
+	
+	let { GET_GROUPS_ENDPOINT } = Uri;
+
+	return axios.get(getEndpoint(GET_GROUPS_ENDPOINT))
+}
+
+/**
  * Return API endpoint with given path
  * @param path
  * @param id

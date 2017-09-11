@@ -19,7 +19,7 @@ const initOrganisation = {
     medium_name: null,
     short_name: null,
     show_adverts: false,
-    color: "#3d3d3d",
+    color: "3d3d3d",
     accent: blendColors("#3d3d3d","#000000", 0.5),
     logo: DefaultLogo,
     telephone_number: null,
@@ -37,6 +37,15 @@ const initialState = {
 }
 
 function addAccent(payload) {
+
+    if (payload == null) {
+        
+        return {
+            ...initOrganisation,
+            accent: blendColors("#"+initOrganisation.color,"#000000", 0.5)
+        }    
+    }
+
     return {
         ...payload,
         accent: blendColors("#"+payload.color,"#000000", 0.5)
