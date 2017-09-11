@@ -13,7 +13,7 @@ import CircleLoader from '../general-components/CircleLoader'
 import CustomSelect from '../general-components/CustomSelect'
 
 class Channel extends Component {
-    
+
     async getChannels () {
         const { dispatch, org } = this.props
         const { organisation }  = org
@@ -30,7 +30,7 @@ class Channel extends Component {
         await dispatch(actions.fetchChannels(organisation.id))
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.getChannels()
     }
     
@@ -58,3 +58,7 @@ export default withRouter(connect((state) => {
       channel:  state.channel
   };
 })(Channel));
+
+
+
+rcc

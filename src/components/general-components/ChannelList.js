@@ -5,6 +5,7 @@ import BaseItem                 from './BaseItem'
 import BaseList                 from './BaseList'
 import PropTypes                from 'prop-types'
 import AddToCalendar            from './AddToCalendar'
+import { Row, Input }                from 'react-materialize'
 import DefaultLogo              from '../../styles/images/logo.png'
 
 class Item extends Component {
@@ -46,32 +47,32 @@ class ChannelList extends Component {
         const { items, org } = this.props
 
         // items.map((item, index) => Object.assign(item, { expand: false }) )
-        this.groupChannelsByOrganisation(org.organisations, items)
+        let channels = this.groupChannelsByOrganisation(org.organisations, items)
 
         return (
 
-            // {items.map((item, index) => (
-                
-            //     <Item key={ index } 
-            //         index={ index } 
-            //         item={ item } 
-            //         organisation={ organisation } 
-            //         type={ item.image ? 1 : 0 } />
-            // ))}
-
             <ul className="list-group">
-                <li className="list-group-item d-flex justify-content-between align-items-center">
-                    Cras justo odio
-                    <span className="badge badge-primary badge-pill">14</span>
+                <li className="list-group-item channel-items-container header">
+                    <div className="row">
+                        <p className="col-10 no-margin align-self-center">Channels</p>
+                        <div className="col-2 text-right checkbox-container">
+                            <input type="checkbox" className="filled-in" id="filled-in-box-1"/>
+                            <label htmlFor="filled-in-box-1"></label>
+                        </div>
+                    </div>
                 </li>
-                <li className="list-group-item d-flex justify-content-between align-items-center">
-                    Dapibus ac facilisis in
-                    <span className="badge badge-primary badge-pill">2</span>
-                </li>
-                <li className="list-group-item d-flex justify-content-between align-items-center">
-                    Morbi leo risus
-                    <span className="badge badge-primary badge-pill">1</span>
-                </li>
+                {channels.map((channel, index) => (
+                    <li key={ index } className="list-group-item channel-items-container item">
+                        <div className="row">
+                            <i className="col-2 fa fa-chevron-down align-self-center" aria-hidden="true"></i>
+                            <p className="col-8 no-margin align-self-center">{ channel.name }</p>
+                            <div className="col-2 text-right checkbox-container">
+                                <input type="checkbox" className="filled-in" id="filled-in-box"/>
+                                <label htmlFor="filled-in-box"></label>
+                            </div>
+                        </div>
+                    </li>
+                ))}                
             </ul>
         );
     }
