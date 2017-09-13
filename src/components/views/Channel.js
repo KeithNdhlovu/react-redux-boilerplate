@@ -33,13 +33,12 @@ class Channel extends Component {
     componentWillMount() {
         this.getChannels()
     }
-    
 
     render() {
         const { org, channel } = this.props;
 
         // Load while we wait for feeds
-        if (channel.fetching && org.organisations) {
+        if (channel.channels.length == 0 || channel.fetching || org.organisations.length == 0) {
             return <CircleLoader />
         }
         
@@ -58,7 +57,3 @@ export default withRouter(connect((state) => {
       channel:  state.channel
   };
 })(Channel));
-
-
-
-rcc

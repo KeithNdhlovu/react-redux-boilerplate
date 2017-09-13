@@ -57,7 +57,7 @@ class SideNavComponent extends Component {
                                 to={ link.url }
                                 onClick={ navigateTo.bind(this, link) }
                                 replace
-                                className={"nav-link waves-effect waves-cyan "+ ((router.location.pathname == link.url) ? "active" : "")}>{ link.caption }</Link>
+                                className={"nav-link "+ ((router.location.pathname == link.url) ? "active" : "")}>{ link.caption }</Link>
                             </li>
                         ))}                                        
                     </ul>

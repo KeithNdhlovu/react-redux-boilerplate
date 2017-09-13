@@ -9,14 +9,67 @@ import { Row, Input }                from 'react-materialize'
 import DefaultLogo              from '../../styles/images/logo.png'
 
 class Item extends Component {
+    constructor(props) {
+        super(props);
+        let initialState = {
+            expand: false
+        }
+        this.state = initialState
+        this.initialState = initialState
+    }
+    
+    togleOpen = () => {
+        this.setState({
+            expand: !this.state.expand
+        })
+    }
+    
+    togleChange = () => {
+        console.log("Val", this.refs.channelCheckbox);
+    }
 
     render() {
+        const { index, organisation, selectedOrg } = this.props
 
         return (
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Cras justo odio
-                <span class="badge badge-primary badge-pill">14</span>
-            </li>
+            <div className="w-100" key={ index }>   
+                <li className="list-group-item channel-items-container organisation-header" style={{ background: "#"+selectedOrg.color }}>
+                    <div className="row">
+                        <i className={"col-2 fa align-self-center " + (this.state.expand ? "fa-chevron-up" : "fa-chevron-down") } 
+                            aria-hidden="true" 
+                            onClick={ this.togleOpen.bind(this) }></i>
+                            
+                        <p className="col-8 no-margin align-self-center">{ organisation.name }</p>
+                        <div className="col-2 text-right checkbox-container">
+                            <input 
+                                type="checkbox" 
+                                className="filled-in" 
+                                id={"filled-in-box-org-" + index}/>
+                            <label htmlFor={"filled-in-box-org-" + index}></label>
+                        </div>
+                    </div>
+                </li>
+                <div className={"w-100 nested-child " + ( this.state.expand ? "show" : "hide" ) }>
+                    {organisation.channels.map((channel, cIndex) => (
+                        <li  key={ cIndex } className="w-100 list-group-item channel-items-container child-item">
+                            <div className="row">
+                                <p className="col-10 no-margin align-self-center">{ channel.group_name }</p>
+                                <div className="col-2 text-right checkbox-container">
+                                    <input 
+                                        type="checkbox" 
+                                        className="filled-in" 
+                                        id={"filled-in-box-channel-" + cIndex} 
+                                        checked={ channel.is_subscribed }
+                                        onChange={ this.togleChange.bind(this) }
+                                        disabled={ channel.can_subscribe }
+                                        value={ channel.id }/>
+                                    <label htmlFor={"filled-in-box-channel-" + cIndex}></label>
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </div>
+            </div>
         );
     }
 }
@@ -38,21 +91,18 @@ class ChannelList extends Component {
                 channels: get(groupedChannels, organisation.id)
             })
         })
-
-        console.log(organisations)
     }
 
     render() {
 
         const { items, org } = this.props
 
-        // items.map((item, index) => Object.assign(item, { expand: false }) )
-        let channels = this.groupChannelsByOrganisation(org.organisations, items)
+        this.groupChannelsByOrganisation(org.organisations, items)
 
         return (
 
             <ul className="list-group">
-                <li className="list-group-item channel-items-container header">
+                <li className="list-group-item channel-items-container header" style={{ background: org.organisation.accent }}>
                     <div className="row">
                         <p className="col-10 no-margin align-self-center">Channels</p>
                         <div className="col-2 text-right checkbox-container">
@@ -61,18 +111,9 @@ class ChannelList extends Component {
                         </div>
                     </div>
                 </li>
-                {channels.map((channel, index) => (
-                    <li key={ index } className="list-group-item channel-items-container item">
-                        <div className="row">
-                            <i className="col-2 fa fa-chevron-down align-self-center" aria-hidden="true"></i>
-                            <p className="col-8 no-margin align-self-center">{ channel.name }</p>
-                            <div className="col-2 text-right checkbox-container">
-                                <input type="checkbox" className="filled-in" id="filled-in-box"/>
-                                <label htmlFor="filled-in-box"></label>
-                            </div>
-                        </div>
-                    </li>
-                ))}                
+                {org.organisations.map((organisation, index) => (
+                    <Item key={ index } index={ index } organisation={ organisation } selectedOrg={ org.organisation }/>
+                ))}
             </ul>
         );
     }
