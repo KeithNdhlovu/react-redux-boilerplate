@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import { Dropdown, ButtonDropdown, DropdownMenu, DropdownItem, DropdownToggle } from 'reactstrap';
+import { Dropdown, DropdownMenu } from 'reactstrap';
 
 // with great thanks to @carlsednaoui for his work in https://github.com/carlsednaoui/add-to-calendar-buttons
 

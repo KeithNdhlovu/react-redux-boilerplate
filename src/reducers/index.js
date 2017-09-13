@@ -5,11 +5,13 @@
 import { combineReducers } from 'redux'
 import { routerReducer }   from 'react-router-redux'
 
-import auth  from './authReducer'
-import feed  from './feedReducer'
-import event from './eventReducer'
-import resource from './resourceReducer'
-import org   from './organisationReducer'
+import auth                 from './authReducer'
+import feed                 from './feedReducer'
+import event                from './eventReducer'
+import contact              from './contactReducer'
+import channel              from './channelReducer'
+import org                  from './organisationReducer'
+import resource             from './resourceReducer'
 
 export default combineReducers({
     auth,
@@ -17,5 +19,7 @@ export default combineReducers({
     org,
     event,
     resource,
+    contact,
+    channel,
     routing: routerReducer,
 });

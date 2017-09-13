@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes            from 'prop-types';
 
-import { connect } from "react-redux"
-import { withRouter, NavLink } from 'react-router-dom'
-import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
+import { connect }          from "react-redux"
+import { 
+    withRouter, 
+    NavLink 
+} from 'react-router-dom'
 
-import { actionTypes } from '../../constants'
+import { 
+    push, 
+    replace, 
+    LOCATION_CHANGE 
+} from 'react-router-redux'
 
-import DefaultLogo from '../../styles/images/logo.png';
+import { 
+    actionTypes 
+} from '../../constants'
+
+import DefaultLogo from '../../styles/images/logo.png'
 
 class MainSideNavComponent extends Component {
     render() {
 
-        const { navigateTo, currentOrganisation }  = this.props;
+        const { filterByOrganisation, currentOrganisation, location }  = this.props;
 
         return (
             // <!-- START LEFT SIDEBAR NAV-->
@@ -27,7 +37,7 @@ class MainSideNavComponent extends Component {
                             }}>
                             <NavLink 
                                 to="/" 
-                                onClick={ navigateTo.bind(this, null) }
+                                onClick={ filterByOrganisation.bind(this, null) }
                                 className="text-link no-padding no-margin">All</NavLink>
                         </div>
                     </li>
@@ -38,7 +48,7 @@ class MainSideNavComponent extends Component {
                             <NavLink 
                                 to="/" 
                                 className="white-circle" 
-                                onClick={ navigateTo.bind(this, organisation) }
+                                onClick={ filterByOrganisation.bind(this, organisation) }
                                 style={{ 
                                     backgroundImage: `url(${organisation.logo})`,
                                     opacity: (organisation.id === currentOrganisation.id) ? 1 : null
@@ -60,19 +70,16 @@ const state = (store) => {
   return {
       currentOrganisation: store.org.organisation,
       organisations: store.org.organisations,
+      location: store.routing.location,
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  navigateTo: (organisation) => {    
+  filterByOrganisation: (organisation) => {    
 
-    // We tell browser to remember
-    dispatch(replace(organisation.ur));
-
-    console.log(organisation)
-    // we tell system to listen
-    dispatch({type: actionTypes().ORGANISATION_NAVIGATION_CHANGED, payload: organisation});
+    // Let all the props know that we are navigating to this organisation
+    dispatch({type: actionTypes().ORGANISATION_NAVIGATION_CHANGED, payload: organisation})
   }
 });
 
-export default withRouter(connect(state, mapDispatchToProps)(MainSideNavComponent));
+export default withRouter(connect(state, mapDispatchToProps)(MainSideNavComponent))

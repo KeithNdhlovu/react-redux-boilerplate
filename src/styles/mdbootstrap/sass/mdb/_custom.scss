@@ -369,6 +369,34 @@ $p-radius: 10px;
     &.custom {
       background-color: $color-grey;
 
+      .place-bottom {
+        position: fixed;
+        bottom: 0;
+        width: $side-nav-desktop-width;
+
+        .fa {
+          vertical-align: middle;
+        }
+
+        .link {
+          span {
+            color: $color-white;    
+          }
+
+          &:hover {
+            cursor: pointer;
+
+            span {
+              color: #444;
+            }  
+          }
+
+          &:hover + p {
+            color: $color-dark-grey;
+          }
+        }
+      }
+
       &.show-full {
         background: $p-color-dark-grey;
       }
@@ -458,9 +486,11 @@ $p-radius: 10px;
 
 
 .header-logo-container {
-    height: $navbar-height;
-    width: $navbar-height;
-    background-size: contain;
+    @include border-radius(50%);
+    background-color: $p-color-white;
+    height: 110px;
+    width: 110px;
+    background-size: 70%;
     background-position: center;
     background-repeat: no-repeat;
     margin: 0 auto;
@@ -559,6 +589,15 @@ footer {
     height: 150px;
   }
 
+  .contact-item-image-container {
+    height: 90px;
+    width: 90px;
+    margin-right: 15px;
+  }
+
+  .mb-10 {
+    margin-bottom: 10px;
+  }
 
   .fa-m {
     font-size: 1.5em;
@@ -574,7 +613,7 @@ footer {
 
   .tags {
     span {
-      margin-right: 10px; 
+      font-size: 1.1em;
     }
   }
 
@@ -603,6 +642,7 @@ footer {
   }
 
   small {
+    line-height: 1.4;
     &.date.small {
       padding: 5px;
     }
@@ -628,6 +668,7 @@ footer {
   .badge {
     font-size: 1em;
     box-shadow: none !important;
+    margin-right: 5px;
   }
 }
 
@@ -655,5 +696,132 @@ $list-item-active-color: #e9ecef;
   &.active {
     background-color: $list-item-active-color;
     border: 1px solid rgba(0, 0, 0, 0.125);
+    color: inherit;
   }
+}
+
+// Custom icon rotations
+$rotate-class: 'fa-rotate' !default;
+$rotate-class-n: 'fa-rotate-n' !default;
+@for $i from 0 through 360 {
+  .#{$rotate-class}-#{$i} {
+      transform: rotate($i + deg);
+  }
+
+  .#{$rotate-class-n}-#{$i} {
+      transform: rotate(-$i + deg);
+  }
+}
+
+.fa-marg-5 {
+  margin-right: 5px;
+}
+
+.fa-1x {
+  font-size: 1.2em !important;
+}
+
+.base-item {
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  .nested-child {
+    .header-2 {
+      margin-top: 10px;
+      font-family: 'Roboto-Regular';
+    }
+    .list-group-item:last-child {
+      padding-bottom: 0;    
+    }
+  }
+}
+
+.contacts-count-container {
+  font-family: 'Roboto-Medium';
+}
+
+// Custom grids
+.row {
+  $class: w !default
+
+  @for $i from 1 through 100 {
+    .#{$class}-#{$i} {
+      width: $i + %;
+      padding-right: 15px;
+      padding-left: 15px;
+
+      @if $i == 20 {
+        max-width: 50px;      
+      }
+    }
+  }
+}
+
+// Custom transition animations
+@mixin transition($transition...) {
+  @if length($transition) == 0 {
+    transition: $transition-base;
+  } @else {
+    transition: $transition;
+  }
+}
+
+.animate-rotation {
+  @include transition(transform 0.5s);
+}
+
+// Checkbox
+
+.checkbox-container {
+  
+  label {
+    margin: 0;
+  }
+
+  [type="checkbox"].filled-in:not(:checked) + label:after {
+    border-color: white;
+  }
+
+  [type="checkbox"].filled-in:checked + label:after {
+    border-color: $p-color-blue;
+    background-color: $p-color-blue;
+  }
+}
+
+
+//List items for channels
+.channel-items-container {
+    background: #3d3d3d;
+    color: white;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    padding: 20px;
+
+    &.header {
+      background: #3d3d3d;
+      border-bottom: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;      
+    }
+
+    &.organisation-header {
+      background: grey;
+      .fa-chevron-down, .fa-chevron-up {
+        cursor: pointer;
+      }
+    }
+
+    &.child-item {
+      background: white;
+      color: $color-dark-grey;
+
+      [type="checkbox"].filled-in:not(:checked) + label:after {
+        border-color: $color-dark-grey;
+      }
+
+      [type="checkbox"].filled-in:checked + label:after {
+        border-color: $p-color-blue;
+        background-color: $p-color-blue;
+      }
+    }
 }

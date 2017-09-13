@@ -1,9 +1,21 @@
 import React from 'react'
-import { createAction, handleActions } from 'redux-actions'
 import { actionTypes } from '../constants'
+import { tagsHelper } from '../utils/tagsHelper'
+import { 
+    map,
+    get,     
+    omit, 
+    flatten, 
+} from 'lodash'
+
+import { 
+    createAction, 
+    handleActions 
+} from 'redux-actions'
 
 const initialState = {
   fetching: false,
+  groups: [],
   resources: [],
   error: null
 }
@@ -22,7 +34,13 @@ export default function reducer(state = initialState, action) {
             return {...state, fetching: false, error: action.payload}
         };
         case actionTypes().RESOURCE_ACTION_SAVE: {
-            return {...state,fetching: false, resources: action.payload.results}
+            
+            let resources = flatten(map(action.payload.results, "items"));
+            let groups = map(action.payload.results, (result, index) => {
+                return omit(result, "items")
+            })
+
+            return {...state,fetching: false, resources: tagsHelper.createTags(resources), groups: groups}
         }
     }
 
