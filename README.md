@@ -15,8 +15,9 @@ I have made a few updated that allowed me to customise  the project to my linkin
 
 just create a `.env` and use the bellow keys
 
-``` REACT_APP_NODE_ENV=local
+``` 
+REACT_APP_NODE_ENV=local
 REACT_APP_LOCAL_API_BASE_URL="http://localhost/api"
 REACT_APP_PROD_API_BASE_URL=
 REACT_APP_CLIENT_ID="THE-ID",
-REACT_APP_CLIENT_SECRET="THE-SECRET" ```
+REACT_APP_CLIENT_SECRET="THE-SECRET"
