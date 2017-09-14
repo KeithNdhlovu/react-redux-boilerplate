@@ -8,6 +8,7 @@ I have made a few updated that allowed me to customise  the project to my linkin
 ### Run
 
 1 `npm install`
+<br/>
 2 `npm run`
 
 ## We are connecting this app to a third party API to perform calls like Get Access Tokken and Get Othe Aditional info
