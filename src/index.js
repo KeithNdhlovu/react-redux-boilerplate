@@ -17,7 +17,5 @@ import 'react-select/scss/default.scss'
 
 import Root from './root'
 
-window.jQuery = jquery
-
 // ========================================
 render(<Root store={store} />, document.getElementById('root'));

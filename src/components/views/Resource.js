@@ -34,25 +34,24 @@ class Resource extends Component {
     
 
     render() {
-        const { organisation, resource } = this.props
+        const { resource } = this.props
 
         // Load while we wait for feeds
-        if (resource.fetching && organisation) {
+        if (resource.fetching) {
             return <CircleLoader />
         }
         
         return (
             <div>
                  {/*Show feeds when ready */}
-                <ResourceList items={ resource.resources } organisation={ organisation }/>
+                <ResourceList items={ resource.resources }/>
             </div>
         );
     }
 }
 
-export default withRouter(connect((state) => {
+export default withRouter(connect((store) => {
   return {
-      organisation: state.org.organisation,
-      resource:     state.resource
+      resource:     store.resource
   };
 })(Resource));

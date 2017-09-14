@@ -17,14 +17,7 @@ import Login from '../views/Login'
 import Feed  from '../views/Feed'
 
 import Resource  from '../views/Resource'
-import Calendar  from '../views/Calendar'
-import Contact   from '../views/Contact'
-import Channel   from '../views/Channel'
-
 import ForOhFour from '../views/ForOhFour'
-
-import MainSideNavigation from '../general-components/MainSideNavigation'
-import SideNavigation from '../general-components/SideNavigation'
 
 import DefaultLogo from '../../styles/images/logo.png'
 
@@ -37,46 +30,10 @@ const routes = [
     main: Feed,
   },    
   { 
-    path: '/calendar',
-    main: Calendar,
-  },
-  { 
     path: '/resources',
     main: Resource,
-  },
-  { 
-    path: '/contacts',
-    main: Contact,
-  },
-  { 
-    path: '/channels',
-    main: Channel,
-  },    
+  }    
 ]
-
-const links = [
-  {
-    id: 1,
-    caption: "News Feed",
-    url: "/",
-  }, {
-    id: 2,
-    caption: "Calendar",
-    url: "/calendar"
-  }, {
-    id: 3,
-    caption: "Resources",
-    url: "/resources"
-  }, {
-    id: 4,
-    caption: "Contact Details",
-    url: "/contacts"
-  }, {
-    id: 5,
-    caption: "Channels",
-    url: "/channels"
-  }
-];
 
 
 class MasterAuthLayout extends Component {
@@ -101,11 +58,7 @@ class MasterAuthLayout extends Component {
           <div className="react-root" id="main">
             {/*<!-- START WRAPPER -->*/}
             <div className="">
-              {/*<!-- include side navigation -->*/}
-              <MainSideNavigation organisations={ organisations }/>
-              
-              {/*<!-- include inner side navigation -->*/}
-              <SideNavigation links={ links } header={ organisation }/>
+
               <section id="content">
                 
                 {/* Content goes here */}
@@ -142,8 +95,6 @@ class MasterAuthLayout extends Component {
 export default withRouter(connect((store) => {
 
   return {
-    organisation:  store.org.organisation,
-    organisations: store.org.organisations,
-    user:          store.user,
+    store: store
   };
 })(MasterAuthLayout));

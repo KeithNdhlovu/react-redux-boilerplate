@@ -58,7 +58,7 @@ class Login extends Component {
                                 <img src={logo} height={120} width={120}/>
                                 <br/>
                                 <br/>
-                                <h2 className="header-caption white-text"><strong>Principal</strong> Talk</h2>
+                                <h2 className="header-caption white-text"><strong>Yay</strong> You</h2>
                                 <br/>
                             </div>
 

@@ -121,17 +121,6 @@ export function getMe (accessToken) {
 	return axios.get(getEndpoint(GET_ME))
 }
 
-/**
- * Get the logged in users' calendar events
- * @param organisationID
- * @return Promise
- */
-export function getUserEvents (organisationID = null) {
-	
-	let { GET_USER_EVENTS_ENDPOINT } = Uri;
-	
-	return axios.get(getEndpoint(GET_USER_EVENTS_ENDPOINT))
-}
 
 /**
  * Get the logged in users' resources
@@ -143,54 +132,6 @@ export function getResources (organisationID = null) {
 	let { GET_RESOURCES } = Uri;
 
 	return axios.get(getEndpoint(GET_RESOURCES))
-}
-
-/**
- * Get the logged in users' resources
- * 
- * @return Promise
- */
-export function getFeedItems (organisationID = null) {
-	
-	let { GET_FEED } = Uri;
-
-	return axios.get(getEndpoint(GET_FEED))
-}
-
-/**
- * Get the logged in users' organinsations
- * 
- * @return Promise
- */
-export function getOrganisations () {
-	
-	let { GET_ORGANISATIONS } = Uri;
-
-	return axios.get(getEndpoint(GET_ORGANISATIONS))
-}
-
-/**
- * Get the logged in users' contacts through organisations
- * 
- * @return Promise
- */
-export function getContacts () {
-	
-	let { GET_ORGANISATIONS } = Uri;
-
-	return axios.get(getEndpoint(GET_ORGANISATIONS))
-}
-
-/**
- * Get the logged in users' channels/groups
- * 
- * @return Promise
- */
-export function getChannels () {
-	
-	let { GET_GROUPS_ENDPOINT } = Uri;
-
-	return axios.get(getEndpoint(GET_GROUPS_ENDPOINT))
 }
 
 /**
