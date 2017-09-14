@@ -1,5 +1,4 @@
 import axios from 'axios';
-import InterceptorUtil from '../utils/InterceptorUtil';
 import { actions } from '../actions/authActions'
 import { createAction, handleActions } from 'redux-actions'
 import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
@@ -94,7 +93,6 @@ export function getRefreshToken (params) {
 	};
 
 	if (refreshToken) {
-		axios.interceptors.request.eject(InterceptorUtil.getInterceptor());
 		return axios.post(getEndpoint(DO_LOGIN_REFRESH), payload).then( (response) => {
             
 			actions.saveTokens(response.data);

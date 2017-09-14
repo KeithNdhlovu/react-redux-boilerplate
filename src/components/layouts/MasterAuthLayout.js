@@ -11,10 +11,8 @@ import { withRouter, NavLink } from 'react-router-dom'
 import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 
 import { actionTypes } from '../../constants'
-import { actions } from '../../actions/organisationActions'
 
 import Login from '../views/Login'
-import Feed  from '../views/Feed'
 
 import Resource  from '../views/Resource'
 import ForOhFour from '../views/ForOhFour'
@@ -27,30 +25,15 @@ const routes = [
   { 
     path: '/',
     exact: true,
-    main: Feed,
-  },    
-  { 
-    path: '/resources',
     main: Resource,
-  }    
+  }  
 ]
 
 
 class MasterAuthLayout extends Component {
   
-  async getOrganisations () {
-      const { dispatch } = this.props
-      dispatch(actions.start())
-      await dispatch(actions.fetchOrganisations())
-  }
-
-  componentDidMount() {
-      this.getOrganisations()
-  }
   
   render () {
-
-    const { organisations, organisation } = this.props
 
     return (
         <Router history={history}>

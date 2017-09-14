@@ -34,7 +34,7 @@ $color-darker-grey: #4A4A4A;
 $color-purple     : #AE75CC;
 
 // Constant colors
-$p-color-grey: #494949;
+$p-color-grey: #222222;
 $p-color-dark-grey: #3d3d3d;
 $p-color-white: #FFFFFF;
 $p-color-faded-white: rgba(255, 255, 255, 0.5);
@@ -269,9 +269,9 @@ $p-radius: 10px;
     background: transparent;
     color: $p-btn-bg-faded-white;
     outline: none;
-    padding: 0.6rem;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0.6rem !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
     height: 3rem !important;
     @include box-sizing(border-box, !important);
 

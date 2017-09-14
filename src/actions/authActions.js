@@ -3,8 +3,6 @@ import querystring from 'query-string'
 import axios from 'axios';
 import Uri from 'jsuri';
 
-import InterceptorUtil from '../utils/InterceptorUtil';
-
 import { actionTypes } from '../constants'
 import { doLogin, getMe, getRefreshToken } from '../api';
 
@@ -74,8 +72,6 @@ export const actions = {
     clearLogins (error = null) {
 
         localStorage.clear();
-        axios.interceptors.request.eject(InterceptorUtil.getInterceptor());
-
         history.replace("/login", null);
     },
 
