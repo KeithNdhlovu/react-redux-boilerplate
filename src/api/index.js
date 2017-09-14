@@ -5,7 +5,7 @@ import { push, replace, LOCATION_CHANGE } from 'react-router-redux'
 import Uri from './endpoints'
 
 let Config = {
-	apiUrl: process.env.REACT_APP_PROD_API_BASE_URL,
+	apiUrl: process.env.REACT_APP_LOCAL_API_BASE_URL,
 	clientId: process.env.REACT_APP_CLIENT_ID,
 	clientSecret: process.env.REACT_APP_CLIENT_SECRET,
 }
@@ -57,16 +57,16 @@ axios.interceptors.response.use(function (response) {
 });
 
 /**
-* @param username (String) The cell phone number of the user which acts as the username.
+* @param email (String) The cell phone number of the user which acts as the email.
 * @param password (String) The user's password.
 * @return Promise
 */
-export function doLogin (username, password) {
+export function doLogin (email, password) {
 	
 	let { DO_LOGIN } = Uri;
 
 	let payload = {
-		username: username,
+		email: email,
 		password: password,
 		app_version: 1,
 		device_id: "THEWEBNOID",
@@ -116,7 +116,20 @@ export function getMe (accessToken) {
 	
 	let { GET_ME } = Uri;
 
-	return axios.get(getEndpoint(GET_ME))
+	let payload = { 
+		"id": "randomDigit", 
+		"name": "firstName",
+		"last_name": "lastName",
+		"created_at": "iso8601", 
+		"updated_at": "iso8601", 
+		"disabled_at": "iso8601",
+		"schools": { 
+			"name": "cityPrefix", 
+			"id": "randomDigit" 
+		} 
+	}
+
+	return axios.post(getEndpoint(GET_ME), payload)
 }
 
 
@@ -128,8 +141,20 @@ export function getMe (accessToken) {
 export function getResources (organisationID = null) {
 	
 	let { GET_RESOURCES } = Uri;
+	let payload = { 
+		"body": "realText", 
+		"id": "randomDigit", 
+		"school_id": "randomDigit", 
+		"title": "catchPhrase", 
+		"created_at": "iso8601", 
+		"updated_at": "iso8601", 
+		"disabled_at": "iso8601", 
+		"rsvp_date": "iso8601", 
+		"icon_id": "randomDigit", 
+		"is_read": "boolean"
+	}
 
-	return axios.get(getEndpoint(GET_RESOURCES))
+	return axios.post(getEndpoint(GET_RESOURCES), payload)
 }
 
 /**

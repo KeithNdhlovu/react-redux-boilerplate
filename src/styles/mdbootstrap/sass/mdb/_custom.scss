@@ -531,16 +531,16 @@ $p-radius: 10px;
   transition: all .2s linear;
   // padding-left: $side-nav-desktop-width;
   // @include mq_on_hide_sidenav() {
-    padding-left: $side-nav-mobile-width + $side-nav-desktop-width;
+    // padding-left: $side-nav-mobile-width + $side-nav-desktop-width;
   // }
 
-  @include mq_small_down() {
-    padding-left: 0;
-  }
+  // @include mq_small_down() {
+  //   padding-left: 0;
+  // }
 
-  &.show-full {
-    padding-left: $side-nav-desktop-width;
-  }
+  // &.show-full {
+  //   padding-left: $side-nav-desktop-width;
+  // }
 }
 
 footer {

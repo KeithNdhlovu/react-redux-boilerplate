@@ -3,8 +3,6 @@ import { render } from 'react-dom'
 
 import store from "./store"
 
-import jquery from 'jquery'
-
 // This version(v4.0.0-alpha-6)
 import './styles/bootstrap/scss/bootstrap.scss'
 

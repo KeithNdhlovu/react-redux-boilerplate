@@ -43,7 +43,7 @@ export const actions = {
         const { access_token } = token;
         return (dispatch, getState) => getMe(access_token).then( (response) => {
             
-            const user = { token, profile: response.data.results }
+            const user = { token, profile: response.data.me }
             this.saveUser(user.profile)
 
             dispatch(actions.save(user))

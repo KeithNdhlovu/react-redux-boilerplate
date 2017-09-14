@@ -10,5 +10,5 @@ const types = {
 };
 
 export function actionTypes() {
-    return types;
+    return types
 };

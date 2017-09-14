@@ -18,14 +18,7 @@ class Resource extends Component {
 
         dispatch(actions.start())
 
-        // When no organisaton id is parsed, we fetch all
-        if (organisation && organisation.id == null) {
-            await dispatch(actions.fetchResources())
-            return;
-        }
-        
-        // Otherwise we use the selected organisation to ge thte data
-        await dispatch(actions.fetchResources(organisation.id))
+        await dispatch(actions.fetchResources())
     }
 
     componentDidMount() {

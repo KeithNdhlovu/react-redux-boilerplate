@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action) {
         };
         case actionTypes().RESOURCE_ACTION_SAVE: {
 
-            return {...state,fetching: false, resources: action.payload}
+            return {...state,fetching: false, resources: action.payload.results}
         }
     }
 

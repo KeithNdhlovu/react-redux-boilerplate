@@ -16,8 +16,8 @@ export const actions = {
      * Get Event handler
      * 
      */
-    fetchResources (organisationID) {
-        return (dispatch, getState) => getResources(organisationID).then( (response) => {
+    fetchResources () {
+        return (dispatch, getState) => getResources().then( (response) => {
             dispatch(actions.save(response.data));
         }).catch( (error) => {
             dispatch(actions.error(error));

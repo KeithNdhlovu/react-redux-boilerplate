@@ -33,7 +33,7 @@ class Login extends Component {
     dispatch(actions.start())
 
 	let payload = {
-		username: this.refs.number.value,
+		username: this.refs.email.value,
 		password: this.refs.password.value
 	};
 
@@ -67,7 +67,7 @@ class Login extends Component {
                             { auth.error ? ( 
                                 <div className="col-12">
                                     <div className="alert alert-danger text-center" role="alert">
-                                        <strong>Invalid username or password. </strong>
+                                        <strong>Invalid email or password. </strong>
                                     </div>
                                     <br/>
                                 </div>
@@ -75,7 +75,7 @@ class Login extends Component {
                           
                             {/*<!--Body-->*/}
                             <div className="md-form col-12 text-center">
-                                <input type="text" placeholder="Number" ref="number" name="number" className="custom-input col-12" />
+                                <input type="text" placeholder="Email" ref="email" name="email" className="custom-input col-12" />
                                 {/*<label htmlFor="defaultForm-email" className="">Your email</label>*/}
                             </div>
 

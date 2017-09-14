@@ -14,7 +14,7 @@ class Item extends Component {
     
     render() {
 
-        const { index, item, organisation, type } = this.props
+        const { index, item, type } = this.props
 
         return (
             <BaseItem active={item.is_read ? "active" : ""} key={ index }>
@@ -23,7 +23,7 @@ class Item extends Component {
                         <div className="row">
                             <div className="col-11">
                                 {/* The header */}
-                                <h5 className="mb-1 header" style={ item.is_read ? null : { color: organisation.accent } }>{ item.title }</h5>
+                                <h5 className="mb-1 header">{ item.title }</h5>
                             </div>
                             <div className={ "col-1 text-center " + (item.is_read ? "show" : "") }>
                                 <i className="fa fa-chevron-down" aria-hidden="true"></i>
@@ -38,28 +38,6 @@ class Item extends Component {
                                 {/* The Body */}
                                 <p className={"mb-1 " + (isExpanded ? "" : "truncate")}>{ item.body }</p>
                                 <br/>
-
-                                {/* Attachments */}
-                                <div className={"attachments " + (isExpanded ? "show" : "hide")}>
-                                    {item.attachments.map((attachment, attIndex) => (
-                                        <span className="badge badge-pill attachment-items"
-                                            key={ attIndex }>
-                                            <i className="fa fa-paperclip fa-rotate-n-45" style={{ color: organisation.accent }}></i>
-                                            { attachment.title }
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {/* The tags in their numbers */}
-                                <div className="tags text-right">
-                                    {item.tags.map((tag, tagIndex) => (
-                                        <span className="badge badge-pill"
-                                            key={ tagIndex } 
-                                            style={{ backgroundColor: tag.color }}
-                                            dangerouslySetInnerHTML={{ __html: tag.name }}>
-                                        </span>
-                                    ))}
-                                </div>
                             </div>                                
                         </div>
                     </div>
@@ -72,7 +50,7 @@ class Item extends Component {
 class ResourceList extends Component {
     render() {
 
-        const { items, organisation } = this.props;
+        const { items } = this.props;
 
         return (
             <div>
@@ -96,7 +74,7 @@ class ResourceList extends Component {
                         
 
                         {items.map((item, index) => (
-                            <Item key={ index } index={ index } item={ item } organisation={ organisation } type={ item.image ? 1 : 0 }/>
+                            <Item key={ index } index={ index } item={ item } type={ 1 }/>
                         ))}
                     </div>
                 )}
@@ -106,8 +84,7 @@ class ResourceList extends Component {
 }
 
 ResourceList.propTypes = {
-    items: React.PropTypes.array.isRequired,
-    organisation: React.PropTypes.object.isRequired
+    items: React.PropTypes.array.isRequired
 };
 
 export default ResourceList;
